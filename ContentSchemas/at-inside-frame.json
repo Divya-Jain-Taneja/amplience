@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-inside-frame-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json",
+  "validationLevel": "PARTIAL"
+}

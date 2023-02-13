@@ -1,0 +1,135 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-media-asset.json",
+
+	"title": "Media Asset",
+	"description": "Inline Media Asset Element",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"required": [
+		"image",
+		"imageAltText"
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "InlineMedia" }
+			}
+		},
+		"variation": {
+			"title": "Choose Component Variation",
+			"description": "Select a component variation",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["1Up","2Up","4Up"], "defaultIndex": 1 }
+            }
+		},
+		"desktopVideoURL": {
+			"title": "Desktop Video URL",
+			"description": "Enter the URL of the desktop video",
+			"type": "string",
+			"format":"uri"
+		},
+		"mobileVideoURL": {
+			"title": "Mobile Video URL",
+			"description": "Enter the URL of the mobile video",
+			"type": "string",
+			"format":"uri"
+		},
+		"image": {
+			"title": "Desktop Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"imageAltText": {
+			"title": "Image Alt text",
+			"description": "Enter the alternate text for image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"mobileImage": {
+			"title": "Mobile Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"link": {
+			"title": "Link URL",
+			"description": "Link URL",
+			"type": "string",
+            "minLength": 0,
+            "maxLength": 256
+		},
+		"outline": {
+			"title": "Apply Outline?",
+			"description": "On Check, outline will be applied to promo tile.",
+			"type": "boolean"
+		},
+		"outlineColor": {
+			"title": "Promo Tile Outline Color",
+			"description": "Enter/Select the color for promo tile (Default: Black)",
+			"format": "color",
+			"type": "string"
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the media",
+			"description": "Rounded edges will be applied to the media on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"insideFrame": {
+			"title": "Inside Frame",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+					}
+				]
+			}
+		},
+		"iconsColor": {
+			"title": "Change Video Control Icons Color",
+			"description": "On the check, the color of the play/pause and volume icons changes to black (Default: White)",
+			"type": "boolean"
+		},
+		"removeAudioControl": {
+			"title": "Remove Audio Control",
+			"description": "Audio Control will be removed on check. (Default - Audio Control is displayed in muted state)",
+			"type": "boolean"
+		},
+		"disableRightClick":{
+			"title": "Disable the right-click option on the video",
+			"description": "On the check, the right-click option will be disabled (Default: Right-click option is enabled)",
+			"type": "boolean"
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"variation",
+		"desktopVideoURL",
+		"mobileVideoURL",
+		"iconsColor",
+		"removeAudioControl",
+		"disableRightClick",
+		"image",
+		"mobileImage",
+		"imageAltText",
+		"link",
+		"outline",
+		"outlineColor",
+		"roundedEdges",
+		"insideFrame"
+	]
+}

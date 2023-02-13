@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-link-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json",
+  "validationLevel": "PARTIAL"
+}

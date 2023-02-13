@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-product-image-selector-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-product-image-selector.json",
+  "validationLevel": "PARTIAL"
+}

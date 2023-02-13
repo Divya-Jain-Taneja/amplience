@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-frame-image.json",
+    "title": "Frame Image",
+    "description": "Frame Image",
+    "allOf": [{
+        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }],
+    "type": "object",
+    "required": [
+        "desktopImage"
+    ],
+    "properties": {
+        "desktopImage": {
+            "title": "Desktop Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+		 "mobileImage": {
+            "title": "Mobile Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+		 "frameWidth": {
+			"title": "Frame Width",
+			"description": "Enter the width of the frame (0px - 25px). Default: 18px",
+			"type": "number",
+            "minimum": 0,
+			"maximum": 25
+		},
+         "disableLazyLoad": {
+			"title": "Disable Lazy Load",
+			"description": "On disabling lazy load, frame image will not be lazy loaded.",
+			"type": "boolean"
+		}
+    }
+}

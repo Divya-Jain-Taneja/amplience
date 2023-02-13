@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\page-v3-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page-v3.json",
+  "validationLevel": "CONTENT_TYPE"
+}

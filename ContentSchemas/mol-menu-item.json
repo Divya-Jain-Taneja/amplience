@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-menu-item-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-menu-item.json",
+  "validationLevel": "CONTENT_TYPE"
+}

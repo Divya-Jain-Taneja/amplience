@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-youtube-player-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-youtube-player.json",
+  "validationLevel": "CONTENT_TYPE"
+}

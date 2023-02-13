@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-page-section-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-section.json",
+  "validationLevel": "PARTIAL"
+}

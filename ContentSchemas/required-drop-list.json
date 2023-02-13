@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\required-drop-list-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/required-drop-list.json",
+  "validationLevel": "CONTENT_TYPE"
+}

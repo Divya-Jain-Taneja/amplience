@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-4up-grid-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-4up-grid.json",
+  "validationLevel": "CONTENT_TYPE"
+}

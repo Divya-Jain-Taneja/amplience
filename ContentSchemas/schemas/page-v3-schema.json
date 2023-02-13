@@ -1,0 +1,90 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page-v3.json",
+    "title": "Page Accelerator V3.0",
+    "description": "Page Accelerator V3.0",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+          "componenthelp": {
+              "title": "Help",
+              "ui:extension": {
+                  "name": "component-help",
+                  "params": { "topic" : "pageAcceleratorV3" }
+              }
+        },
+        "contentTypes": {
+            "title": "Content Type",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-section.json"
+                    }
+                ]
+            }
+        },
+        "pageBg": {
+            "title": "Page Background",
+            "type": "array",
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-background.json"
+                    }
+                ]
+            }
+        },
+        "space": {
+            "title": "Spacing",
+            "type": "array",
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-spacing.json"
+                    }
+                ]
+            }
+        },
+        "insideFrame": {
+            "title": "Inside Frame",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+                    }
+                ]
+            }
+        },
+        "stickers": {
+            "title": "Stickers",
+            "type": "array",
+            "minItems": 0,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-sticker.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "contentTypes",
+        "pageBg",
+        "insideFrame",
+        "space",
+        "stickers"
+    ]
+}

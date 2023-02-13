@@ -1,0 +1,100 @@
+{
+  "$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+  "allOf": [
+    {
+      "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }
+  ],
+  "id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/sfcc-slot-accelerators.json",
+  "title": "SFCC Slot all accelerators",
+  "description": "SFCC Slot all accelerators",
+  "type": "object",
+  "properties": {
+    "_environment": {
+      "type": "object",
+      "properties": {
+        "sfcc_slot": {
+          "$ref": "https://raw.githubusercontent.com/amplience/dc-integrations-sfcc/master/content-types/sfcc/sfcc.json#/definitions/sfcc_slot"
+        },
+        "sfcc_category_slot": {
+          "$ref": "https://raw.githubusercontent.com/amplience/dc-integrations-sfcc/master/content-types/sfcc/sfcc.json#/definitions/sfcc_category_slot"
+        },
+        "sfcc_folder_slot": {
+          "$ref": "https://raw.githubusercontent.com/amplience/dc-integrations-sfcc/master/content-types/sfcc/sfcc.json#/definitions/sfcc_folder_slot"
+        },
+        "sfcc_site": {
+          "allOf": [
+            {
+              "$ref": "https://raw.githubusercontent.com/amplience/dc-integrations-sfcc/master/content-types/sfcc/sfcc.json#/definitions/sfcc_site"
+            },
+            {
+              "properties": {
+                "site_id": {
+                  "title": "Choose site id",
+                  "description": "Select the site id for the component to be pushed.",
+                  "type": "string",
+                  "ui:extension": {
+                    "name": "required-drop-list",
+                    "params": {
+                      "options": [
+                        "toro_us_rt ",
+                        "toro_ca_rt ",
+                        "sw_us_rt",
+                        "sw_ca_rt"
+                      ],
+                      "defaultIndex": 2
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "content": {
+      "allOf": [
+        {
+          "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+        },
+        {
+          "properties": {
+            "contentType": {
+              "title": "Page Content",
+              "enum": [
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/product-carousel.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/html-editor.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-wof-grid.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v3.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-slider.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-col-split-container.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid-v2.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-lifestyle-carousel.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-visual-filter.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-4up-grid.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel-v2.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-content-block.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-v2.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050-v2.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shoppable-video.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset-v2.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v4.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v5.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page-v3.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-feature-benefit.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shorts-video.json",
+                  "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-cloud-animation.json"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

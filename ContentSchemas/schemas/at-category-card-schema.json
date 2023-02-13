@@ -1,0 +1,49 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-category-card.json",
+
+	"title": "Category Card",
+	"description": "Category Card",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"categoryId": {
+			"title": "Category ID",
+			"description": "Category card ID",
+			"type": "string"
+		},
+		"categoryImage": {
+			"title": "Image",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-image.json"
+					}
+				]
+			}
+		},
+		"categoryTitle": {
+			"title": "Title",
+			"description": "Category card title",
+			"type": "string"
+		}
+		
+	},
+	"propertyOrder": [
+		"categoryId",
+		"categoryImage",
+		"categoryTitle"
+	],
+	"required": [
+		"categoryId"
+	]
+}

@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-plp-filter-card.json",
+
+    "title": "PLP Visual Filter Card",
+    "description": "PLP Visual Filter Card",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    
+    "type": "object",
+    "properties": {
+        "categoryId": {
+            "title": "Category ID",
+            "description": "Category card ID",
+            "type": "string"
+        },
+        "categoryImage": {
+            "title": "Image",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-image-selector.json"
+                }
+            ]
+        },
+        "categoryTitle": {
+            "title": "Title",
+            "description": "Category card title",
+            "type": "string"
+        },
+        "link": {
+            "title": "Link URL",
+            "description": "Default category URL will be overridden with the provided URL.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        }		
+    },
+    "propertyOrder": [
+        "categoryId",
+        "categoryImage",
+        "categoryTitle",
+        "link"
+    ],
+    "required": [
+        "categoryId"
+    ]
+}

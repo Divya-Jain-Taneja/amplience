@@ -1,0 +1,170 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shorts-video.json",
+	
+	"title": "Shorts Video",
+	"description": "Shorts video carousel component to add multiple short videos together.",
+	
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "shortsVideo" }
+			}
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default: transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the mobile display style",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Carousel View - Bidirectional",
+						"Carousel View - Infinite",
+						"Grid with padding",
+						"Grid without padding"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items":{
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"mediaAssetTiles": {
+			"title": "Media Asset Tiles",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 5,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-tile.json"
+					}
+				]
+			}
+		},
+		"delayAnimation":{
+			"title": "Delay Configuration",
+			"description": "Select the time for delay configuration",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": { "options" : ["0.5", "1", "1.5","2"], "values": ["500", "1000", "1500","2000"], "defaultIndex": 0 }
+			}			
+		},
+		"mobileQuality": {
+			"title": "Mobile Quality Parameters",
+			"description": "Select mobile quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+				    "values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"	
+					],
+					"defaultIndex": 0
+				}
+			}
+		},	
+		"desktopQuality": {
+			"title": "Desktop Quality Parameters",
+			"description": "Select desktop quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+					"values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"
+					],
+					"defaultIndex": 2
+				}
+			}
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"backgroundColor",
+		"mobileStyle",
+		"headerBlock",
+		"mediaAssetTiles",
+		"delayAnimation",
+		"mAspectRatio",
+		"mobileQuality",
+		"dAspectRatio",
+		"desktopQuality",
+		"jumpPointID"
+	]
+}

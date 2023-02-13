@@ -1,0 +1,60 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-header-block.json",
+	"title": "Header Block",
+	"description": "Inline Header block constituting of a Text Block, background Color, and a set of links",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"textBlock": {
+			"title": "Inline Text Block",
+			"description": "Inline Text Block Atom",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-headline.json"
+				}
+			]
+		},
+		"links": {
+			"title": "Inline CTA Links",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 6,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-link.json"
+					}
+				]
+			}
+		},
+		"alignItems": {
+			"title": "Alignment",
+			"description": "Select the alignment for the the header block items",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Left","Center","Right"], "defaultIndex": 1 }
+            }
+		},
+		"ctaView": {
+			"title": "Stack CTAs",
+			"description": "The CTAs will show in a vertical stack layout. They are wrapped by default.",
+			"type": "boolean"
+		}
+	},
+	"propertyOrder": [
+		"textBlock",
+		"links",
+		"alignItems"
+	],
+	"required": [
+		"textBlock",
+		"alignItems"
+	]
+}

@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-config-data-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-config-data.json",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-id-value-config-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-id-value-config.json",
+  "validationLevel": "PARTIAL"
+}

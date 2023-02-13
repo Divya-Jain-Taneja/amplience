@@ -1,0 +1,114 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-headline.json",
+	"title": "Text Block",
+	"description": "Inline Text Block Element",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"propertyOrder": [
+		"headlineText",
+		"headlineSize",
+		"headlineSizeMobile",
+		"headlineColor",
+		"eyebrowText",
+		"eyebrowTextSize",
+		"eyebrowTextColor",
+		"bodyText",
+		"textSize",
+		"textSizeMobile",
+		"textColor",
+		"headlineTag"
+	],
+	"type": "object",
+	"properties": {
+		"textSize": {
+			"title": "Desktop: Choose Body Text Size",
+			"description": "Select the size of body text for desktop.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-body-styles"
+            }
+		},
+		"textSizeMobile": {
+			"title": "Mobile: Choose Body Text Size",
+			"description": "Select the size of body text for mobile.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-body-styles"
+            }
+		},
+		"headlineTag": {
+			"title": "Select Headline Variation",
+			"description": "Headline with selected tag will be generated.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": { "options" : ["H1", "H2", "H3"], "values": ["h1", "h2", "h3"], "defaultIndex": 1 }
+			}
+		},
+		"textColor": {
+			"title": "Body Copy Text Color",
+			"description": "Choose the body copy text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"eyebrowText": {
+			"title": "Eyebrow Text",
+			"description": "Enter the Eyebrow Text",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 64
+		},
+		"eyebrowTextSize": {
+			"title": "Choose Eyebrow Text Size",
+			"description": "Select the size of eyebrow text",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-eyebrow-styles"
+            }
+		},
+		"eyebrowTextColor": {
+			"title": "Eyebrow Text Color",
+			"description": "Choose the eyebrow text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"headlineText": {
+			"title": "Headline",
+			"description": "Enter the headline text",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 64
+		},
+		"headlineSize": {
+			"title": "Desktop: Choose Headline Size",
+			"description": "Select the size of headline text for desktop.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-headline-styles"
+            }
+		},
+		"headlineSizeMobile": {
+			"title": "Mobile: Choose Headline Size",
+			"description": "Select the size of headline text for mobile.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-headline-mobile-styles"
+            }
+		},
+		"headlineColor": {
+			"title": "Headline Color",
+			"description": "Choose the headline text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"bodyText": {
+			"title": "Body Text/Sub-headline",
+			"description": "Enter the Body Text/Sub-headline",
+			"type": "string"
+		}
+	}
+}

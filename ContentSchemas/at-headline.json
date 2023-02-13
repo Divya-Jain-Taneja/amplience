@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-headline-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-headline.json",
+  "validationLevel": "CONTENT_TYPE"
+}

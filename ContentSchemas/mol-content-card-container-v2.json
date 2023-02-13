@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-content-card-container-v2-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v2.json",
+  "validationLevel": "CONTENT_TYPE"
+}

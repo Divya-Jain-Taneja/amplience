@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\delivery-key-schema.json",
+  "schemaId": "https://schema-examples.com/delivery-key",
+  "validationLevel": "PARTIAL"
+}

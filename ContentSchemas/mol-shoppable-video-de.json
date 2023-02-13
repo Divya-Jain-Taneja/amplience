@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-shoppable-video-schema-de.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shoppable-video-de.json",
+  "validationLevel": "CONTENT_TYPE"
+}

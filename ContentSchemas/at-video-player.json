@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-video-player-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+  "validationLevel": "CONTENT_TYPE"
+}

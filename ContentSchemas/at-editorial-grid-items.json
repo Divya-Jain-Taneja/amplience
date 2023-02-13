@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-editorial-grid-items-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-editorial-grid-items.json",
+  "validationLevel": "PARTIAL"
+}

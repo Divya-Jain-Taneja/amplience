@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json",
+
+	"title": "Inside Frame",
+    "description": "Inside Frame",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "frameStyle": {
+			"title": "Apply Inside Frame?",
+			"description": "On Uncheck: Rounded edges applied to basic frame. (Default: Rectangular edges)",
+			"type": "boolean",
+			"default": true
+		},
+		"frameColor": {
+			"title": "Basic Frame Color",
+			"description": "Choose the frame color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- black)",
+			"format": "color",
+			"type": "string",
+			"default": "#000"
+		},
+		"colorFrame": {
+			"title": "Color Frame",
+			"description": "Choose the frame color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		}
+
+    },
+    "propertyOrder": [
+		"frameStyle",
+		"frameColor",
+		"colorFrame"
+	],
+	"required": []
+}

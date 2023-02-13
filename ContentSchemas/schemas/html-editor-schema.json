@@ -1,0 +1,31 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/html-editor.json",
+
+	"title": "HTML Editor",
+	"description": "WYSIWYG HTML Editor",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "openhtml" }
+			}
+		},
+		"htmlEditor": {
+			"title": "HTML Editor",
+			"ui:extension": {
+				"name": "wysiwyg-html-editor"
+			}
+		}
+	},
+	"propertyOrder": []
+}

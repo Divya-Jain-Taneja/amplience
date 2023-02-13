@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-editorial-grid-v2-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid-v2.json",
+  "validationLevel": "CONTENT_TYPE"
+}

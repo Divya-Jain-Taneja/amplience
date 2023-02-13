@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-wof-card-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-wof-card.json",
+  "validationLevel": "CONTENT_TYPE"
+}

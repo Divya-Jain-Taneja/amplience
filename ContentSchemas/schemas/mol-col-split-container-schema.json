@@ -1,0 +1,173 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-col-split-container.json",
+
+	"title": "Column Split Container",
+	"description": "Column Split Container",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "colSplitContainer" }
+			}
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Select background color (Default- Transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"columnSelector": {
+			"title": "Column Selector",
+			"description": "Select the number of columns (Default- 2).",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"2",
+						"3",
+						"4"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"contentTypes": {
+		"type": "array",
+		"minItems": 2,
+		"maxItems": 4,
+		"items": {
+		  "allOf": [
+			{
+			  "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+			},
+			{
+			  "properties": {
+				"contentType": {
+				  "title": "Content Types",
+				  "enum": [
+					"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+					"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+					"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-youtube-player.json" ]
+				}
+			  }
+			}
+		  ]
+		},
+		"title": "Content Type",
+		"description": ""
+	   },
+	   "desktopStyle": {
+			"title": "Desktop: Display Style",
+			"description": "Select the Desktop display style NOTE : When Desktop Carousel is selected Desktop carousel properties will be applicable on mobile, irrespective of the mobile display style selected.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": { "options" : ["Row","Carousel"], "defaultIndex": 1 }
+            }
+		},
+		"deskAutoMove": {
+			"title": "Desktop Auto Move",
+			"description": "Auto move the carousel on Desktop View",
+			"type": "boolean"
+		},
+		"autoMoveTime":{
+			"title": "Desktop Auto Move Time",
+			"description": "Auto move Speed Range: 0.5 - 10 sec (Default: 0.5sec)",
+			"type": "string",
+			"pattern":"^([1-9]|10|[1-9][.][0-9]|[0][.][5-9])$"
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the Mobile display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Stack","Carousel","Looping","Horizontal Scroll"], "defaultIndex": 1 }
+            }
+		},
+		"loopingTime": {
+			"title": "Mobile: Looping time(sec)",
+			"description": "Select the looping time (Default- 1sec). NOTE:- It will only work with Looping display in mobile.",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["0.5","1","2","3"], "defaultIndex": 1 }
+            }
+		},
+		"paddingSize": {
+			"title": "Padding in-between the coulmns",
+			"description": "Enter padding in-between the coulmns (Default: 24px)",
+			"type": "number",
+			"minimum": 24,
+			"maximum": 64
+		},
+		"removePadding": {
+			"title": "Remove Padding",
+			"description": "Remove padding around the component (Default: Padding is applied)",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		}
+		
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"componentMaxWidth",
+		"backgroundColor",
+		"headerBlock",
+		"columnSelector",
+		"contentTypes",
+		"desktopStyle",
+		"deskAutoMove",
+		"autoMoveTime",
+		"mobileStyle",
+		"loopingTime",
+		"paddingSize",
+		"removePadding",
+		"jumpPointID"
+	],
+	"required":[
+		"columnSelector",
+		"mobileStyle",
+		"contentTypes"
+	]
+}

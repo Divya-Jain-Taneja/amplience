@@ -1,0 +1,54 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-product-image-selector.json",
+	"title": "Product/Image Selector",
+	"description": "Product and image selector to create 2UP carousel.",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"productCard": {
+			"title": "Product Selector",
+			"description": "Select the product cards/tiles to create the 2UP Carousel",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"type": "string"
+			},
+			"ui:extension": {
+				"name": "sfcc-product-selector"
+			}
+		},
+		"productImage": {
+			"title": "Image",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-image-selector.json"
+				}
+			]
+		},
+		"productImageAltText": {
+			"title": "Image Alt text",
+			"description": "Enter the alternate text for the image",
+			"type": "string"
+		},
+		"link": {
+			"title": "Link URL",
+			"description": "Redirect to the provided URL.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		}
+	},
+	"propertyOrder": [
+		"productCard",
+		"productImage",
+		"productImageAltText",
+		"link"
+	]
+}

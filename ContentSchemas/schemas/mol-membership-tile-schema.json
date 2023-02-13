@@ -1,0 +1,270 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-membership-tile.json",
+
+	"title": "Membership Tiles/Reward Tiles",
+	"description": "Membership Tiles/Reward Tiles",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "membershipTiles" }
+			}
+		},
+		"solidBgFill": {
+			"title": "Background Primary Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear"
+					],
+					"values":[
+						"bottom right",
+						"bottom"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"insideFrame": {
+			"title": "Inside Frame",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+					}
+				]
+			}
+		},
+		"mediaAsset": {
+			"title": "Background Image/Video",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json"
+					}
+				]
+			}
+		},
+		"headlineText": {
+			"title": "Headline",
+			"description": "Enter the headline text",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 64
+		},
+		"headlineSize": {
+			"title": "Desktop: Choose Headline Size",
+			"description": "Select the size of headline text for desktop.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-headline-styles"
+            }
+		},
+		"headlineSizeMobile": {
+			"title": "Mobile: Choose Headline Size",
+			"description": "Select the size of headline text for mobile.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-headline-mobile-styles"
+            }
+		},
+		"headlineColor": {
+			"title": "Headline Color",
+			"description": "Choose the headline text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"eyebrowText": {
+			"title": "Eyebrow Text",
+			"description": "Enter the Eyebrow Text",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 64
+		},
+		"eyebrowTextSize": {
+			"title": "Choose Eyebrow Text Size",
+			"description": "Select the size of eyebrow text",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-eyebrow-styles"
+            }
+		},
+		"eyebrowTextColor": {
+			"title": "Eyebrow Text Color",
+			"description": "Choose the eyebrow text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"bodyText": {
+			"title": "Body Text/Sub-headline",
+			"description": "Enter the Body Text/Sub-headline",
+			"type": "string"
+		},
+		"textSize": {
+			"title": "Desktop: Choose Body Text Size",
+			"description": "Select the size of body text for desktop.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-body-styles"
+            }
+		},
+		"textSizeMobile": {
+			"title": "Mobile: Choose Body Text Size",
+			"description": "Select the size of body text for mobile.",
+			"type": "string",
+			"ui:extension": {
+                "name": "text-body-styles"
+            }
+		},
+		"textColor": {
+			"title": "Body Copy Text Color",
+			"description": "Choose the body copy text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+			"format": "color",
+			"type": "string"
+		},
+		"heroContent": {
+			"title": "Hero Content?",
+			"description": "Headline with H1 tag will be generated.",
+			"type": "boolean"
+		},
+		"links": {
+			"title": "CTA Links",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 6,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json"
+					}
+				]
+			}
+		},
+		"stackCTAs": {
+			"title": "Stack CTAs",
+			"description": "The CTAs will show in a vertical stack layout. They are wrapped by default.",
+			"type": "boolean"
+		},
+		"inlineImage": {
+			"title": "Inline Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"inlineImageAltText": {
+			"title": "Inline Image Alt text",
+			"description": "Enter the alternate text for image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"inlineImagePosition": {
+			"title": "Inline Image Position",
+			"description": "Select the position of the inline image w.r.t eyebrow, headline, body copy, and CTA.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Top most position",
+						"Immediately after eyebrow",
+						"Immediately after headline",
+						"Immediately after body copy",
+						"Bottom most position"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"promoText": {
+			"title": "Promo Line / Top Line",
+			"description": "Enter a Promo Line/Top Line text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"promoTextColor": {
+			"title": "Promo Line / Top Line Text Color",
+			"description": "Choose the promo line / top line text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"promoTextSize": {
+			"title": "Promo Line / Top Line Text Size",
+			"description": "Choose the Promo Line / Top Line text Size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-promo-styles"
+			}
+		},
+		"bylineText": {
+			"title": "Byline / Disclaimer",
+			"description": "Enter a Byline/Disclaimer text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"bylineTextColor": {
+			"title": "Byline / Disclaimer Text Color",
+			"description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"bylineTextSize": {
+			"title": "Byline / Disclaimer Text Size",
+			"description": "Choose the byline / disclaimer text Size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-byline-styles"
+			}
+		},
+		"backgroundOpacity": {
+			"title": "Background Opacity",
+			"description": "Enter a percentage value (without a '%' sign) to add the text background opacity.",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		}
+	},
+	"propertyOrder": []
+}

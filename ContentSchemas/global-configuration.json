@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\global-configuration-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/global-configuration.json",
+  "validationLevel": "CONTENT_TYPE"
+}

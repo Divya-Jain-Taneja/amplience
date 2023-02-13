@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-content-card-v2-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-content-card-v2.json",
+  "validationLevel": "PARTIAL"
+}

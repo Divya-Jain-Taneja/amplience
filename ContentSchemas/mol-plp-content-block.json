@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-plp-content-block-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-content-block.json",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,193 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-inline-banner-50-50.json",
+
+    "title": "Inline Banner 50-50",
+    "description": "Inline Banner 50-50",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "InlineBanner5050" }
+            }
+        },
+        "chooseLayout": {
+            "title": "Choose Layout (Image/Video/Text)",
+            "description": "Select the layout",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+                    "options" : [
+                        "Left (Image/Video Left, Text Right)",
+                        "Right (Image/Video Right, Text Left)"
+                    ],
+                    "defaultIndex": 0 
+                }
+            }
+        },
+        "TextBackgroundColor": {
+            "title": "Background Primary Color",
+            "description": "Select header block background color (Default: Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientColor": {
+            "title": "Background Gradient Secondary Color",
+            "description": "Choose the gradient color from color-palette or enter hex code or RGB value or color name (Default: Linear gradient starting from top left to bottom right)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientType": {
+            "title": "Gradient Type",
+            "description": "Select the Gradient Type( Default - Diagonal)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Diagonal",
+                        "Linear - Top to Bottom",
+                        "Linear - Left to Right"
+                    ],
+                    "values":[
+                        "bottom right",
+                        "bottom",
+                        "right"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "headerBlockBgImageD": {
+            "title": "Desktop: Header Block Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "headerBlockBgImageM": {
+            "title": "Mobile: Header Block Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Background Image Alt text",
+            "description": "Enter the alternate text for the background image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },
+        "backgroundLink": {
+            "title": "Header Block Link URL",
+            "description": "Enter the header block link URL.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "backgroundLinkTarget": {
+            "title": "Open Header Block Link Into New Tab",
+            "description": "On the check, the header block link will be open into a new tab.",
+            "type": "boolean",
+            "default": false
+        },
+        "mediaAsset": {
+            "title": "Media Asset",
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-media-asset.json"
+                    }
+                ]
+            }
+        },
+        "spacingAroundMedia": {
+            "title": "Apply Spacing Around Media Asset",
+            "description": "On the check, the spacing will be applied around the media asset.",
+            "type": "boolean"
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "description": "Header Block Mol",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-header-block.json"
+                }
+            ]
+        },
+        "disclaimerText": {
+            "title": "Disclaimer Text",
+            "description": "Enter a Byline/Disclaimer text.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+         "bylineTextColor": {
+            "title": "Byline / Disclaimer Text Color",
+            "description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+            "format": "color",
+            "type": "string"
+        },
+        "bylineTextSize": {
+            "title": "Byline / Disclaimer Text Size",
+            "description": "Choose the byline / disclaimer text Size",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-byline-styles"
+            }
+        },
+        "outline": {
+            "title": "Apply Outline?",
+            "description": "On Check, outline will be applied to promo tile.",
+            "type": "boolean"
+        },
+        "outlineColor": {
+            "title": "Promo Tile Outline Color",
+            "description": "Enter/Select the color for promo tile (Default: Black color)",
+            "format": "color",
+            "type": "string"
+        },
+        "roundedEdges": {
+            "title": "Apply rounded edges to the component",
+            "description": "Rounded edges will be applied to the overall component on the check. (Default: No rounded edge is applied)",
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "chooseLayout"
+    ],
+    "propertyOrder": [
+        "componenthelp",
+        "chooseLayout",
+        "TextBackgroundColor",
+        "gradientColor",
+        "gradientType",
+        "mediaAsset",
+        "spacingAroundMedia",
+        "headerBlock",
+        "headerBlockBgImageD",
+        "headerBlockBgImageM",
+        "imageAltText",
+        "backgroundLink",
+        "backgroundLinkTarget",
+        "disclaimerText",
+        "bylineTextSize",
+        "bylineTextColor",
+        "outline",
+        "outlineColor",
+        "roundedEdges"
+    ]
+}

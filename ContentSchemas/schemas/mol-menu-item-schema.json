@@ -1,0 +1,131 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-menu-item.json",
+
+	"title": "Title",
+	"description": "Description",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "menuItem" }
+			}
+		},
+		"menuImage": {
+			"title": "Menu Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"imageAltText": {
+			"title": "Image Alt text",
+			"description": "Enter the alternate text for image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"mobileQuality": {
+			"title": "Mobile Quality Parameters",
+			"description": "Select mobile quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+				    "values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},	
+		"desktopQuality": {
+			"title": "Desktop Quality Parameters",
+			"description": "Select desktop quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+					"values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"	
+					],
+					"defaultIndex": 2
+				}
+			}
+		},
+		"ctaLink": {
+			"title": "CTA Links",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-plain-link.json"
+					}
+				]
+			}
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		}
+		
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"menuImage",
+		"imageAltText",
+		"mAspectRatio",
+		"mobileQuality",
+		"dAspectRatio",
+		"desktopQuality",
+		"ctaLink"
+	],
+	"required":[
+		"menuImage",
+		"imageAltText"
+	]
+}

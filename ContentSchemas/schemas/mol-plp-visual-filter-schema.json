@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-visual-filter.json",
+
+	"title": "PLP visual filter container",
+	"description": "PLP visual filter container",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "plpvisualfilter" }
+			}
+			},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Select background color (Default- Transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"noImage": {
+			"title": "No image to be shown?",
+			"description": "On check, PLP visual filter image will not be shown.",
+			"type": "boolean"
+		},
+		"categoryRow": {
+			"title": "Category row",
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 7,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-plp-filter-card.json"
+					}
+				]
+			}
+		},
+		"disableLazyLoad": {
+			"title": "Disable lazy load?",
+			"description": "On disabling lazy load, PLP Visual Filter cards images will not be lazy loaded.",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		}		
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"backgroundColor",
+		"headerBlock",
+		"noImage",
+		"categoryRow",
+		"mAspectRatio",
+		"disableLazyLoad",
+		"jumpPointID"
+	],
+	"required": ["categoryRow"]
+}

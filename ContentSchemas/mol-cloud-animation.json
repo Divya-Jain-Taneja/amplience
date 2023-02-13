@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-cloud-animation-schema.json",
+  "schemaId": "https://www.sapient.com/dynamic-content-accelerators/dist/contentTypes/mol-cloud-animation.json",
+  "validationLevel": "CONTENT_TYPE"
+}

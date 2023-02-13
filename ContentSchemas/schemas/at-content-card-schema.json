@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-content-card.json",
+
+    "title": "Content Card",
+    "description": "Content Card",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    
+    "type": "object",
+    "properties": {
+        "image": {
+            "title": "Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt text",
+            "description": "Enter the alternate text for image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },
+        "imageLink": {
+            "title": "Card Link",
+            "description": "Enter the URL of the image/card link.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "inlineCTATitle": {
+            "title": "",
+            "description": "The below CTA will be used within the image as inline CTA, independent from other URL or Header block CTA.",
+            "type": "string",
+            "const": "Inline CTA"
+        },
+        "inlineCTA": {
+            "title": "Inline CTA Link",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json"
+                    }
+                ]
+            }
+        },
+        "imageCaption": {
+            "title": "Caption Text",
+            "description": "Enter the caption text for media.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 100
+        },
+        "imageCaptionAlignment": {
+            "title": "Caption Alignment",
+            "description": "Select the alignment of caption text w.r.t media (Default - Left align).",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Left",
+                        "Center"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "imageCaptionTextColor": {
+            "title": "Caption Text Color",
+            "description": "Choose the text color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- black)",
+            "format": "color",
+            "type": "string"
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "image",
+        "imageAltText",
+        "imageLink",
+        "inlineCTATitle",
+        "inlineCTA",
+        "imageCaption",
+        "imageCaptionAlignment",
+        "imageCaptionTextColor",
+        "headerBlock"
+    ],
+    "required":[
+        "image",
+        "imageAltText"
+    ]
+}

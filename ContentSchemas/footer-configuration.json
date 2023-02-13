@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\footer-configuration-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/footer-configuration.json",
+  "validationLevel": "CONTENT_TYPE"
+}

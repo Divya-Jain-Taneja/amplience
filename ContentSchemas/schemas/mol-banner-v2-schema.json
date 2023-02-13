@@ -1,0 +1,171 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-v2.json",
+
+    "title": "Banner",
+    "description": "Homepage Banner",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "banner" }
+            }
+        },
+        "leftTextPosition": {
+            "title": "Text Position from Left",
+            "description": "Enter a percentage value (without a '%' sign) to position text horizontally from the left (Default is 50)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "topTextPosition": {
+            "title": "Text Position from Top",
+            "description": "Enter a percentage value (without a '%' sign) to position text vertically from the top (Default is 50)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "contentTypes": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+            "allOf": [
+                {
+                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                },
+                {
+                "properties": {
+                    "contentType": {
+                        "title": "Content Types",
+                        "enum": [
+                            "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+                            "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-youtube-player.json" ]
+                        }
+                    }
+                }
+            ]
+            },
+            "title": "Media Content Type",
+            "description": ""
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "description": "Header Block Mol",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        },
+        "solidBgFill": {
+            "title": "Solid Background Fill",
+            "description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "promoText": {
+            "title": "Promo Line / Top Line",
+            "description": "Enter a Promo Line/Top Line text.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "promoTextColor": {
+            "title": "Promo Line / Top Line Text Color",
+            "description": "Choose the promo line / top line text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+            "format": "color",
+            "type": "string"
+        },
+        "bylineText": {
+            "title": "Byline / Disclaimer",
+            "description": "Enter a Byline/Disclaimer text.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "bylineTextColor": {
+            "title": "Byline / Disclaimer Text Color",
+            "description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+            "format": "color",
+            "type": "string"
+        },
+        "bylineTextSize": {
+            "title": "Byline / Disclaimer Text Size",
+            "description": "Choose the byline / disclaimer text Size ",
+            "type": "string",
+            "ui:extension": {
+                "name":"text-byline-styles"
+            }
+        },
+        "backgroundOpacity": {
+            "title": "Background Opacity",
+            "description": "Enter a percentage value (without a '%' sign) to add the text background opacity.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "mobileTextPosition": {
+            "title": "Mobile: Text Position",
+            "description": "Select the position of header text block w.r.t banner.",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Above The Media",
+                        "Below The Media",
+                        "Over The Media"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "jumpPointID": {
+            "title": "Jump Point Id",
+            "description":"",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+                }
+            ]
+        },
+        "componentMaxWidth": {
+            "title": "Component Max Width",
+            "description": "Enter component's max width.(Default: Full Bleed)",
+            "type": "number",
+            "minimum": 50,
+            "maximum": 9999
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "componentMaxWidth",
+        "solidBgFill",
+        "leftTextPosition",
+        "topTextPosition",
+        "contentTypes",
+        "headerBlock",
+        "promoText",
+        "promoTextColor",
+        "bylineText",
+        "bylineTextColor",
+        "bylineTextSize",
+        "mobileTextPosition",
+        "backgroundOpacity",
+        "JumpPointID"
+    ]
+}

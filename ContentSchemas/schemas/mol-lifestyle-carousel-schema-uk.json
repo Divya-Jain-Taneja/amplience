@@ -1,0 +1,161 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-lifestyle-carousel-uk.json",
+
+	"title": "Lifestyle Carousel",
+	"description": "Lifestyle carousel to display static or rich media on one side of the template (left or right) and a rich product carousel experience on the other side (left or right).",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "lifestyleCarousel" }
+			}
+		},
+		"layout": {
+			"title": "Choose Layout",
+			"description": "Select the primary media position as left or Right",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Left","Right"], "defaultIndex": 0 }
+            }
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"primaryMedia": {
+			"title": "Primary Media",
+			"description": "Content picker to choose primary media for this component.",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+							"title": "Content Types",
+							"enum": [
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json"]
+							}
+						}
+					}
+				]
+			}
+	  	},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"productCarousel": {
+			"title": "Products Carousel",
+			"description": "Products Carousel",
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 6,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-product-cta-card-uk.json"
+					}
+				]
+			}
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the product cards",
+			"description": "Rounded edges will be applied to the product cards on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"autoPlay": {
+			"title": "Auto scroll",
+			"description": "If this is checked the carousel will auto scroll (Default: Auto scroll will be disabled)",
+			"type": "boolean"
+		},
+		"scrollTime": {
+			"title": "Carousel Time (Sec)",
+			"description": "Select the carousel / scroll time (Default is 1sec).",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["0.5","1","2","3","4","5"], "defaultIndex": 1 }
+            }
+		},
+		"jumpPointID": {
+			"title": "Anchor Tag",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"siteName":{
+			"title": "Site Information",
+			"type":"string",
+			"ui:extension": {
+                "name": "site-info"
+            }
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the Mobile display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Carousel","Horizontal Scroll"], "defaultIndex": 0 }
+            }
+		},
+		"primaryMediaMessage": {
+			"title": "",
+			"description": "Primary Media content must be 4:5 aspect ratio.",
+			"type": "string",
+			"const": "Primary Media"
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"layout",
+		"backgroundColor",
+		"mobileStyle",
+		"primaryMediaMessage",
+		"primaryMedia",
+		"headerBlock",
+		"productCarousel",
+		"roundedEdges",
+		"autoPlay",
+		"scrollTime",
+		"jumpPointID",
+		"siteName"
+	],
+	"required":[
+		"primaryMedia",
+		"productCarousel"
+	]
+}

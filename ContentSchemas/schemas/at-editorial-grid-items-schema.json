@@ -1,0 +1,51 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-editorial-grid-items.json",
+
+	"type":"object",
+	"properties":{
+		"gridItem": {
+			"title": "1UP Grid",
+			"description": "Select content type as 4 UP Grids like Media Asset and Header Block",
+			"type": "object",
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+								"title": "Content Types",
+								"enum": [
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block-container.json"
+								]
+							}
+						}
+					}
+				]
+		},
+		"inlineCTATitle": {
+            "title": "",
+            "description": "This CTA will be used within the image as inline CTA, independent from other URL or Header block CTA.",
+            "type": "string",
+            "const": "Inline CTA"
+        },
+		"inlineCTA":{
+			"title":"inlineCTA",
+			"type":"array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items":{
+				"allOf":[
+					{
+						"$ref":"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json"
+					}
+				]
+			}
+		}
+	},
+	"required":[
+		"gridItem"
+	]
+}

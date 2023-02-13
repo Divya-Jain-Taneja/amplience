@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\sfcc-contentasset-flexible-schema.json",
+  "schemaId": "https://www.sapient.com/dynamic-content-accelerators/dist/contentTypes/sfcc-contentasset-flexible.json",
+  "validationLevel": "CONTENT_TYPE"
+}

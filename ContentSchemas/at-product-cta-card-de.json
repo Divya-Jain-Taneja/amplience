@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-product-cta-card-schema-de.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-product-cta-card-de.json",
+  "validationLevel": "PARTIAL"
+}

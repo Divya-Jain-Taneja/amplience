@@ -1,0 +1,196 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-cloud-animation.json",
+
+    "title": "Cloud Animation",
+    "description": "Cloud animation component with fade in/fade out and zoom in effects",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "cloudAnimation" }
+            }
+        },
+        "backgroundColor": {
+            "title": "Background Color",
+            "description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default: transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "animateIcon": {
+            "title": "Add Image/Icon for Fade In/Fade Out (Upload an image with aspect ratio 1:1 in SVG/PNG/JPG format)",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link"
+                }
+            ]
+        },
+        "animateIconAltText": {
+            "title": "Image/Icon Alt text",
+            "description": "Enter the alternate text for image/icon.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },
+        "animationDuration": {
+            "title": "Choose the animation duration in milliseconds",
+            "description": "Please choose the animation duration time(Default: 1000 ms)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "300",
+                        "400",
+                        "500",
+                        "600",
+                        "700",
+                        "800",
+                        "900",
+                        "1000",
+                        "1100",
+                        "1200",
+                        "1300",
+                        "1400",
+                        "1500"
+                    ],
+                    "defaultIndex": 7
+                }
+            }
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items":{
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        },
+        "mediaAsset": {
+            "title": "Media Tile",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-tile.json"
+                    }
+                ]
+            }
+        },
+        "mAspectRatio": {
+            "title": "Mobile Aspect Ratio:",
+            "description": "Select mobile image/video aspect ratio.",
+            "type": "string",
+            "ui:extension": {
+                "name": "aspect-ratio-select-list-mobile"
+            }
+        },
+        "mobileQuality": {
+            "title": "Mobile Quality Parameters",
+            "description": "Select mobile quality parameters.",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "very low",
+                        "low",
+                        "med",
+                        "high",
+                        "very high"	
+                    ],
+                    "values": [
+                        "$qlt_very_low$",
+                        "$qlt_low$",
+                        "$qlt_med$",
+                        "$qlt_high$",
+                        "$qlt_very_high$"	
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "dAspectRatio": {
+            "title": "Desktop Aspect Ratio:",
+            "description": "Select desktop image/video aspect ratio.",
+            "type": "string",
+            "ui:extension": {
+                "name": "aspect-ratio-select-list"
+            }
+        },
+        "desktopQuality": {
+            "title": "Desktop Quality Parameters",
+            "description": "Select desktop quality parameters.",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "very low",
+                        "low",
+                        "med",
+                        "high",
+                        "very high"	
+                    ],
+                    "values": [
+                        "$qlt_very_low$",
+                        "$qlt_low$",
+                        "$qlt_med$",
+                        "$qlt_high$",
+                        "$qlt_very_high$"
+                    ],
+                    "defaultIndex": 2
+                }
+            }
+        },
+        "headerPosition": {
+            "title": "Choose the placement of headline w.r.t media asset",
+            "description": "Select the placement of the headline w.r.t media asset(Default: Above the media asset)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+                    "options": [
+                        "Above Media Asset",
+                        "Below Media Asset"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "ctaLink": {
+            "title": "CTA Link",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [],
+    "required": [
+        "animateIcon",
+        "animateIconAltText"
+    ]
+}

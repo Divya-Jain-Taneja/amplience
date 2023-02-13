@@ -1,0 +1,134 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid.json",
+
+	"title": "Editorial Grid",
+	"description": "Editorial grid module to build an editorial brand story on the homepage.",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "EditorialGrid" }
+			}
+		},"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		},
+		"layout": {
+			"title": "Choose Layout",
+			"description": "Select the primary media position as left or Right",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Left","Right"], "defaultIndex": 0 }
+            }
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"primaryMedia": {
+			"title": "Primary Media",
+			"description": "Content picker to choose primary media for this component.",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+							"title": "Content Types",
+							"enum": [
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-youtube-player.json"]
+							}
+						}
+					}
+				]
+			}
+	  	},
+		"gridItems": {
+			"title": "4 UP Grids",
+			"description": "Select content type as 4 UP Grids like Media Asset and Header Block",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+								"title": "Content Types",
+								"enum": [
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block-container.json"
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		"zeroPadding": {
+			"title": "Zero Padding",
+			"description": "There will be no padding / space between the assets (Default: Standard padding applied)",
+			"type": "boolean"
+		},
+		"removePadding": {
+			"title": "Remove Padding",
+			"description": "Remove padding around the component (Default: Padding is applied)",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Anchor Tag",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		}
+	},
+	"propertyOrder": [],
+	"required":[
+		"primaryMedia",
+		"gridItems"
+	]
+}

@@ -1,0 +1,108 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-youtube-player.json",
+
+	"title": "Youtube Player",
+	"description": "Youtube Player",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"required": [
+		"desktopYoutubeURL",
+		"image",
+		"imageAltText"
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "youtubePlayer" }
+			}
+		},
+		"desktopYoutubeURL": {
+			"title": "Desktop Youtube ID",
+			"description": "Enter the youtube ID for desktop",
+			"type": "string"
+		},
+		"mobileYoutubeURL": {
+			"title": "Mobile Youtube ID",
+			"description": "Enter the youtube ID for mobile",
+			"type": "string"
+		},
+		"image": {
+			"title": "Desktop Poster Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"imageAltText": {
+			"title": "Poster Image Alt Text",
+			"description": "Enter the alternate text for poster image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"mobileImage": {
+			"title": "Mobile Poster Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"disableLazyLoad": {
+			"title": "Disable lazy load?",
+			"description": "On disabling lazy load, youtube poster image will not be lazy loaded.",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"playIconColor": {
+			"title": "Change play cta color to black.",
+			"description": "On check,color of youtube play cta changes to black (Default- white).",
+			"type": "boolean"
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"desktopYoutubeURL",
+		"mobileYoutubeURL",
+		"image",
+		"mobileImage",
+		"imageAltText",
+		"mAspectRatio",
+		"dAspectRatio",
+		"playIconColor",
+		"disableLazyLoad",
+		"jumpPointID"
+	]
+}

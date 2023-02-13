@@ -1,0 +1,147 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-4up-grid-uk.json",
+
+	"title": "4UP Grid Container UK",
+	"description": "4UP Grid container module with the product cards to build a grid with image.",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "4UPGrid" }
+			}
+		},
+		"layout": {
+			"title": "Choose Layout",
+			"description": "Select the primary media position as left or Right",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Left","Right"], "defaultIndex": 0 }
+            }
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"primaryMediaMessage": {
+			"title": "",
+			"description": "Primary Media content must be 4:5 aspect ratio.",
+			"type": "string",
+			"const": "Primary Media"
+		},
+		"primaryMedia": {
+			"title": "Primary Media",
+			"description": "Content picker to choose primary media for this component.",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+							"title": "Content Types",
+							"enum": [
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json"]
+							}
+						}
+					}
+				]
+			}
+	  	},
+		"gridItems": {
+			"title": "4UP Grid",
+			"description": "Select the product cards/tiles to create the 4UP Grid",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 4,
+			"items": {
+				"type": "string"
+			},
+			"ui:extension": {
+				"name": "sfcc-product-selector-uk"
+			}
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the product cards",
+			"description": "Rounded edges will be applied to the product cards on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"cardOptions": {
+			"title": "Items to show with product card",
+			"description": "Select a single or multiple items to show with product card (Default is name only).",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+					"options" : [
+						"Name only",
+						"Price only",
+						"Ratings only",
+						"Name + Price",
+						"Name + Ratings",
+						"Price + Ratings",
+						"Name + Price + Ratings"
+					], 
+					"defaultIndex": 0 
+				}
+            }
+		},
+		"jumpPointID": {
+			"title": "Anchor Tag",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"layout",
+		"backgroundColor",
+		"headerBlock",
+		"primaryMediaMessage",
+		"primaryMedia",
+		"gridItems",
+		"roundedEdges",
+		"cardOptions",
+		"jumpPointID"
+	],
+	"required":[
+		"primaryMedia",
+		"gridItems"
+	]
+}

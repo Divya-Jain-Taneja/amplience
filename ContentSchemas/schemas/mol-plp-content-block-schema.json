@@ -1,0 +1,77 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-content-block.json",
+
+	"title": "PLP Content Block",
+	"description": "PLP content block for SEO purposes with show less and show more functionality.",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "plpContentBlock" }
+			}
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"bodyTextLess": {
+			"title": "Body Text (Always Shown)",
+			"description": "Enter the Body Text that will always show",
+			"ui:extension": {
+				"name": "wysiwyg-html-editor"
+			}
+		},
+		"bodyTextMore": {
+			"title": "Body Text For Show More",
+			"description": "Enter the Body Text for show more content",
+			"ui:extension": {
+				"name": "wysiwyg-html-editor"
+			}
+		},
+		"jumpPointID": {
+			"title": "Anchor Tag",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"bodyTextLessTitle": {
+			"title": "",
+			"description": "Enter the Text in below editor that will be always shown.",
+			"type": "string",
+			"const": "Text (Always Shown)"
+		},
+		"bodyTextMoreTitle": {
+			"title": "",
+			"description": "Enter the Text in below editor for show more content.",
+			"type": "string",
+			"const": "Text (Show More)"
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"backgroundColor",
+		"bodyTextLessTitle",
+		"bodyTextLess",
+		"bodyTextMoreTitle",
+		"bodyTextMore",
+		"jumpPointID"
+	],
+	"required": [
+		"bodyTextLess",
+		"bodyTextMore"
+	]
+}

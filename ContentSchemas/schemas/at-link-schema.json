@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json",
+    "title": "Call To Action",
+    "description": "CTA Link with variations",
+    "allOf": [{
+        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }],
+    "type": "object",
+    "required": [
+        "label",
+        "linkURL",
+        "linkStyle"
+    ],
+    "properties": {
+        "label": {
+            "title": "Enter Link Label",
+            "description": "Text which is going to be displayed for the link",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 35
+        },
+        "linkURL": {
+            "title": "Enter Link URL",
+            "description": "URL of the link",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "linkStyle": {
+            "title": "Style",
+            "description": "Style definition of the link",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-cta-styles"
+            }
+        },
+        "linkSize": {
+            "title": "Size",
+            "description": "Size definition of the link",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-cta-size"
+            }
+        },
+        "target": {
+            "title": "Should link to be opened in a new tab?",
+            "description": "Sets Target of link to '_blank'",
+            "type": "boolean",
+            "default": false
+        },
+        "ctaTextColor": {
+            "title": "CTA Text Color",
+            "description":"Choose the CTA text color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+            "format": "color",
+            "type": "string"
+        },
+        "ctaBgColor": {
+            "title": "CTA Background Color",
+            "description":"Choose the CTA Background color from color picker or enter rgb value or hex code or a color name (Default- black i.e. #000000)",
+            "format": "color",
+            "type": "string"
+        },
+        "ctaColorInverse": {
+            "title": "Inverse Hover Color?",
+            "description": "On check, CTA text and background color will be inversed on hover (Default - Standard color on hover as per the brand)",
+            "type": "boolean"
+        }
+    },
+    "propertyOrder": [
+        "label",
+        "linkURL",
+        "linkStyle",
+        "linkSize",
+        "ctaTextColor",
+        "ctaBgColor",
+        "ctaColorInverse",
+        "target"
+    ]
+}

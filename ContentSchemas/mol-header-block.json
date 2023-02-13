@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-header-block-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json",
+  "validationLevel": "CONTENT_TYPE"
+}

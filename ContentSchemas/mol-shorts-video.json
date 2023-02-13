@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/mol-shorts-video-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shorts-video.json",
+  "validationLevel": "CONTENT_TYPE"
+}

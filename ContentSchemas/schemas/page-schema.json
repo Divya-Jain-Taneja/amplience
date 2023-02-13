@@ -1,0 +1,210 @@
+{
+	"$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+	"id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page.json",
+	"title": "Page Accelerator",
+	"description": "Page Accelerator",
+	"allOf": [
+	  {
+		"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+	  }
+	],
+	"propertyOrder": [],
+	"type": "object",
+	"properties": {
+	  	"componenthelp": {
+			  "title": "Help",
+			  "ui:extension": {
+				  "name": "component-help",
+				  "params": { "topic" : "pageAccelerator" }
+			  }
+		},
+		"contentTypes": {
+		"type": "array",
+		"items": {
+			"allOf": [
+			{
+				"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+			},
+			{
+				"properties": {
+				"contentType": {
+					"title": "Content Types",
+					"enum": [
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/table-ext.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/product-carousel.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/html-editor.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-category-row.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-wof-grid.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-slider.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-col-split-container.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-lifestyle-carousel.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-visual-filter.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-4up-grid.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-content-block.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-v2.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050-v2.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shoppable-video.json",
+						"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v2.json" ]
+					}
+			  	}
+			}
+		  ]
+		},
+		"title": "Content Type",
+		"description": ""
+		},
+		"desktopBgImage": {
+			"title": "Desktop Background Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"mobileBgImage": {
+			"title": "Mobile Background Image",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"backgroundSize": {
+			"title": "Background Image Size",
+			"description": "Select option for background image size (Default - auto).",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"auto",
+						"cover",
+						"contain"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"backgroundRepeat": {
+			"title": "Background Image Repeat",
+			"description": "Select option for background image repeat (Default - no-repeat).",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"repeat",
+						"no-repeat"
+					],
+					"defaultIndex": 1
+				}
+			}
+		},
+		"backgroundPosition": {
+			"title": "Background Image Position",
+			"description": "Select option for background image position (Default - center center).",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"left top",
+						"left center",
+						"left bottom",
+						"right top",
+						"right center",
+						"right bottom",
+						"center top",
+						"center center",
+						"center bottom"
+					],
+					"defaultIndex": 7
+				}
+			}
+		},
+		"disableLazyLoad": {
+			"title": "Disable lazy load?",
+			"description": "On disabling lazy load, background image will not be lazy loaded.",
+			"type": "boolean"
+		},
+		"paddingBackgroundImage": {
+			"title": "Apply spacing to Background image?",
+			"description": "Apply the spacing to Background image (Default : Background Image - Full Bleed)",
+			"type": "boolean"
+		},
+		"marginTopD": {
+			"title": "Spacing From Top In Desktop",
+			"description": "Enter a number value to add the spacing form the top (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginBottomD": {
+			"title": "Spacing From Bottom In Desktop",
+			"description": "Enter a number value to add the spacing form the bottom (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginLeftD": {
+			"title": "Spacing From Left In Desktop",
+			"description": "Enter a number value to add the spacing form the left (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginRightD": {
+			"title": "Spacing From Right In Desktop",
+			"description": "Enter a number value to add the spacing form the right (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginInBetweenD": {
+			"title": "Spacing Between Multiple Contents In Desktop",
+			"description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginTopM": {
+			"title": "Spacing From Top In Mobile",
+			"description": "Enter a number value to add the spacing form the top (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginBottomM": {
+			"title": "Spacing From Bottom In Mobile",
+			"description": "Enter a number value to add the spacing form the bottom (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginLeftM": {
+			"title": "Spacing From Left In Mobile",
+			"description": "Enter a number value to add the spacing form the left (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginRightM": {
+			"title": "Spacing From Right In Mobile",
+			"description": "Enter a number value to add the spacing form the right (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"marginInBetweenM": {
+			"title": "Spacing Between Multiple Contents In Mobile",
+			"description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		}
+	}
+}

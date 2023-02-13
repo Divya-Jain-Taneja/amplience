@@ -1,0 +1,88 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/global-configuration.json",
+
+	"title": "Configurations",
+	"description": "Configurations",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"deliveryKey": {
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://schema-examples.com/delivery-key"
+				}
+			]
+		},
+		"device": {
+			"title": "device",
+			"description": "Desktop or Mobile",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Desktop", "Mobile"], "defaultIndex": 0 }
+            }
+		},
+		"zoneid": {
+			"title": "zoneid",
+			"description": "Zone ID",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"contenttype": {
+			"title": "contenttype",
+			"description": "Content Type",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Amplience JSON","Amplience HTML", "SFCC Content", "SFCC HTML", "External URL"], "defaultIndex": 0 }
+            }
+		},
+		"srccontentid": {
+			"title": "srccontentid",
+			"description": "Source Content ID",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"srcurl": {
+			"title": "srcurl",
+			"description": "Source URL",
+			"type": "string",
+			"format":"uri"
+		},
+		"selector": {
+			"title": "selector",
+			"description": "selector",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"segmentname": {
+			"title": "segmentname",
+			"description": "Segment Name",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 10
+		},
+		"segmentvalue": {
+			"title": "segmentvalue",
+			"description": "Segment Value",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 10
+		}
+	},
+	"propertyOrder": [],
+	"required":[
+		"deliveryKey"
+	]
+}

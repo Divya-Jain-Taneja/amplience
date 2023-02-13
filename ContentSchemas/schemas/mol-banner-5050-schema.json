@@ -1,0 +1,215 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050.json",
+
+    "title": "Banner 5050",
+    "description": "Banner 5050",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "banner5050" }
+            }
+        },
+        "chooseLayout": {
+            "title": "Choose Layout (Image/Video/Text)",
+            "description": "Select the layout",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+                    "options" : [
+                        "Left (Image/Video Left, Text Right)",
+                        "Right (Image/Video Right, Text Left)"
+                    ],
+                    "defaultIndex": 0 
+                }
+            }
+        },
+        "mediaAsset": {
+            "title": "Media Asset",
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json"
+                    }
+                ]
+            }
+        },
+        "TextBackgroundColor": {
+            "title": "Background Primary Color",
+            "description": "Select text background color (Default- Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "leftTextPosition": {
+            "title": "Text Position from Left",
+            "description": "Enter a percentage value (without a '%' sign) to position text horizontally from the left (Default is 50)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "topTextPosition": {
+            "title": "Text Position from Top",
+            "description": "Enter a percentage value (without a '%' sign) to position text vertically from the top (Default is 50)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "description": "Header Block Mol",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                }
+            ]
+        },
+        "headerBlockPosition": {
+            "title": "Choose the order of header block in mobile",
+            "description": "Select the position of header block in mobile (Top/Bottom of the media)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+                    "options" : [
+                        "Top of the media",
+                        "Bottom of the media"
+                    ],
+                    "defaultIndex": 0 
+                }
+            }
+        },
+        "jumpPointID": {
+            "title": "Jump Point Id",
+            "description":"",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+                }
+            ]
+        },
+        "componentMaxWidth": {
+            "title": "Component Max Width",
+            "description": "Enter component's max width.(Default: Full Bleed)",
+            "type": "number",
+            "minimum": 50,
+            "maximum": 9999
+        },
+        "disclaimerText": {
+            "title": "Disclaimer Text",
+            "description": "Enter a Byline/Disclaimer text.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "bylineTextColor": {
+            "title": "Byline / Disclaimer Text Color",
+            "description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+            "format": "color",
+            "type": "string"
+        },
+        "bylineTextSize": {
+            "title": "Byline / Disclaimer Text Size",
+            "description": "Choose the byline / disclaimer text Size",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-byline-styles"
+            }
+        },
+        "countDownClockAndImage": {
+            "title": "CountDown Clock",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-banner5050-countdown-clock.json"
+                    }
+                ]
+            }
+        },
+        "gradientColor": {
+            "title": "Background Gradient Secondary Color",
+            "description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+            "format": "color",
+            "type": "string"
+        },
+        "outlineCheckbox": {
+            "title": "Apply Outline for Desktop?",
+            "description": "On the Check, the outline will be applied on desktop",
+            "type": "boolean"
+        },
+        "outlineCheckbox_Mob": {
+            "title": "Apply Outline for Mobile?",
+            "description": "On the Check, the outline will be applied on mobile",
+            "type": "boolean"
+        },
+        "outlineColor": {
+            "title": "Outline Color",
+            "description": "Enter/Select the color for Banner 5050 Outline (Default: Black color)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientType": {
+            "title": "Gradient Type",
+            "description": "Select the Gradient Type( Default - Diagonal)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Diagonal",
+                        "Linear - Top to Bottom",
+                        "Linear - Left to Right"
+                    ],
+                    "values":[
+                        "bottom right",
+                        "bottom",
+                        "right"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        }
+    },
+    "required": [
+        "chooseLayout"
+    ],
+    "propertyOrder": [
+        "componenthelp",
+        "componentMaxWidth",
+        "chooseLayout",
+        "TextBackgroundColor",
+        "gradientColor",
+        "gradientType",
+        "leftTextPosition",
+        "topTextPosition",
+        "mediaAsset",
+        "headerBlock",
+        "headerBlockPosition",
+        "disclaimerText",
+        "bylineTextSize",
+        "bylineTextColor",
+        "countDownClockAndImage",
+        "jumpPointID",
+        "outlineCheckbox",
+        "outlineCheckbox_Mob",
+        "outlineColor"
+    ]
+}

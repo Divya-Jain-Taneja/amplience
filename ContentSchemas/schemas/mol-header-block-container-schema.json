@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block-container.json",
+	"title": "Header Block",
+	"description": "Header block constituting of a Text Block, background Color, and a set of links",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"headerBlock": {
+			"title": "Header Block",
+			"description": "Header Block",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+				}
+			]
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to this header block container",
+			"description": "Rounded edges will be applied to this header block container on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		}
+	},
+	"propertyOrder": [
+		"headerBlock",
+		"backgroundColor",
+		"roundedEdges"
+	],
+	"required": [
+		"headerBlock"
+	]
+}

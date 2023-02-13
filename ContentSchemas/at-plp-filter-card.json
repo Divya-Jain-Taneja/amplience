@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-plp-filter-card-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-plp-filter-card.json",
+  "validationLevel": "PARTIAL"
+}

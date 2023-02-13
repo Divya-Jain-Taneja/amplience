@@ -1,0 +1,76 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-slider.json",
+	"title": "Slider",
+	"description": "A carousel container module with the different types of cards to build a carousel component",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "slider" }
+			}
+		},
+		"backgroundColor": {
+			"title": "Background Color",
+			"description": "Choose the background color for container (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"contentTypes": {
+			"title": "Content Type",
+			"description": "Select content type like Media Asset, Hero Banner and Banner 5050",
+			"type": "array",
+			"minItems": 2,
+			"maxItems": 8,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+					},
+					{
+						"properties": {
+							"contentType": {
+								"title": "Content Types",
+								"enum": [
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner.json",
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050.json",
+									"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json" 
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		"sliderLoop": {
+			"title": "Slider Loop",
+			"description": "Restart the slider from first slide after ending (Default: No Looping)",
+			"type": "boolean"
+		},
+		"navDots": {
+			"title": "Show Navigational Dots",
+			"description": "Hide / Show the navigational dots of the slider (Default: Hidden)",
+			"type": "boolean"
+		},
+		"autoSlideTime": {
+			"title": "Auto Slide",
+			"description": "Select the auto slide time of the slides",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Disable","6 sec","7 sec","8 sec","9 sec","10 sec"], "defaultIndex": 0 }
+            }
+		}
+	},
+	"propertyOrder": [],
+	"required":[
+		"contentTypes"
+	]
+}

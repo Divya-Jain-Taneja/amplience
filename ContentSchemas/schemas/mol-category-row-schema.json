@@ -1,0 +1,135 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-category-row.json",
+
+	"title": "Category row container",
+	"description": "Category row container",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "categorycontainer" }
+			}
+			},
+		"backgroundColor": {
+			"title": "Background Primary Color",
+			"description": "Select background color (Default- Transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the Mobile display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Carousel","Horizontal Scroll"], "defaultIndex": 0 }
+            }
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"categoryRow": {
+			"title": "Category row",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 6,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-category-card.json"
+					}
+				]
+			}
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the category cards",
+			"description": "Rounded edges will be applied to the category cards on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		},
+		"disableLazyLoad": {
+			"title": "Disable lazy load?",
+			"description": "On disabling lazy load, category cards images will not be lazy loaded.",
+			"type": "boolean"
+		},
+		"removePadding": {
+			"title": "Remove Padding",
+			"description": "Remove padding around the component (Default: Padding is applied)",
+			"type": "boolean"
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"componentMaxWidth",
+		"backgroundColor",
+		"gradientColor",
+		"mobileStyle",
+		"headerBlock",
+		"categoryRow",
+		"mAspectRatio",
+		"dAspectRatio",
+		"roundedEdges",
+		"disableLazyLoad",
+		"removePadding",
+		"jumpPointID"
+	],
+	"required": ["categoryRow"]
+}

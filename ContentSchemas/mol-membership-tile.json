@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-membership-tile-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-membership-tile.json",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,96 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-tile.json",
+
+	"title": "Media Tile",
+	"description": "Atomic shorts media tile element",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"badge": {
+			"title": "Badge",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-badge-text.json"
+					}
+				]
+			}
+		},
+		"topScrim": {
+			"title": "Top Scrim Behavior",
+			"description": "On check the top scrim behavior will be enabled",
+			"type": "boolean",
+			"default":true
+		},		
+		"mediaAsset": {
+			"title": "Media Asset Tile",
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-media.json"
+					}
+				]
+			}
+		},
+		"middleScrim": {
+			"title": "Middle Scrim Behavior",
+			"description": "On check the middle scrim behavior will be enabled",
+			"type": "boolean",
+			"default":true
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items":{
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"paddingCTA":{
+			"title": "Padding between body copy and CTA",
+			"description": "Select the padding between the Body Copy and the CTA",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": { "options" : ["8px", "16px", "24px"], "values": ["8", "16", "24"], "defaultIndex": 1 }
+			}			
+		},
+		"bottomScrim": {
+			"title": "Bottom Scrim Behavior",
+			"description": "On check the bottom scrim behavior will be enabled",
+			"type": "boolean",
+			"default":true
+		}
+	},
+
+	"propertyOrder": [
+		"badge",
+		"topScrim",
+		"mediaAsset",
+		"middleScrim",
+		"headerBlock",
+		"paddingCTA",
+		"bottomScrim"
+	],
+	"required": [
+		"mediaAsset"
+	]
+}

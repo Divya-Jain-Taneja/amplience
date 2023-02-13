@@ -1,0 +1,82 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/table-ext.json",
+
+	"title": "Table",
+	"description": "WYSIWYG Table",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+
+	"propertyOrder": [
+		"componenthelp",
+		"tableSort",
+		"anchorTableHeader",
+		"table"
+	],
+
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "table" }
+			}
+		},
+		"tableSort": {
+			"title": "Enable Sort?",
+			"description": "Enable Table Sorting",
+			"type": "boolean"
+		},
+		"anchorTableHeader": {
+			"title": "Anchor Header Row?",
+			"description": "Anchor Table Header Row",
+			"type": "boolean"
+		},
+        "table": {
+            "type": "object",
+            "title": "table",
+            "ui:extension": {
+                "name": "table-ext",
+                "params": { "rowDefaultValue" : 3, "colDefaultValue" : 3}
+            },
+            "properties": {
+				"headercols": {
+					"title": "Column Header",
+					"description": "description",
+					"type": "array",
+					"minItems": 0,
+					"maxItems": 99,
+					"items": {
+						"type": "string"
+					}
+				},
+                "row": {
+                    "type": "array",
+					"minItems": 1,
+					"maxItems": 20,
+					"title": "row", 
+                    "items": {
+						"type": "object",
+						"title": "row",
+						"properties": {
+							"col": {
+								"type": "array",
+								"minItems": 1,
+								"maxItems": 99,
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+                    }
+                }
+            }
+		}
+	}
+}	
+

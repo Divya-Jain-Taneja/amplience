@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-page-spacing-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-spacing.json",
+  "validationLevel": "PARTIAL"
+}

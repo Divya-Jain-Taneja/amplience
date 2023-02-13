@@ -1,0 +1,26 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-config-data.json",
+
+	"title": "static configuration data",
+	"description": "static configuration data",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"configuration": {
+			"type": "array",
+			"minItems": 1,
+			"maxItems": 999,
+			"items": {
+				"$ref":"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-id-value-config.json"
+			}
+		}	
+	},
+	"propertyOrder": []
+}

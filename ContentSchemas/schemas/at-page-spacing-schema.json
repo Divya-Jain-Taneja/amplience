@@ -1,0 +1,90 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-spacing.json",
+    "title": "Spacing",
+    "type": "object",
+    "properties": {
+        "marginTopD": {
+            "title": "Desktop: Spacing From Top",
+            "description": "Enter a number value to add the spacing from the top (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginBottomD": {
+            "title": "Desktop: Spacing From Bottom",
+            "description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginLeftD": {
+            "title": "Desktop: Spacing From Left",
+            "description": "Enter a number value to add the spacing from the left (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginRightD": {
+            "title": "Desktop: Spacing From Right",
+            "description": "Enter a number value to add the spacing from the right (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginInBetweenD": {
+            "title": "Desktop: Spacing Between Multiple Contents",
+            "description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginTopM": {
+            "title": "Mobile: Spacing From Top",
+            "description": "Enter a number value to add the spacing from the top (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginBottomM": {
+            "title": "Mobile: Spacing From Bottom",
+            "description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginLeftM": {
+            "title": "Mobile: Spacing From Left",
+            "description": "Enter a number value to add the spacing from the left (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginRightM": {
+            "title": "Mobile: Spacing From Right",
+            "description": "Enter a number value to add the spacing from the right (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginInBetweenM": {
+            "title": "Mobile: Spacing Between Multiple Contents",
+            "description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        }
+    },
+    "propertyOrder": [
+        "marginTopD",
+        "marginBottomD",
+        "marginLeftD",
+        "marginRightD",
+        "marginInBetweenD",
+        "marginTopM",
+        "marginBottomM",
+        "marginLeftM",
+        "marginRightM",
+        "marginInBetweenM"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-lifestyle-carousel-schema-uk.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-lifestyle-carousel-uk.json",
+  "validationLevel": "CONTENT_TYPE"
+}

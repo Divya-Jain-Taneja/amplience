@@ -1,0 +1,105 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-feature-benefit.json",
+    "title": "Feature Benefit",
+    "description": "Feature Benefit",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "featureBenefit" }
+            }
+        },
+        "componentMaxWidth": {
+            "title": "Component Max Width",
+            "description": "Enter component's max width.(Default: Full Bleed)",
+            "type": "number",
+            "minimum": 50,
+            "maximum": 9999
+        },
+        "backgroundColor": {
+            "title": "Background Primary Color",
+            "description": "Select background color (Default: Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientColor": {
+            "title": "Background Gradient Secondary Color",
+            "description": "Choose the gradient color (Choose from color-palette or enter hex code or RGB value or color name) (Default: Starts from top left to bottom right)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientType": {
+            "title": "Gradient Type",
+            "description": "Select the Gradient Type( Default - Diagonal)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Diagonal",
+                        "Linear - Top to Bottom",
+                        "Linear - Left to Right"
+                    ],
+                    "values":[
+                        "bottom right",
+                        "bottom",
+                        "right"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "desktopCards": {
+            "title": "Desktop: Cards in a Row",
+            "description": "Select the number of cards to be displayed in a row on desktop (Default: 5)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["3","4","5"], "defaultIndex": 2 }
+            }
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        },
+        "featureBenefitCard": {
+            "title": "Feature Benefit Card",
+            "type": "array",
+            "minItems": 3,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-feature-benefit-card.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "componentMaxWidth",
+        "backgroundColor",
+        "gradientColor",
+        "gradientType",
+        "desktopCards",
+        "headerBlock",
+        "featureBenefitCard"
+    ]
+}

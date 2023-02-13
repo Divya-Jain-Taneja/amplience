@@ -1,0 +1,284 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v4.json",
+
+	"title": "Card Display Container V4.0",
+	"description": "Home Card Display Container V4.0",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "contentCardContainerV4" }
+			}
+		},
+		"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		},
+		"backgroundColor": {
+			"title": "Background Primary Color",
+			"description": "Select background color (Default: Transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hex code or RGB value or color name) (Default: Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		},
+		"desktopStyle": {
+			"title": "Desktop: Display Style",
+			"description": "Select the desktop display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Stack","Carousel"], "defaultIndex": 1 }
+            }
+		},
+		"desktopCards": {
+			"title": "Desktop: Cards in a Row",
+			"description": "Select the number of cards to be displayed in a row on desktop (Default: 4)",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["2","3","4","5","6"], "defaultIndex": 2 }
+            }
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the mobile display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Stack","Carousel","Horizontal Scroll"], "defaultIndex": 1 }
+            }
+		},
+		"mobileCards": {
+			"title": "Mobile: Cards in a Row",
+			"description": "Select the number of cards to be displayed in a row on mobile (Default: 2)",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["1","2","3"], "defaultIndex": 1 }
+            }
+		},
+		"columnDivider": {
+			"title": "Add Multi Column Divider",
+			"description": "Multi column divider will be added on check(Default : No Multi column divider is applied)",
+			"type": "boolean"
+		},
+		"columnDividerColor": {
+			"title": "Multi column Divider Color",
+			"description": "Select multi column divider color(Default - Black)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"contentCard": {
+			"title": "Content Card",
+			"type": "array",
+			"minItems": 2,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-content-card-v4.json"
+					}
+				]
+			}
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"imageIcon": {
+			"title": "Icon Image",
+			"description": "Images will be set as thumbnails.",
+			"type": "boolean"
+		},
+		"removePadding": {
+			"title": "Remove Padding",
+			"description": "Remove padding around the component (Default: Padding is applied)",
+			"type": "boolean"
+		},
+		"desktopPaddingRow": {
+			"title": "Desktop: Padding Within Row",
+			"description": "Enter the padding between cards in a row on desktop (Default: 24px)",
+			"type": "number",
+			"minimum": 0,
+			"maximum": 64
+		},
+		"desktopPaddingStack": {
+			"title": "Desktop: Padding Between Stacks",
+			"description": "Enter the padding between card stacks on desktop (Default: 48px)",
+			"type": "number",
+			"minimum": 0,
+			"maximum": 64
+		},
+		"mobilePaddingRow": {
+			"title": "Mobile: Padding Within Row",
+			"description": "Enter the padding between cards in a row on mobile (Default: 24px)",
+			"type": "number",
+			"minimum": 0,
+			"maximum": 64
+		},
+		"mobilePaddingStack": {
+			"title": "Mobile: Padding Between Stacks",
+			"description": "Enter the padding between card stacks on mobile (Default: 48px)",
+			"type": "number",
+			"minimum": 0,
+			"maximum": 64
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		},
+		"mobileQuality": {
+			"title": "Mobile Quality Parameters",
+			"description": "Select mobile quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+				    "values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"	
+					],
+					"defaultIndex": 0
+				}
+			}
+		},	
+		"desktopQuality": {
+			"title": "Desktop Quality Parameters",
+			"description": "Select desktop quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"	
+					],
+					"values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"	
+					],
+					"defaultIndex": 2
+				}
+			}
+		},
+		"roundedEdgeCheckbox": {
+			"title": "Apply rounded edges to all Content Cards",
+			"description": "Rounded edges will be applied to all the content cards on the check. (Default: No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear - Top to Bottom",
+						"Linear - Left to Right"
+					],
+					"values":[
+						"bottom right",
+						"bottom",
+						"right"
+					],
+					"defaultIndex": 0
+				}
+			}
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"componentMaxWidth",
+		"backgroundColor",
+		"gradientColor",
+		"gradientType",
+		"desktopStyle",
+		"desktopCards",
+		"mobileStyle",
+		"mobileCards",
+		"columnDivider",
+		"columnDividerColor",
+		"headerBlock",
+		"contentCard",
+		"mAspectRatio",
+		"mobileQuality",
+		"dAspectRatio",
+		"desktopQuality",
+		"disableLazyLoad",
+		"roundedEdges",
+		"imageIcon",
+		"removePadding",
+		"desktopPaddingRow",
+		"desktopPaddingStack",
+		"mobilePaddingRow",
+		"mobilePaddingStack",
+		"jumpPointID",
+		"roundedEdgeCheckbox"
+	]
+}

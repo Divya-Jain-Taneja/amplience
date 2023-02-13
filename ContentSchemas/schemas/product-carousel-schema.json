@@ -1,0 +1,162 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/product-carousel.json",
+
+	"title": "Product Carousel",
+	"description": "Product Carousel",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "productcarousel" }
+			}
+			},
+		"chooseLayout": {
+			"title": "Choose Card Type",
+			"description": "Select Card Type (Default- Product Card)",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+					"options" : [
+						"Product Card"
+					],
+					"defaultIndex": 0 
+				}
+            }
+		},
+		"mobileStyle": {
+			"title": "Mobile: Display Style",
+			"description": "Select the Mobile display style",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Carousel","Horizontal Scroll"], "defaultIndex": 0 }
+            }
+		},
+		"backgroundColor": {
+			"title": "Background Primary Color",
+			"description": "Select background color (Default- Transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"products": {
+			"title": "Product Selector",
+			"description": "description",
+			"type": "array",
+			"minItems": 4,
+			"maxItems": 16,
+			"items": {
+			"type": "string"
+			},
+			"ui:extension": {
+				"name": "sfcc-product-selector"
+			}
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the product cards",
+			"description": "Rounded edges will be applied to the product cards on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"colorSwatches": {
+			"title": "Color Swatches",
+			"description": "Enable color swatches on all product cards. (Default: Disabled)",
+			"type": "boolean"
+		},
+		"starRating": {
+			"title": "Star rating",
+			"description": "Enable star ratings on all product cards. (Default: Disabled)",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		},
+		"removePadding": {
+			"title": "Remove Padding",
+			"description": "Remove padding around the component (Default: Padding is applied)",
+			"type": "boolean"
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear - Top to Bottom",
+						"Linear - Left to Right"
+					],
+					"values":[
+						"bottom right",
+						"bottom",
+						"right"
+					],
+					"defaultIndex": 0
+				}
+			}
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"componentMaxWidth",
+		"chooseLayout",
+		"mobileStyle",
+		"backgroundColor",
+		"gradientColor",
+		"gradientType",
+		"headerBlock",
+		"products",
+		"roundedEdges",
+		"colorSwatches",
+		"starRating",
+		"removePadding",
+		"jumpPointID"
+	],
+    "required": [
+        "products"
+    ]
+}

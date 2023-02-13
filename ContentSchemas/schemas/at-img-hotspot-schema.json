@@ -1,0 +1,85 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+	"title": "Image Hotspot",
+	"description": "Image Hotspot",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "richimage" }
+			}
+		},
+		"hotspotImage": {
+			"title": "Hotspot Image",
+			"ui:extension": {
+				"name": "image-hotspot-meta-data-ext"
+			}
+		},
+		"richImageAltText": {
+			"title": "Image Alt Text",
+			"description": "Enter the alternate text for rich image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"hotSpotIcon": {
+			"title": "HotSpot Icon (Default- transparent)",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+			]
+		},
+		"highlightStyle": {
+			"title": "Highlight Style",
+			"description": "Highlight style for polygon (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"hotspotImage",
+		"richImageAltText",
+		"hotSpotIcon",
+		"highlightStyle",
+		"jumpPointID",
+		"mAspectRatio",
+		"dAspectRatio"
+	],
+	"required": [
+		"richImageAltText"
+	]
+}

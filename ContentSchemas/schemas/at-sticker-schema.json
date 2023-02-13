@@ -1,0 +1,161 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-sticker.json",
+
+    "title": "Sticker",
+    "description": "Sticker option",
+    "type": "object",
+    "properties": {
+        "image": {
+            "title": "Desktop Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "mobileImage": {
+            "title": "Mobile Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt text",
+            "description": "Enter the alternate text for image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },
+        "mobileQuality": {
+            "title": "Mobile Quality Parameters",
+            "description": "Select mobile quality parameters.",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "very low",
+                        "low",
+                        "med",
+                        "high",
+                        "very high"	
+                    ],
+                    "values": [
+                        "$qlt_very_low$",
+                        "$qlt_low$",
+                        "$qlt_med$",
+                        "$qlt_high$",
+                        "$qlt_very_high$"	
+                    ],
+                    "defaultIndex": 3
+                }
+            }
+        },
+        "desktopQuality": {
+            "title": "Desktop Quality Parameters",
+            "description": "Select desktop quality parameters.",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "very low",
+                        "low",
+                        "med",
+                        "high",
+                        "very high"	
+                    ],
+                    "values": [
+                        "$qlt_very_low$",
+                        "$qlt_low$",
+                        "$qlt_med$",
+                        "$qlt_high$",
+                        "$qlt_very_high$"	
+                    ],
+                    "defaultIndex": 4
+                }
+            }
+        },
+        "leftPositionDesktop": {
+            "title": "Desktop: Sticker Position from Left",
+            "description": "Enter a percentage value (without a '%' sign) to position the sticker horizontally from the left on the desktop (Default is 50)",
+            "type": "integer",
+            "minimum": -50,
+            "maximum": 150
+        },
+        "topPositionDesktop": {
+            "title": "Desktop: Sticker Position from Top",
+            "description": "Enter a percentage value (without a '%' sign) to position the sticker vertically from the top on the desktop (Default is 50)",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "leftPositionMobile": {
+            "title": "Mobile: Sticker Position from Left",
+            "description": "Enter a percentage value (without a '%' sign) to position the sticker horizontally from the left on mobile (Default is 50)",
+            "type": "integer",
+            "minimum": -50,
+            "maximum": 150
+        },
+        "topPositionMobile": {
+            "title": "Mobile: Sticker Position from Top",
+            "description": "Enter a percentage value (without a '%' sign) to position the sticker vertically from the top on mobile (Default is 50)",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "stickerWidthD": {
+            "title": "Desktop: Adjust the width of the Sticker",
+            "description": "Enter a number value to adjust the width of the sticker (Default is 120px width)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "stickerHeightD": {
+            "title": "Desktop: Adjust the height of the Sticker",
+            "description": "Enter a number value to adjust the height of the sticker (Default is 120px height)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "stickerWidthM": {
+            "title": "Mobile: Adjust the width of the Sticker",
+            "description": "Enter a number value to adjust the width of the sticker (Default is 80px width)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "stickerHeightM": {
+            "title": "Mobile: Adjust the height of the Sticker",
+            "description": "Enter a number value to adjust the height of the sticker (Default is 80px height)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "hideSticker": {
+            "title": "Hide the sticker for mobile?",
+            "description": "Hide the sticker for mobile devices (Default : Sticker will show for both desktop and mobile)",
+            "type": "boolean"
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, sticker image will not be lazy loaded.",
+            "type": "boolean"
+        }
+    },
+    "propertyOrder": [
+        "image",
+        "mobileImage",
+        "imageAltText",
+        "stickerWidthD",
+        "stickerHeightD",
+        "desktopQuality",
+        "stickerWidthM",
+        "stickerHeightM",
+        "mobileQuality",
+        "leftPositionDesktop",
+        "topPositionDesktop",
+        "leftPositionMobile",
+        "topPositionMobile",
+        "hideSticker",
+        "disableLazyLoad"
+    ],
+    "required": [
+        "imageAltText"
+    ]
+}

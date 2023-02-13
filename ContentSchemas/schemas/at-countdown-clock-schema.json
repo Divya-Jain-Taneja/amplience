@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-countdown-clock.json",
+    "title": "Countdown Clock Timer",
+    "description": "Countdown Clock Timer",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "timerDate": {
+            "title": "Timer End Date",
+            "description": "Enter an end date for the countdown timer.",
+            "type": "string",
+            "format": "date",
+            "ui:extension": {
+                "url": "https://date-time-picker.extensions.content.amplience.net"
+            }
+        },
+        "time": {
+            "title": "Timer End Time (Eastern Time Zone)",
+            "description": "Enter an end time for the countdown timer. (Format : 24 Hours)",
+            "type": "string",
+            "format": "time",
+            "ui:extension": {
+                "url": "https://date-time-picker.extensions.content.amplience.net"
+            }
+        },
+        "standardTime": {
+            "title": "Standard Time",
+            "description": "The countdown clock will be adjusted as per the standard time on the check. (Default: No standard time)",
+            "type": "boolean"
+        }
+    },
+    "propertyOrder": [
+        "timerDate",
+        "time",
+        "standardTime"
+    ],
+    "required": [
+        "timerDate",
+        "time"
+    ]
+}

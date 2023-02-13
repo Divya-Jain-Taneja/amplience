@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-link.json",
+    "title": "Call To Action",
+    "description": "Inline CTA Link with variations",
+    "allOf": [{
+        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }],
+    "type": "object",
+    "required": [
+        "label",
+        "linkURL",
+        "linkStyle"
+    ],
+    "properties": {
+        "label": {
+            "title": "Enter Link Label",
+            "description": "Text which is going to be displayed for the link",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 35
+        },
+        "linkURL": {
+            "title": "Enter Link URL",
+            "description": "URL of the link",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "linkStyle": {
+            "title": "Style",
+            "description": "Style definition of the link",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-cta-styles"
+            }
+        },
+        "linkSize": {
+            "title": "Size",
+            "description": "Size definition of the link",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-cta-size"
+            }
+        },
+        "target": {
+            "title": "Should link to be opened in a new tab?",
+            "description": "Sets Target of link to '_blank'",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "propertyOrder": [
+        "label",
+        "linkURL",
+        "linkStyle",
+        "linkSize",
+        "target"
+    ]
+}

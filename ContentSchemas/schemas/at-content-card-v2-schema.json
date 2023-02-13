@@ -1,0 +1,64 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-content-card-v2.json",
+	"title": "Content Card",
+	"description": "Content Card",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"mediaAsset": {
+				"title": "Media Asset",
+				"type": "array",
+				"minItems": 0,
+				"maxItems": 1,
+				"items": {
+					"allOf": [
+						{
+							"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json"
+						}
+					]
+				}
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"description": "Header Block",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items":{
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+					}
+				]
+			}
+		},
+		"inlineCTATitle": {
+            "title": "",
+            "description": "This CTA will be used within the image as inline CTA, independent from other URL or Header block CTA.",
+            "type": "string",
+            "const": "Inline CTA"
+        },
+		"inlineCTA": {
+			"title": "Inline CTA Link",
+			"description": "This CTA will be used within the image as inline CTA, independent from other URL or Header block CTA.",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-link.json"
+					}
+				]
+			}
+		}
+	},
+	"required":[
+		"mediaAsset"
+	]
+}

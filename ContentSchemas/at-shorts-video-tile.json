@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/at-shorts-video-tile-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-tile.json",
+  "validationLevel": "PARTIAL"
+}

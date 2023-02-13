@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-feature-benefit-card.json",
+   "title": "Feature Benefit Card",
+    "description": "Feature Benefit Card",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "cardBackgroundColor": {
+            "title": "Content Card Background Primary Color",
+            "description": "Select content card background color (Default: Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "cardImage": {
+            "title": "Add image (Please use svg/png)",
+            "description":"Enter the image url or select the image from hub.",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt text",
+            "description": "Enter the alternate text for image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },
+        "cardHeaderBlock": {
+            "title": "Header Block",
+            "description": "Header Block",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items":{
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "cardBackgroundColor",
+        "cardImage",
+        "imageAltText",
+        "cardHeaderBlock"
+    ],
+    "required": [
+        "cardImage",
+        "imageAltText"
+    ]
+}

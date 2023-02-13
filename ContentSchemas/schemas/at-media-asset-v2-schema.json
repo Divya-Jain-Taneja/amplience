@@ -1,0 +1,226 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset-v2.json",
+
+	"title": "Media Asset V2",
+	"description": "Media Asset V2 Element",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"required": [
+		"imageAltText"
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "media" }
+			}
+		},
+		"desktopVideoURL": {
+			"title": "Desktop Video URL",
+			"description": "Enter the URL of the desktop video",
+			"type": "string",
+			"format":"uri"
+		},
+		"mobileVideoURL": {
+			"title": "Mobile Video URL",
+			"description": "Enter the URL of the mobile video",
+			"type": "string",
+			"format":"uri"
+		},
+		"image": {
+			"title": "Desktop Image*",
+			"description":"Enter the image url or select the image from hub.",
+			"ui:extension": {
+                "name": "image-selector",
+                "params": {
+					"requiredField":true
+				}
+			}
+		},
+		"imageAltText": {
+			"title": "Image Alt text",
+			"description": "Enter the alternate text for image.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"mobileImage": {
+			"title": "Mobile Image",
+			"description":"Enter the image url or select the image from hub.",
+			"ui:extension": {
+                "name": "image-selector"
+			}
+		},
+		"link": {
+			"title": "Link URL",
+			"description": "Link URL",
+			"type": "string",
+            "minLength": 0,
+            "maxLength": 256
+		},
+		"disableLazyLoad": {
+			"title": "Disable lazy load?",
+			"description": "On disabling lazy load, media assets will not be lazy loaded.",
+			"type": "boolean"
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"imageCaption": {
+			"title": "Caption Text",
+			"description": "Enter the caption text for media.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 100
+		},
+		"imageCaptionAlignment": {
+			"title": "Caption Alignment",
+			"description": "Select the alignment of caption text w.r.t media (Default - Left align).",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Left",
+						"Center"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"mobileQuality": {
+			"title": "Mobile Quality Parameters",
+			"description": "Select mobile quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"
+					],
+				    "values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"desktopQuality": {
+			"title": "Desktop Quality Parameters",
+			"description": "Select desktop quality parameters.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"very low",
+						"low",
+						"med",
+						"high",
+						"very high"
+					],
+					"values": [
+						"$qlt_very_low$",
+						"$qlt_low$",
+						"$qlt_med$",
+						"$qlt_high$",
+						"$qlt_very_high$"
+					],
+					"defaultIndex": 2
+				}
+			}
+		},
+		"imageCaptionTextColor": {
+			"title": "Caption Text Color",
+			"description": "Choose the text color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- black)",
+			"format": "color",
+			"type": "string"
+		},
+		"iconsColor": {
+			"title": "Change Video Control Icons Color",
+			"description": "On the check, the color of the play/pause and volume icons changes to black (Default: White)",
+			"type": "boolean"
+		},
+		"removeAudioControl": {
+			"title": "Remove Audio Control",
+			"description": "Audio Control will be removed on check. (Default - Audio Control is displayed in muted state)",
+			"type": "boolean"
+		},
+		"removeAutoPlay":{
+			"title": "Turn Off AutoPlay",
+			"description": "On check Turn Off AutoPlay(Default : AutoPlay)",
+			"type": "boolean"
+		},
+		"disableRightClick":{
+			"title": "Disable the right-click option on the video",
+			"description": "On the check, the right-click option will be disabled (Default: Right-click option is enabled)",
+			"type": "boolean"
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the media",
+			"description": "Rounded edges will be applied to the media on the check. (Default - No rounded edge is applied)",
+			"type": "boolean"
+		},
+		"mAspectRatio": {
+			"title": "Mobile Aspect Ratio:",
+			"description": "Select mobile image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list-mobile"
+			}
+		},
+		"dAspectRatio": {
+			"title": "Desktop Aspect Ratio:",
+			"description": "Select desktop image/video aspect ratio.",
+			"type": "string",
+			"ui:extension": {
+				"name": "aspect-ratio-select-list"
+			}
+		}
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"desktopVideoURL",
+		"mobileVideoURL",
+		"iconsColor",
+		"removeAudioControl",
+		"removeAutoPlay",
+		"disableRightClick",
+		"image",
+		"mobileImage",
+		"imageAltText",
+		"roundedEdges",
+		"link",
+		"imageCaption",
+		"imageCaptionAlignment",
+		"imageCaptionTextColor",
+		"mAspectRatio",
+		"mobileQuality",
+		"dAspectRatio",
+		"desktopQuality",
+		"disableLazyLoad",
+		"jumpPointID"
+	]
+}

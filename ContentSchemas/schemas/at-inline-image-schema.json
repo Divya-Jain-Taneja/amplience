@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-image.json",
+    "title": "Inline Image",
+    "description": "Image",
+    "allOf": [{
+        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }],
+    "type": "object",
+    "properties": {
+        "image": {
+            "title": "Desktop Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "mobileImage": {
+            "title": "Mobile Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt Text",
+            "description": "Enter the alternate text for inline image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 125
+        },
+        "imageWidth": {
+            "title": "Width of the inline image for Desktop",
+            "description": "Enter the initial width of the inline image for Desktop",
+            "type": "integer",
+            "minimum": 1
+        },
+        "imageHeight": {
+            "title": "Height of the inline image for Desktop",
+            "description": "Enter the initial height of the inline image for Desktop",
+            "type": "integer",
+            "minimum": 1
+        },
+        "mobileImageWidth": {
+            "title": "Width of the inline image for Mobile",
+            "description": "Enter the initial width of the inline image for Mobile",
+            "type": "integer",
+            "minimum": 1
+        },
+        "mobileImageHeight": {
+            "title": "Height of the inline image for Mobile",
+            "description": "Enter the initial height of the inline image for Mobile",
+            "type": "integer",
+            "minimum": 1
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, inline image will not be lazy loaded.",
+            "type": "boolean"
+        }
+    },
+    "propertyOrder": [
+        "mobileImage",
+        "image",
+        "imageAltText",
+        "mobileImageWidth",
+        "mobileImageHeight",
+        "imageWidth",
+        "imageHeight",
+        "disableLazyLoad"
+    ],
+    "required": [
+        "mobileImage",
+        "mobileImageWidth",
+        "mobileImageHeight",
+        "imageWidth",
+        "imageHeight",
+        "imageAltText"
+    ]
+}

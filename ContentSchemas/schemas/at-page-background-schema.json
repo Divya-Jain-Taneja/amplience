@@ -1,0 +1,173 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-background.json",
+    "title": "Background",
+    "type": "object",
+    "properties": {
+        "solidBgFill": {
+            "title": "Background Primary Color",
+            "description": "Choose the background color (Choose from color-palette or enter hex code or RGB value or color name) (Default: transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientColor": {
+            "title": "Background Gradient Secondary Color",
+            "description": "Choose the gradient color (Choose from color-palette or enter hex code or RGB value or color name) (Default: Starts from top left to bottom right)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientType": {
+        "title": "Gradient Type",
+        "description": "Select the Gradient Type( Default - Diagonal)",
+        "type": "string",
+        "ui:extension": {
+            "name": "required-drop-list",
+            "params": {
+                "options": [
+                    "Diagonal",
+                    "Linear - Top to Bottom",
+                    "Linear - Left to Right"
+                ],
+                "values":[
+                    "bottom right",
+                    "bottom",
+                    "right"
+                ],
+                "defaultIndex": 0
+            }
+        }
+    },
+        "desktopBgImage": {
+            "title": "Desktop Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "mobileBgImage": {
+            "title": "Mobile Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "backgroundSize": {
+            "title": "Background Image Size",
+            "description": "Select option for background image size (Default: auto)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "auto",
+                        "cover",
+                        "contain",
+                        "exact match"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "backgroundRepeat": {
+            "title": "Background Image Repeat",
+            "description": "Select option for background image repeat (Default: no-repeat)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "repeat",
+                        "no-repeat"
+                    ],
+                    "defaultIndex": 1
+                }
+            }
+        },
+        "backgroundPosition": {
+            "title": "Background Image Position",
+            "description": "Select option for background image position (Default: center center)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "left top",
+                        "left center",
+                        "left bottom",
+                        "right top",
+                        "right center",
+                        "right bottom",
+                        "center top",
+                        "center center",
+                        "center bottom"
+                    ],
+                    "defaultIndex": 7
+                }
+            }
+        },
+        "roundedEdges": {
+            "title": "Apply rounded edges to the background",
+            "description": "Rounded edges will be applied to the background on the check (Default: No rounded edges are applied)",
+            "type": "boolean"
+        },
+        "paddingBackgroundImage": {
+            "title": "Apply spacing to the background",
+            "description": "Apply the spacing to the background image from outside (Default: Full bleed)",
+            "type": "boolean"
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, background image will not be lazy loaded.",
+            "type": "boolean"
+    },
+    "desktopBgVideoURL": {
+        "title": "Desktop Background Video URL",
+        "description": "Enter the URL of the desktop video",
+        "type": "string",
+        "format":"uri"
+    },
+    "mobileBgVideoURL": {
+        "title": "Mobile Background Video URL",
+        "description": "Enter the URL of the mobile video",
+        "type": "string",
+        "format":"uri"
+    },
+    "iconsColor": {
+        "title": "Change Video Control Icons Color",
+        "description": "On the check, the color of the play/pause and volume icons changes to black (Default: White)",
+        "type": "boolean"
+    },
+    "removeAudioControl": {
+        "title": "Remove Audio Control",
+        "description": "Audio Control will be removed on check. (Default - Audio Control is displayed in muted state)",
+        "type": "boolean"
+    },
+    "mAspectRatio": {
+        "title": "Mobile Aspect Ratio:",
+        "description": "Select mobile image/video aspect ratio.",
+        "type": "string",
+        "ui:extension": {
+            "name": "aspect-ratio-select-list-mobile"
+        }
+    },
+    "dAspectRatio": {
+        "title": "Desktop Aspect Ratio:",
+        "description": "Select desktop image/video aspect ratio.",
+        "type": "string",
+        "ui:extension": {
+            "name": "aspect-ratio-select-list"
+        }
+        }
+    },
+    "propertyOrder": [
+        "solidBgFill",
+        "gradientColor",
+        "gradientType",
+        "desktopBgImage",
+        "mobileBgImage",
+        "backgroundSize",
+        "backgroundRepeat",
+        "backgroundPosition",
+        "roundedEdges",
+        "paddingBackgroundImage",
+        "disableLazyLoad"
+    ]
+}

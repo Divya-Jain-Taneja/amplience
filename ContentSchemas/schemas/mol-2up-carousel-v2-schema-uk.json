@@ -1,0 +1,174 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel-v2-uk.json",
+    "title": "2UP Carousel V2",
+    "description": "2UP carousel container module with the product cards and amplience images to build a grid with image.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "2UPCarousel_v2" }
+            }
+        },
+        "layout": {
+              "title": "Choose Layout",
+              "description": "Select the primary media position as left or Right",
+              "type": "string",
+              "ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["Left","Right"], "defaultIndex": 0 }
+            }
+        },
+        "backgroundColor": {
+            "title": "Background Color",
+            "description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default: Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "headerBlock": {
+             "title": "Header Block",
+             "type": "array",
+             "minItems": 0,
+             "maxItems": 1,
+             "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        },
+        "primaryMedia": {
+            "title": "Primary Media",
+            "description": "Content picker to choose primary media for this component.",
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                            "title": "Content Types",
+                            "enum": [
+                                "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+                                "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+                                "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "mobileLayout": {
+            "title": "Mobile: Layout Style",
+            "description": "Select the mobile layout style",
+            "type": "string",
+            "ui:extension": {
+            "name": "required-drop-list",
+            "params": { 
+                "options" : [
+                    "Header Block without Media Asset",
+                    "Header Block with Media Asset"
+                    ], 
+                    "defaultIndex": 0 
+                }
+            }
+        },
+        "productCards": {
+            "title": "Product Cards",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 8,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-product-image-selector-uk.json"
+                    }
+                ]
+            }
+        },
+        "transparentBg": {
+            "title": "Apply transparent background to the product cards/image selector",
+            "description": "Transparent background will be applied to the product cards/image selector on check (Default: Background color)",
+            "type": "boolean"
+        },
+        "roundedEdges": {
+            "title": "Apply rounded edges to the product cards",
+            "description": "Rounded edges will be applied to the product cards on the check. (Default: No rounded edge is applied)",
+            "type": "boolean"
+        },
+        "cardOptions": {
+             "title": "Items to show with product card",
+             "description": "Select a single or multiple items to show with product card (Default is name only).",
+             "type": "string",
+             "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options" : [
+                        "Name only",
+                        "Price only",
+                        "Ratings only",
+                        "Name + Price",
+                        "Name + Ratings",
+                        "Price + Ratings",
+                        "Name + Price + Ratings"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "countDownClockAndImage": {
+            "title": "CountDown Clock",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-banner5050-countdown-clock.json"
+                    }
+                ]
+            }
+        },
+        "jumpPointID": {
+            "title": "Anchor Tag",
+            "description":"",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+                }
+            ]
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "layout",
+        "backgroundColor",
+        "headerBlock",
+        "primaryMedia",
+        "mobileLayout",
+        "productCards",
+        "transparentBg",
+        "roundedEdges",
+        "cardOptions",
+        "countDownClockAndImage",
+        "jumpPointID"
+    ],
+    "required":[
+        "primaryMedia",
+        "productCards"
+    ]
+}

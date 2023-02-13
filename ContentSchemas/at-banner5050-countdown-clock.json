@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-banner5050-countdown-clock-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-banner5050-countdown-clock.json",
+  "validationLevel": "PARTIAL"
+}

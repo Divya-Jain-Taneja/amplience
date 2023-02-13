@@ -1,0 +1,121 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-section.json",
+	"title": "Page Section",
+	"description": "Page section with bottom spacing",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"pageContentTypes": {
+			"title": "Content Type",
+			"allOf": [
+				{ "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link" },
+				{
+					"properties": {
+						"contentType": {
+							"title": "Content Types",
+							"enum": [
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/table-ext.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-img-hotspot.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/product-carousel.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/html-editor.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-category-row.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-wof-grid.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v3.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-video-player.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-slider.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-col-split-container.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-lifestyle-carousel.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-visual-filter.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-4up-grid.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel-v2.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-plp-content-block.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-v2.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-5050-v2.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shoppable-video.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-editorial-grid-v2.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset-v2.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v4.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-content-card-container-v5.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-feature-benefit.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-shorts-video.json",
+								"https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-cloud-animation.json"
+							]
+						}
+					}
+				}
+			]
+		},
+		"leftRightSpaceD": {
+			"title": "Desktop: left and Right spacing for current section",
+			"description": "Enter a number value to add the spacing from the left and right (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"leftRightSpaceM": {
+			"title": "Mobile: left and Right spacing for current section",
+			"description": "Enter a number value to add the spacing from the left and right (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"bottomSpaceD": {
+			"title": "Desktop: Bottom spacing for current section",
+			"description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 300
+		},
+		"bottomSpaceM": {
+			"title": "Mobile: Bottom spacing for current section",
+			"description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 300
+		},
+		"pageSectionLink": {
+			"title": "Background URL",
+			"description": "Enter the background URL for current page section.",
+			"type": "string",
+            "minLength": 0,
+            "maxLength": 256
+		},
+		"pageSectionLinkTarget": {
+            "title": "Background link to be opened in a new tab?",
+            "description": "On Check: Sets target of link to '_blank'",
+            "type": "boolean",
+            "default": false
+        },
+		"displayMobileOnly": {
+			"title": "Display on Mobile only",
+			"description": "Upon checked will display content only on mobile",
+			"type": "boolean"
+		},
+		"displayDesktopOnly": {
+			"title": "Display on Desktop only",
+			"description": "Upon checked will display content only on desktop",
+			"type": "boolean"
+		}
+	},
+	"propertyOrder": [
+		"pageContentTypes",
+		"leftRightSpaceD",
+		"leftRightSpaceM",
+		"bottomSpaceD",
+		"bottomSpaceM",
+		"pageSectionLink",
+		"pageSectionLinkTarget",
+		"displayMobileOnly",
+		"displayDesktopOnly" 
+	]
+}

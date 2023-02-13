@@ -1,0 +1,232 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page-v2.json",
+    "title": "Page Accelerator V2.0",
+    "description": "Page Accelerator V2.0",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+          "componenthelp": {
+              "title": "Help",
+              "ui:extension": {
+                  "name": "component-help",
+                  "params": { "topic" : "pageAcceleratorV2" }
+              }
+        },
+        "contentTypes": {
+            "title": "Content Type",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-section.json"
+                    }
+                ]
+            }
+        },
+        "desktopBgImage": {
+            "title": "Desktop Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "mobileBgImage": {
+            "title": "Mobile Background Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "roundedEdges": {
+            "title": "Apply rounded edges to the background image",
+            "description": "Rounded edges will be applied to the background image on the check. (Default - No rounded edge is applied)",
+            "type": "boolean"
+        },
+        "backgroundSize": {
+            "title": "Background Image Size",
+            "description": "Select option for background image size (Default - auto).",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "auto",
+                        "cover",
+                        "contain"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "backgroundRepeat": {
+            "title": "Background Image Repeat",
+            "description": "Select option for background image repeat (Default - no-repeat).",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "repeat",
+                        "no-repeat"
+                    ],
+                    "defaultIndex": 1
+                }
+            }
+        },
+        "backgroundPosition": {
+            "title": "Background Image Position",
+            "description": "Select option for background image position (Default - center center).",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "left top",
+                        "left center",
+                        "left bottom",
+                        "right top",
+                        "right center",
+                        "right bottom",
+                        "center top",
+                        "center center",
+                        "center bottom"
+                    ],
+                    "defaultIndex": 7
+                }
+            }
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, background image will not be lazy loaded.",
+            "type": "boolean"
+        },
+        "paddingBackgroundImage": {
+            "title": "Apply spacing to Background image?",
+            "description": "Apply the spacing to Background image (Default : Background Image - Full Bleed)",
+            "type": "boolean"
+        },
+        "marginTopD": {
+            "title": "Desktop: Spacing From Top",
+            "description": "Enter a number value to add the spacing from the top (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginBottomD": {
+            "title": "Desktop: Spacing From Bottom",
+            "description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginLeftD": {
+            "title": "Desktop: Spacing From Left",
+            "description": "Enter a number value to add the spacing from the left (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginRightD": {
+            "title": "Desktop: Spacing From Right",
+            "description": "Enter a number value to add the spacing from the right (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginInBetweenD": {
+            "title": "Desktop: Spacing Between Multiple Contents",
+            "description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginTopM": {
+            "title": "Mobile: Spacing From Top",
+            "description": "Enter a number value to add the spacing from the top (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginBottomM": {
+            "title": "Mobile: Spacing From Bottom",
+            "description": "Enter a number value to add the spacing from the bottom (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginLeftM": {
+            "title": "Mobile: Spacing From Left",
+            "description": "Enter a number value to add the spacing from the left (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginRightM": {
+            "title": "Mobile: Spacing From Right",
+            "description": "Enter a number value to add the spacing from the right (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "marginInBetweenM": {
+            "title": "Mobile: Spacing Between Multiple Contents",
+            "description": "Enter a number value to add the spacing between multiple contents vertically (Default is 0)",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        },
+        "insideFrame": {
+            "title": "Inside Frame",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+                    }
+                ]
+            }
+        },
+        "stickers": {
+            "title": "Stickers",
+            "type": "array",
+            "minItems": 0,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-sticker.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "contentTypes",
+        "desktopBgImage",
+        "mobileBgImage",
+        "roundedEdges",
+        "insideFrame",
+        "backgroundSize",
+        "backgroundRepeat",
+        "backgroundPosition",
+        "disableLazyLoad",
+        "paddingBackgroundImage",
+        "marginTopD",
+        "marginBottomD",
+        "marginLeftD",
+        "marginRightD",
+        "marginInBetweenD",
+        "marginTopM",
+        "marginBottomM",
+        "marginLeftM",
+        "marginRightM",
+        "marginInBetweenM",
+        "stickers"
+    ]
+}

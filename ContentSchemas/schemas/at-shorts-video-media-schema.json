@@ -1,0 +1,86 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-shorts-video-media.json",
+
+    "title": "Media Asset",
+    "description": "Atomic shorts video/image media asset element",
+
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "componenthelp": {
+            "title": "Help",
+            "ui:extension": {
+                "name": "component-help",
+                "params": { "topic" : "shortsVideoMedia" }
+            }
+        },
+        "mobileVideoURL": {
+            "title": "Mobile Video URL",
+            "description": "Enter the URL of the mobile video",
+            "type": "string",
+            "format":"uri"
+        },
+        "desktopVideoURL": {
+            "title": "Desktop Video URL",
+            "description": "Enter the URL of the desktop video",
+            "type": "string",
+            "format":"uri"
+        },
+        "mobileImage": {
+            "title": "Mobile Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "desktopImage": {
+            "title": "Desktop Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt text",
+            "description": "Enter the alternate text for image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 50
+        },		
+        "link": {
+            "title": "Link URL",
+            "description": "Link URL",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, media assets will not be lazy loaded.",
+            "type": "boolean"
+        },
+        "iconsColor": {
+            "title": "Change Video Control Icons Color",
+            "description": "On the check, the color of the play/pause and volume icons changes to black (Default: White)",
+            "type": "boolean"
+        }
+    },
+    "propertyOrder": [
+        "componenthelp",
+        "mobileVideoURL",
+        "desktopVideoURL",
+        "iconsColor",
+        "mobileImage",
+        "desktopImage",
+        "imageAltText",
+        "link",
+        "disableLazyLoad"
+    ],
+    "required": [
+        "mobileImage",
+        "imageAltText"
+    ]
+}

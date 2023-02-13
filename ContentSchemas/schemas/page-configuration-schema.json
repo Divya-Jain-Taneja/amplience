@@ -1,0 +1,50 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/page-configuration.json",
+
+	"title": "Page Zone Configurations",
+	"description": "Page Zone Configurations",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"pageurl": {
+			"title": "pageurl",
+			"description": "Page URL",
+			"type": "string",
+			"format":"uri"
+		},
+		"globalproperties": {
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/global-configuration.json"
+				}
+			]
+		},
+		"pagetype": {
+			"title": "pagetype",
+			"description": "Page Type",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["PLP","Landing Page","PDP","Search","Null Search"], "defaultIndex": 0 }
+            }
+		},
+		"cached": {
+			"title": "cached",
+			"description": "Cached",
+			"type": "string",
+			"ui:extension": {
+                "name": "required-drop-list",
+                "params": { "options" : ["true","false"], "defaultIndex": 0 }
+            }
+		}				
+	},
+	"propertyOrder": []
+}

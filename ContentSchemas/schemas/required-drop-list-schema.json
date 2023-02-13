@@ -1,0 +1,36 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/required-drop-list.json",
+
+	"title": "Required Drop List",
+	"description": "Required Drop List",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"reqdroplist": {
+            "type": "string",
+            "title": "reqdroplist",
+			"description": "Required DropDown Field",
+            "ui:extension": {
+                "url": "https://c1.adis.ws/c/tapestry/requireddroplist?qwe=6",
+                "params": { "options" : ["a","b","c"], "defaultIndex": 2 }
+            }
+		},
+		"reqdroplist2": {
+            "type": "string",
+            "title": "reqdroplist2",
+			"description": "Required DropDown Field2",
+            "ui:extension": {
+                "url": "https://c1.adis.ws/c/tapestry/requireddroplist?qwe=6",
+                "params": { "options" : ["x","y","z"], "defaultIndex": 0 }
+            }
+		}
+	},
+	"propertyOrder": []
+}

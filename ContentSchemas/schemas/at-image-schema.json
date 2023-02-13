@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-image.json",
+    "title": "Image",
+    "description": "Image",
+    "allOf": [{
+        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }],
+    "type": "object",
+    "required": [
+        "image",
+        "imageAltText"
+    ],
+    "properties": {
+        "image": {
+            "title": "Image",
+            "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ]
+        },
+        "imageAltText": {
+            "title": "Image Alt Text",
+            "description": "Enter the alternate text for image.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 125
+        },
+        "disableLazyLoad": {
+            "title": "Disable lazy load?",
+            "description": "On disabling lazy load, inline image will not be lazy loaded.",
+            "type": "boolean"
+        } 
+    },
+    "propertyOrder": [
+        "image",
+        "imageAltText",
+        "disableLazyLoad"
+    ]
+}

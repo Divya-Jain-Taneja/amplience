@@ -1,0 +1,156 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-banner5050-countdown-clock.json",
+    "title": "Countdown Clock Timer & Image",
+    "description": "Countdown Clock Timer & Image",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "countdownStyle": {
+            "title": "Choose Countdown Style",
+            "description": "Select countdown timer style (Default - Countdown Style 1).",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "Countdown Style 1",
+                        "Countdown Style 2"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "countDownClock": {
+            "title": "CountDown Clock",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-countdown-clock.json"
+                    }
+                ]
+            }
+        },
+        "clockTextSize": {
+            "title": "Desktop: Choose Text Size for days, hours, minutes & seconds.",
+            "description": "Desktop: Select the size for countdown timer display text.",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-body-styles"
+            }
+        },
+        "clockTextSizeMobile": {
+            "title": "Mobile: Choose Text Size for days, hours, minutes & seconds.",
+            "description": "Mobile: Select the size for countdown timer display text.",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-body-styles"
+            }
+        },
+        "clockNumberSize": {
+            "title": "Desktop: Choose Countdown Timer Number Size",
+            "description": "Select the size of Countdown timer number values for desktop.",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-headline-styles"
+            }
+        },
+        "clockNumberSizeMobile": {
+            "title": "Mobile: Choose Countdown Timer Number Size",
+            "description": "Select the size of Countdown Timer Number values for mobile.",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-headline-styles"
+            }
+        },
+        "displayDays": {
+            "title": "Display DD(Days)?",
+            "description": "On Uncheck: Days will not be displayed in countdown timer.(Default: Days will be displayed)",
+            "type": "boolean",
+            "default": true
+        },
+        "displayHours": {
+            "title": "Display HH(Hours)?",
+            "description": "On Uncheck: Hours will not be displayed in countdown timer.(Default: Hours will be displayed)",
+            "type": "boolean",
+            "default": true
+        },
+        "displayMinutes": {
+            "title": "Display MM(Minutes)?",
+            "description": "On Uncheck: Minutes will not be displayed in countdown timer.(Default: Minutes will be displayed)",
+            "type": "boolean",
+            "default": true
+        },
+        "displaySeconds": {
+            "title": "Display SS(Seconds)?",
+            "description": "On Uncheck: Seconds will not be displayed in countdown timer.(Default: Seconds will be displayed)",
+            "type": "boolean",
+            "default": true
+        },
+        "numberBoxWidth": {
+            "title": "Minimum width of the count-down number box",
+            "description": "Enter the minimum width of the count-down number box (Default: 48px)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "numberBoxHeight": {
+            "title": "Minimum height of the count-down number box",
+            "description": "Enter the minimum height of the count-down number box (Default: 48px)",
+            "type": "integer",
+            "minimum": 1
+        },
+        "headerBlockPosition": {
+            "title": "Select Header Block Position",
+            "description": "Select header block position w.r.t image. (Default - top most)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "top most",
+                        "bottom most"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        },
+        "inlineImage": {
+            "title": "Inline Image",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-image.json"
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "countdownStyle",
+        "countDownClock",
+        "clockTextSize",
+        "clockTextSizeMobile",
+        "clockNumberSize",
+        "clockNumberSizeMobile",
+        "displayDays",
+        "displayHours",
+        "displayMinutes",
+        "displaySeconds",
+        "numberBoxWidth",
+        "numberBoxHeight",
+        "headerBlockPosition",
+        "inlineImage"
+    ],
+    "required": [
+    ]
+}

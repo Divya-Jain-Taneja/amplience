@@ -1,0 +1,207 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-inline-banner.json",
+	"title": "Inline Banner",
+	"description": "Inline Homepage Banner Promo Tile",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "InlineBanner" }
+			}
+		},
+		"mediaAsset": {
+			"title": "Media Asset",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-media-asset.json"
+					}
+				]
+			}
+		},
+		"leftTextPosition": {
+			"title": "Text Position from Left",
+			"description": "Enter a percentage value (without a '%' sign) to position text horizontally from the left (Default is 50)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"topTextPosition": {
+			"title": "Text Position from Top",
+			"description": "Enter a percentage value (without a '%' sign) to position text vertically from the top (Default is 50)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"description": "Header Block Mol",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-header-block.json"
+				}
+			]
+		},
+		"solidBgFill": {
+			"title": "Background Primary Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"promoText": {
+			"title": "Promo Line / Top Line",
+			"description": "Enter a Promo Line/Top Line text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"bylineText": {
+			"title": "Byline / Disclaimer",
+			"description": "Enter a Byline/Disclaimer text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"backgroundOpacity": {
+			"title": "Background Opacity",
+			"description": "Enter a percentage value (without a '%' sign) to add the text background opacity.",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"promoTextColor": {
+			"title": "Promo Line / Top Line Text Color",
+			"description": "Choose the promo line / top line text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"promoTextSize": {
+			"title": "Promo Line / Top Line Text Size",
+			"description": "Choose the Promo Line / Top Line text Size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-promo-styles"
+			}
+		},
+		"bylineTextColor": {
+			"title": "Byline / Disclaimer Text Color",
+			"description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"bylineTextSize": {
+			"title": "Byline / Disclaimer Text Size",
+			"description": "Choose the byline / disclaimer text size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-byline-styles"
+			}
+		},
+		"outline": {
+			"title": "Apply Outline?",
+			"description": "On Check, outline will be applied to promo tile.",
+			"type": "boolean"
+		},
+		"outlineColor": {
+			"title": "Promo Tile Outline Color",
+			"description": "Enter/Select the color for promo tile (Default: Black)",
+			"format": "color",
+			"type": "string"
+		},
+		"backgroundLink": {
+			"title": "Background URL",
+			"description": "Enter the background URL for text only banner variation.",
+			"type": "string",
+            "minLength": 0,
+            "maxLength": 256
+		},
+		"backgroundLinkTarget": {
+            "title": "Background link to be opened in a new tab?",
+            "description": "On Check: Sets target of link to '_blank'",
+            "type": "boolean",
+            "default": false
+        },
+		"insideFrame": {
+			"title": "Inside Frame",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+					}
+				]
+			}
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear - Top to Bottom",
+						"Linear - Left to Right"
+					],
+					"values":[
+						"bottom right",
+						"bottom",
+						"right"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"roundedEdges": {
+			"title": "Apply rounded edges to the component",
+			"description": "Rounded edges will be applied to the overall component on the check. (Default: No rounded edge is applied)",
+			"type": "boolean"
+		}
+	},
+	"required": [
+	],
+	"propertyOrder": [
+		"componenthelp",
+		"solidBgFill",
+		"gradientColor",
+		"gradientType",
+		"backgroundLink",
+		"backgroundLinkTarget",
+		"mediaAsset",
+		"leftTextPosition",
+		"topTextPosition",
+		"headerBlock",
+		"promoText",
+		"promoTextColor",
+		"promoTextSize",
+		"bylineText",
+		"bylineTextSize",
+		"bylineTextColor",
+		"backgroundOpacity",
+		"outline",
+		"outlineColor",
+		"insideFrame",
+		"roundedEdges"
+	]
+}

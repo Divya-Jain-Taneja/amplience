@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-badge-text.json",
+    "title": "Badge",
+    "description": "Atomic badge text element",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "badgeText": {
+            "title": "Badge Text",
+            "description": "Enter the badge text",
+            "type": "string"
+        },
+        "badgeMobSize":{
+            "title": "Mobile: Choose Badge Size",
+            "description": "Select the size of badge text for mobile",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-body-styles"
+            }
+        },
+        "badgeDeskSize":{
+            "title": "Desktop: Choose Badge Size",
+            "description": "Select the size of badge text for desktop",
+            "type": "string",
+            "ui:extension": {
+                "name": "text-body-styles"
+            }
+        },
+        "badgeColor": {
+            "title": "Badge Color",
+            "description": "Choose the badge text color from color picker or enter rgb value or hex code or a color name (Default – black i.e #000000",
+            "format": "color",
+            "type": "string"
+        }
+    },
+    "propertyOrder": [
+        "badgeText",
+        "badgeMobSize",
+        "badgeDeskSize",
+        "badgeColor"
+    ]
+}

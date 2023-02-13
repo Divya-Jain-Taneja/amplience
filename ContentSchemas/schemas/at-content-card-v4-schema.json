@@ -1,0 +1,109 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-content-card-v4.json",
+    "title": "Content Card",
+    "description": "Content Card V3.0",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "mediaAsset": {
+            "title": "Media Asset V2",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset-v2.json"
+                    }
+                ]
+            }
+        },
+        "headerBlock": {
+            "title": "Header Block",
+            "description": "Header Block",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items":{
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+                    }
+                ]
+            }
+        },
+        "headerPosition": {
+            "title": "Header Block Position",
+            "description": "Select the header block position with respect to the content card (Default: Below the card)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": { 
+                    "options": [
+                        "Inline - Top position",
+                        "Inline - Center aligned",
+                        "Inline - Bottom position",
+                        "Below the card"
+                    ], 
+                    "defaultIndex": 3
+                }
+            }
+        },
+        "cardBackgroundColor": {
+            "title": "Content Card Background Primary Color",
+            "description": "Select content card background color (Default: Transparent)",
+            "format": "color",
+            "type": "string"
+        },
+        "cardGradientColor": {
+            "title": "Content Card Background Gradient Secondary Color",
+            "description": "Choose the content card gradient color (Choose from color-palette or enter hex code or RGB value or color name) (Default: Starts from top left to bottom right)",
+            "format": "color",
+            "type": "string"
+        },
+        "cardOutlineCheckbox": {
+            "title": "Apply Outline?",
+            "description": "On check, outline will be applied to content card",
+            "type": "boolean"
+        },
+        "cardOutlineColor": {
+            "title": "Content Card Outline Color",
+            "description": "Enter/Select the color for content card (Default: Black color)",
+            "format": "color",
+            "type": "string"
+        },
+        "gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear - Top to Bottom",
+						"Linear - Left to Right"
+					],
+					"values":[
+						"bottom right",
+						"bottom",
+						"right"
+					],
+					"defaultIndex": 0
+				}
+			}
+        }
+    },
+    "propertyOrder": [
+        "cardBackgroundColor",
+        "cardGradientColor",
+        "gradientType",
+        "cardOutlineCheckbox",
+        "cardOutlineColor"
+    ]
+}

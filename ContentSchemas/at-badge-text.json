@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-badge-text-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-badge-text.json",
+  "validationLevel": "PARTIAL"
+}

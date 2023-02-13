@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-page-background-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-page-background.json",
+  "validationLevel": "PARTIAL"
+}

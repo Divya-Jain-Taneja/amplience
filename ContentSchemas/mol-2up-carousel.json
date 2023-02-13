@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-2up-carousel-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-2up-carousel.json",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\at-media-asset-v2-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset-v2.json",
+  "validationLevel": "CONTENT_TYPE"
+}
