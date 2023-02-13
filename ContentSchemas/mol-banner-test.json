@@ -1,5 +1,5 @@
 {
   "body": ".\\schemas\\mol-banner-schema.json",
-  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-test.json",
+  "schemaId": "https://bitbucket.org/divjain2/toro_amplience_new/raw/a1047478504f8ce8f3781c4136ef230568f10dc8/ContentSchemas/schemas/mol-banner-schema-test.json",
   "validationLevel": "CONTENT_TYPE"
 }
