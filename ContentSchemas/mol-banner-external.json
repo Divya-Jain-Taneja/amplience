@@ -1,5 +1,5 @@
 {
-  "body": ".\\schemas\\mol-banner-schema.json",
-  "schemaId": "https://bitbucket.org/divjain2/toro_amplience_new/raw/a1047478504f8ce8f3781c4136ef230568f10dc8/ContentSchemas/schemas/mol-banner-schema-external.json",
+  "body": ".\\schemas\\mol-banner-external-schema.json",
+  "schemaId": "https://bitbucket.org/divjain2/toro_amplience_new/raw/a1047478504f8ce8f3781c4136ef230568f10dc8/ContentSchemas/schemas/mol-banner-external-schema.json",
   "validationLevel": "CONTENT_TYPE"
 }
