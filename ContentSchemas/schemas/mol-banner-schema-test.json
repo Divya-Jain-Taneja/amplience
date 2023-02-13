@@ -1,0 +1,287 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner.json",
+	"title": "Banner",
+	"description": "Homepage Banner",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"componenthelp": {
+			"title": "Help",
+			"ui:extension": {
+				"name": "component-help",
+				"params": { "topic" : "banner" }
+			}
+		},
+		"leftTextPosition": {
+			"title": "Text Position from Left",
+			"description": "Enter a percentage value (without a '%' sign) to position text horizontally from the left (Default is 50)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"topTextPosition": {
+			"title": "Text Position from Top",
+			"description": "Enter a percentage value (without a '%' sign) to position text vertically from the top (Default is 50)",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"headerWidth":{
+			"title": "Header Block Width",
+			"description": "Enter Header block width Default: 648px",
+			"type": "integer",
+			"minimum": 50,
+			"maximum": 800
+		},
+		"mediaAsset": {
+			"title": "Media Asset",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-media-asset.json"
+					}
+				]
+			}
+		},
+		"headerBlock": {
+			"title": "Header Block",
+			"description": "Header Block Mol",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-header-block.json"
+				}
+			]
+		},
+		"solidBgFill": {
+			"title": "Background Primary Color",
+			"description": "Choose the background color (Choose from color-palette or enter hexcode or rgb value or color name) (Default- transparent)",
+			"format": "color",
+			"type": "string"
+		},
+		"promoText": {
+			"title": "Promo Line / Top Line",
+			"description": "Enter a Promo Line/Top Line text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"promoTextColor": {
+			"title": "Promo Line / Top Line Text Color",
+			"description": "Choose the promo line / top line text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"promoTextSize": {
+			"title": "Promo Line / Top Line Text Size",
+			"description": "Choose the Promo Line / Top Line text Size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-promo-styles"
+			}
+		},
+		"bylineText": {
+			"title": "Byline / Disclaimer",
+			"description": "Enter a Byline/Disclaimer text.",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 256
+		},
+		"bylineTextColor": {
+			"title": "Byline / Disclaimer Text Color",
+			"description": "Choose the byline / disclaimer text color (Choose from color-palette or enter hexcode or rgb value or color name)",
+			"format": "color",
+			"type": "string"
+		},
+		"bylineTextSize": {
+			"title": "Byline / Disclaimer Text Size",
+			"description": "Choose the byline / disclaimer text Size",
+			"type": "string",
+			"ui:extension": {
+				"name": "text-byline-styles"
+			}
+		},
+		"backgroundOpacity": {
+			"title": "Background Opacity",
+			"description": "Enter a percentage value (without a '%' sign) to add the text background opacity.",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 100
+		},
+		"mobileTextPosition": {
+			"title": "Mobile: Text Position",
+			"description": "Select the position of header text block w.r.t banner.",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Above The Media",
+						"Below The Media",
+						"Over The Media"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+		"jumpPointID": {
+			"title": "Jump Point Id",
+			"description":"",
+			"type": "object",
+			"allOf": [
+				{
+					"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-jumpAnchor.json"
+				}
+			]
+		},
+		"componentMaxWidth": {
+			"title": "Component Max Width",
+			"description": "Enter component's max width.(Default: Full Bleed)",
+			"type": "number",
+			"minimum": 50,
+			"maximum": 9999
+		},
+		"marqueeVariation": {
+			"title": "Apply marquee text?",
+			"description": "On check, Banner headline will converts into marquee text.",
+			"type": "boolean"
+		},
+		"marqueeTextSpeed": {
+			"title": "Marquee Text Speed",
+			"description": "Please enter Marquee text speed in seconds.(Default: 10s, Min - 1s, Max - 800s)",
+			"type": "number",
+			"minimum": 1,
+			"maximum": 800
+		},
+		"countDownClock": {
+			"title": "CountDown Clock",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-countdown-clock.json"
+					}
+				]
+			}
+		},
+		"insideFrame": {
+			"title": "Inside Frame",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inside-frame.json"
+					}
+				]
+			}
+		},
+		"frameImage": {
+			"title": "Frame Image",
+			"type": "array",
+			"minItems": 0,
+			"maxItems": 1,
+			"items": {
+				"allOf": [
+					{
+						"$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-frame-image.json"
+					}
+				]
+			}
+		},
+		"gradientColor": {
+			"title": "Background Gradient Secondary Color",
+			"description": "Choose the gradient color (Choose from color-palette or enter hexcode or rgb value or color name) (Default - Starts from top left to bottom right)",
+			"format": "color",
+			"type": "string"
+		},
+		"gradientType": {
+			"title": "Gradient Type",
+			"description": "Select the Gradient Type( Default - Diagonal)",
+			"type": "string",
+			"ui:extension": {
+				"name": "required-drop-list",
+				"params": {
+					"options": [
+						"Diagonal",
+						"Linear - Top to Bottom",
+						"Linear - Left to Right"
+					],
+					"values":[
+						"bottom right",
+						"bottom",
+						"right"
+					],
+					"defaultIndex": 0
+				}
+			}
+		},
+        "inlineImage": {
+            "title": "Inline Image",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 1,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-inline-image.json"
+                    }
+                ]
+            }
+        },
+        "headerBlockPosition": {
+            "title": "Select Header Block Position",
+            "description": "Select header block position w.r.t inline image. (Default - top most)",
+            "type": "string",
+            "ui:extension": {
+                "name": "required-drop-list",
+                "params": {
+                    "options": [
+                        "top most",
+                        "bottom most"
+                    ],
+                    "defaultIndex": 0
+                }
+            }
+        }
+	},
+	"propertyOrder": [
+		"componenthelp",
+		"componentMaxWidth",
+		"solidBgFill",
+		"gradientColor",
+		"gradientType",
+		"leftTextPosition",
+		"topTextPosition",
+		"headerWidth",
+		"mediaAsset",
+		"headerBlock",
+		"marqueeVariation",
+		"marqueeTextSpeed",
+		"countDownClock",
+		"insideFrame",
+		"frameImage",
+		"promoText",
+		"promoTextColor",
+		"promoTextSize",
+		"bylineText",
+		"bylineTextSize",
+		"bylineTextColor",
+		"mobileTextPosition",
+		"backgroundOpacity",
+        "inlineImage",
+        "headerBlockPosition",
+        "jumpPointID"
+	]
+}

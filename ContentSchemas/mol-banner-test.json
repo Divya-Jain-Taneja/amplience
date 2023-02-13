@@ -1,0 +1,5 @@
+{
+  "body": ".\\schemas\\mol-banner-schema.json",
+  "schemaId": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/mol-banner-test.json",
+  "validationLevel": "CONTENT_TYPE"
+}
