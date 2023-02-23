@@ -1,0 +1,57 @@
+<div class="at-media-tile u-delay{{#or (eq mobileStyle 'Grid with padding') (eq mobileStyle 'Grid without padding')}} col-6{{/or}} col-md{{#if mediaAsset.0.desktopVideoURL}} desktop-video{{/if}} {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}video-is-playing{{~/if}}" data-qa="site_promo_shorts-video_wrapper" card="{{cardCounter}}">
+    <style>
+        {{#if badge.0.badgeColor}}
+        .media-tile-{{childId}} {
+            --color: {{#if badge.0.badgeColor}}{{badge.0.badgeColor}}{{else}}#000{{/if}};
+        }
+        {{/if}}
+        {{#or topScrim middleScrim bottomScrim}}
+            .media-scrim-{{childId}} {
+                background: {{#if (and topScrim middleScrim bottomScrim)}} var(--top-scrim),var(--middle-scrim),var(--bottom-scrim);{{else if (and topScrim middleScrim)}} var(--top-scrim),var(--middle-scrim);{{else if (and topScrim bottomScrim)}}var(--top-scrim),var(--bottom-scrim);{{else if (and middleScrim bottomScrim)}} var(--middle-scrim),var(--bottom-scrim);{{else if topScrim}}var(--top-scrim);{{else if middleScrim}}var(--middle-scrim);{{else  bottomScrim}}var(--bottom-scrim);{{/if}};
+            }
+        {{/or}}
+        .amp-video-wrapper-{{childId}} .mol-header-block .links-container a{
+            margin-top:{{{paddingCTA}}}px;
+        }
+    </style>
+    <div class="amp-video-wrapper amp-video-wrapper-{{childId}}">
+        {{#each mediaAsset}}
+            {{#if disableLazyLoad}}
+                {{> sfcc-short-video-media-asset componentName=../componentName topScrim=../topScrim middleScrim=../middleScrim bottomScrim=../bottomScrim mAspectRatio=../mAspectRatio mobileQuality=../mobileQuality dAspectRatio=../dAspectRatio desktopQuality=../desktopQuality parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="shorts_video" mediaAssetData=this }}
+            {{else}}
+                {{> sfcc-short-video-media-asset-lazy-load componentName=../componentName topScrim=../topScrim middleScrim=../middleScrim bottomScrim=../bottomScrim mAspectRatio=../mAspectRatio mobileQuality=../mobileQuality dAspectRatio=../dAspectRatio desktopQuality=../desktopQuality parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="shorts_video" mediaAssetData=this }}
+            {{/if}}
+        {{/each}}
+        {{#if (test componentName (toRegex ".*/mol-shorts-video.json")) ~}}
+            {{#if badge.0.badgeText}}
+                <div class="media-badge-text media-tile-{{childId}} u-color">
+                    <p class='{{#if (eq badge.0.badgeMobSize badge.0.badgeDeskSize)}}{{badge.0.badgeMobSize}}{{else}}{{badge.0.badgeMobSize}} d-{{badge.0.badgeDeskSize}}{{/if}}'>
+                        {{{badge.0.badgeText}}}
+                    </p>
+                </div>
+            {{/if}}
+        {{~/if}}
+        <button type="button" class="modal-close-btn close" data-dismiss="modal" aria-label="Close">
+            <svg class="icon" height="32" width="32" role="presentation">
+                <use xlink:href="#icon-close-large"></use>
+            </svg>
+        </button>
+        {{#if headerBlock}}
+            <div class="media-tile-text-block"
+                {{#if mediaAsset.0.link}}
+                    tabindex="0" role="link"
+                    data-comp-url="{{{mediaAsset.0.link}}}"
+                    data-event="internal_promotion"
+                    data-promotion-id="{{promotionId}}"
+                    data-promotion-name="{{headerBlock.0.textBlock.headlineText}}"
+                    data-creative-name="{{mediaAsset.0.image.name}}"
+                    data-location-id="shorts_video"
+                    data-creative-slot="{{prepend (stringify (add cardCounter 1)) 'CD'}}"
+                {{/if}}>
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=../childId promotionId=../promotionId locationId="shorts_video" mainLinkConfigured=(length ../contentCard) creativeSlot=../creativeSlot headerBlockData=this }}
+                {{/each}}
+            </div>
+        {{/if}}
+    </div>
+</div>

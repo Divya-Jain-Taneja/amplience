@@ -1,0 +1,87 @@
+{{#or solidBgFill backgroundOpacity promoTextColor bylineTextColor outline insideFrame.0.frameColor gradientColor}}
+<style>
+{{#and solidBgFill (not gradientColor)}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .solid-background{
+    background-color: {{solidBgFill}};
+}
+{{/and}}
+{{#if promoTextColor}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .promo-line-text{
+    color: {{promoTextColor}};
+}
+{{/if}}
+{{#if bylineTextColor}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .byline-text{
+    
+	--byline-text-color: {{#if bylineTextColor}}{{bylineTextColor}}{{else}}#000{{/if}};
+}
+{{/if}}
+{{#if backgroundOpacity}}
+	.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+		background: rgba(0,0,0,calc({{backgroundOpacity}}/100));
+	}
+{{/if}}
+{{#if outline}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }}.outline{
+	border: 1px solid {{#if outlineColor}}{{outlineColor}}{{else}}black{{/if}};
+}
+{{/if}}
+{{#if insideFrame.0.frameColor}}
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame {
+        border-color: {{insideFrame.0.frameColor}};
+    }
+{{/if}}
+{{#if insideFrame.0.colorFrame}}
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame {
+        box-shadow: {{#if insideFrame.frameStyle}}0 0 0 34px {{insideFrame.0.colorFrame}};{{else}}0 0 0 45px {{insideFrame.0.colorFrame}};{{/if}}
+    }
+{{/if}}
+{{#if gradientColor}}
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .solid-background{
+        --background-gradient: linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if solidBgFill}}{{solidBgFill}}{{else}}transparent{{/if}}, {{gradientColor}});
+    }
+{{/if}}
+{{#if mediaAsset}}
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }}.inline .header-block-position:not(.header-block-position-5050){
+        --position-top:{{#and topTextPosition (not marqueeVariation)}}{{topTextPosition}}{{else}}50{{/and}}%;
+        --position-left:{{#and leftTextPosition (not marqueeVariation)}}{{leftTextPosition}}{{else}}50{{/and}}%;
+        --position-translate: translate(-{{#and leftTextPosition (not marqueeVariation)}}{{leftTextPosition}}{{else}}50{{/and}}%, -{{#and topTextPosition (not marqueeVariation)}}{{topTextPosition}}{{else}}50{{/and}}%);
+    }
+{{/if}}
+</style>
+{{/or}}
+
+<div class="mol-banner inline{{#if outline}} outline{{/if}}{{#if roundedEdges}} rounded-edges{{/if}}{{#if (eq mediaAsset.0.variation '1Up')}} one-up{{else if (eq mediaAsset.0.variation '2Up')}} two-up{{else}} four-up{{/if}} mol-banner-{{replace (last (split [@id] "/")) "-" "" }}{{#and (not mediaAsset) backgroundLink}} cursor-pointer{{#if backgroundLinkTarget}} openLinkInNewTab{{/if}}{{/and}} container-fluid" 
+    data-qa="site_promo_inline-banner_wrapper"
+    {{#and (not mediaAsset) backgroundLink}}
+	tabindex="0" role="link"
+	data-comp-url="{{{backgroundLink}}}"
+	data-event="internal_promotion"
+    data-promotion-id="{{#append "id-" (replace _meta.name " " "")}}{{/append}}"
+    data-promotion-name="{{#replace _meta.name " " ""}}{{/replace}}"
+    data-creative-name="NO_IMAGE"
+    data-location-id="inlinebanner"
+    data-creative-slot="0"
+    {{/and}}>
+	<div class="row">
+	    <div class="banner-container {{#if (not mediaAsset)}}solid-background d-flex{{#if gradientColor}} u-background-gradient{{/if}}{{/if}}{{#if insideFrame}} with-frame{{/if}}{{#if mediaAsset.0.disableRightClick}} disable-video-click{{/if}}{{#if mediaAsset.0.roundedEdges}} rounded-edges{{/if}} col-12 p-0">
+    	    {{#if (not mediaAsset)}}
+    	    {{#if insideFrame}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+    	    <div class="align-self-center mx-auto w-100">
+    	    {{/if}}
+        		{{#if promoText}}<p class="{{promoTextSize}} promo-line-text {{#if mediaAsset}}promo-text-over-media{{else}}promo-text{{/if}}">{{{promoText}}}</p>{{/if}}
+    			    <div class="mol-header-block-container{{#if mediaAsset}} header-block-position{{#and mediaAsset (or (and (eq leftTextPosition 50) (eq topTextPosition 50)) (and (not leftTextPosition) (not topTextPosition)) (and (eq leftTextPosition 50) (not topTextPosition)) (and (eq topTextPosition 50) (not leftTextPosition)) )}} header-block-position-5050{{/and}}{{#if backgroundOpacity}} opacity-enabled{{/if}}{{/if}} {{#if mediaAsset.0.link}}click-enabled{{/if}} mob-text-over-img">
+    					{{> sfcc-inline-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="inlinebanner" creativeName=mediaAsset.0.image.name mainLinkConfigured=mediaAsset.0.link  headerBlockData=headerBlock }}
+    				</div>
+    			{{#if mediaAsset}}
+    				{{#each mediaAsset}}
+    					{{> sfcc-inline-media-asset insideFrameData=../insideFrame parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="inlinebanner" mediaAssetData=this }}
+    				{{/each}}
+    			{{/if}}			
+    			{{#if bylineText}}<p class="{{#if bylineTextColor}}u-disclaimer-text-color {{/if}}{{bylineTextSize}} byline-text {{#if mediaAsset}}disclaimer-text-over-media{{else}}disclaimer-text{{/if}}">{{{bylineText}}}</p>{{/if}}
+    		{{#if (not mediaAsset)}}
+    		</div>
+    		{{/if}}
+		</div>
+	</div>
+</div>

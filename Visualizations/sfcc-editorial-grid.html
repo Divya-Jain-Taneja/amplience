@@ -1,0 +1,155 @@
+{{#or backgroundColor componentMaxWidth}}
+ <style>
+{{#if backgroundColor}}
+        .sfcc-editorial-grid-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    
+{{/if}}
+{{#if componentMaxWidth}}
+        .sfcc-editorial-grid-{{replace (last (split [@id] "/")) "-" "" }}{
+            max-width: {{componentMaxWidth}}px;
+        }
+{{/if}}
+ </style>
+{{/or}}
+<div class="mol-editorial-grid container-fluid sfcc-editorial-grid-{{replace (last (split [@id] "/")) "-" "" }}  {{#if removePadding}}p-0{{/if}}" data-qa="site_promo_editorial-grid_wrapper">
+{{#if jumpPointID }}
+    {{> sfcc-at-jumpAnchor this }}
+{{/if}}
+    {{#if headerBlock}}
+	<div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" mainLinkConfigured=(length ../gridItems) headerBlockData=this }}
+		{{/each}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="row {{#if (eq layout 'Right')}}mobile-stack{{/if}}">
+		<div class="left-container col-sm-12 col-md-6{{#if zeroPadding}} no-padding{{/if}}">
+		{{#if (eq layout 'Left')}}
+			{{#each primaryMedia}}
+				<div class="primary-block">
+                    {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                        {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot="EGTT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                        {{#if disableLazyLoad}}
+                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                        {{else}}
+                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                        {{/if}}
+                    {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                        {{> sfcc-video-player this}}
+                    {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                        {{> sfcc-youtube-player promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) youtubeplayerData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5"}}
+                    {{~/if}}               
+                </div>
+			{{/each}}
+		{{else}}
+			<div class="grid-block">
+				<div class="row">
+				{{#each gridItems}}
+					<div class="grid-wrapper col-6">
+						<div class="grid-item">
+							{{#if (test ../[@type] (toRegex ".*/mol-editorial-grid-v2.json")) ~}}
+						    {{#with gridItem}}
+        					        {{#if (test this.[@type] (toRegex ".*/mol-header-block-container.json")) ~}}
+                                        {{> sfcc-header-block-container parentid=(append (replace (last (split ../../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(prepend (stringify (add 1 @index)) "EGT") headerBlockData=this }}
+                                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                                        {{#if disableLazyLoad}}
+                                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                        {{else}}
+                                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                        {{/if}}
+                                        {{#if ../inlineCTA}}
+                                    		<div class="inline-cta{{#if imageCaption}} cta-bottom{{/if}}">
+                                    			{{#each ../inlineCTA}}
+                                    				{{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=(replace (last (split ../../../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../../../_meta.name " " "")) locationId="card_container" creativeName=../creativeName creativeSlot=(prepend 'C' ( prepend (stringify (add 1 @../index)) 'EGT')) }}
+                                    			{{/each}}
+                                    		</div>
+		                                {{/if}}
+                                {{~/if}}
+						    {{/with}}
+						{{else}}
+						    {{#if (test this.[@type] (toRegex ".*/mol-header-block-container.json")) ~}}
+                                {{> sfcc-header-block-container parentid=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(prepend (stringify (add 1 @index)) "EGT") headerBlockData=this }}
+                            {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                                {{#if disableLazyLoad}}
+                                    {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                {{else}}
+                                    {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                {{/if}}
+                            {{~/if}}
+						{{/if}}
+						</div>
+					</div>
+				{{/each}}
+				</div>
+			</div>
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-12 col-md-6{{#if zeroPadding}} no-padding{{/if}}">
+		{{#if (eq layout 'Left')}}
+			<div class="grid-block">
+				<div class="row">
+                {{#each gridItems}}
+					<div class="grid-wrapper col-6">
+						<div class="grid-item">
+						{{#if (test ../[@type] (toRegex ".*/mol-editorial-grid-v2.json")) ~}}
+						    {{#with gridItem}}
+        					        {{#if (test this.[@type] (toRegex ".*/mol-header-block-container.json")) ~}}
+                                        {{> sfcc-header-block-container parentid=(append (replace (last (split ../../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(prepend (stringify (add 1 @index)) "EGT") headerBlockData=this }}
+                                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                                        {{#if disableLazyLoad}}
+                                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                        {{else}}
+                                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                        {{/if}}
+                                        {{#if ../inlineCTA}}
+                                    		<div class="inline-cta{{#if imageCaption}} cta-bottom{{/if}}">
+                                    			{{#each ../inlineCTA}}
+                                    				{{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=(replace (last (split ../../../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../../../_meta.name " " "")) locationId="card_container" creativeName=../creativeName creativeSlot=(prepend 'C' ( prepend (stringify (add  1 @../index)) 'EGT')) }}
+                                    			{{/each}}
+                                    		</div>
+		                                {{/if}}
+                                {{~/if}}
+						    {{/with}}
+						{{else}}
+						    {{#if (test this.[@type] (toRegex ".*/mol-header-block-container.json")) ~}}
+                                {{> sfcc-header-block-container parentid=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(prepend (stringify (add 1 @index)) "EGT") headerBlockData=this }}
+                            {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                                {{#if disableLazyLoad}}
+                                    {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                {{else}}
+                                    {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EGT" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=480 desktopImageRetina=940 tabletImageNormal=320 tabletImageRetina=640 mobileImageNormal=384 mobileImageRetina=768}}
+                                {{/if}}
+                            {{~/if}}
+						{{/if}}
+						</div>
+					</div>
+				{{/each}}
+				</div>
+			</div>
+		{{else}}
+			{{#each primaryMedia}}
+            <div class="primary-block">
+                {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                    {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot="EGTT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="825,660,440,352,468,375"}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                    {{> sfcc-video-player this}}
+                {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                        {{> sfcc-youtube-player promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="editorial_grid" creativeSlot=(append "EG" (stringify (add 1 @index))) youtubeplayerData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5"}}
+                    {{~/if}}                
+            </div>
+			{{/each}}
+		{{/if}}
+		</div>
+	</div>
+</div>

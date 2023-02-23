@@ -1,0 +1,110 @@
+<style>
+  @media only screen and (max-width:768px){
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}}{
+      top:{{#if (stringify topPositionMobile)}}{{topPositionMobile}}{{else}}50{{/if}}%;
+      left:{{#if (stringify leftPositionMobile)}}{{leftPositionMobile}}{{else}}50{{/if}}%;
+      transform: translate({{#if (stringify leftPositionMobile)}}{{multiply -1 leftPositionMobile}}{{else}}-50{{/if}}%, {{#if (stringify topPositionMobile)}}{{multiply -1 topPositionMobile}}{{else}}-50{{/if}}%);
+    }
+    {{#if stickerWidthM}}
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}} picture{
+      width: {{stickerWidthM}}px;
+    }
+    {{/if}}
+  }
+{{#if stickerWidthM}}
+  @media only screen and (max-width: 543px) {
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}} picture{
+      width: {{divide (multiply 90 stickerWidthM) 100}}px;
+    }
+  }
+{{/if}}
+  @media only screen and (min-width:769px){
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}}{
+      top:{{#if (stringify topPositionDesktop)}}{{topPositionDesktop}}{{else}}50{{/if}}%;
+      left:{{#if (stringify leftPositionDesktop)}}{{leftPositionDesktop}}{{else}}50{{/if}}%;
+      transform: translate({{#if (stringify leftPositionDesktop)}}{{multiply -1 leftPositionDesktop}}{{else}}-50{{/if}}%, {{#if (stringify topPositionDesktop)}}{{multiply -1 topPositionDesktop}}{{else}}-50{{/if}}%);
+    }
+    {{#if stickerWidthD}}
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}} picture{
+      width: {{divide (multiply 80 stickerWidthD) 100}}px;
+    }
+    {{/if}}
+  }
+{{#if stickerWidthD}}
+  @media only screen and (min-width: 992px) {
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}} picture{
+      width: {{divide (multiply 90 stickerWidthD) 100}}px;
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    .amp-page-acc-{{parentId}} .at-sticker-block-{{stickerCounter}} picture{
+      width: {{stickerWidthD}}px;
+    }
+  }
+{{/if}}
+</style>
+<div class="sticker-block at-sticker-block-{{stickerCounter}}{{#if hideSticker}} d-none d-md-block{{/if}}" style="--m-aspect-ratio: {{#if (and stickerWidthM stickerHeightM)}}{{stickerWidthM}}/{{stickerHeightM}}{{else if stickerWidthM}}{{stickerWidthM}}/80{{else if stickerHeightM}}80/{{stickerHeightM}}{{else}}80/80{{/if}};--d-aspect-ratio: {{#if (and stickerWidthD stickerHeightD)}}{{stickerWidthD}}/{{stickerHeightD}}{{else if stickerWidthD}}{{stickerWidthD}}/120{{else if stickerHeightD}}120/{{stickerHeightD}}{{else}}120/120{{/if}};">
+  <div class="amps-aspect-ratio-box">
+  {{#if image}}
+    {{#if disableLazyLoad}}
+    <picture class="u-full-cover-element m-d-ratio-defined">
+    {{else}}
+    <picture data-loading="lazy" data-class="aspect-ratio-img" class="u-full-cover-element m-d-ratio-defined" data-iesrc="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}{{/if}}" data-alt="{{imageAltText}}">
+    {{/if}}
+      {{#or (contains image.name ".png") (contains image.name "_png")}}
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=png" {{#if stickerWidthD}}width="{{stickerWidthD}}"{{else}}width="120"{{/if}} {{#if stickerHeightD}}height="{{stickerHeightD}}"{{else}}height="120"{{/if}} media="(min-width: 1200px)" type="image/png">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=png" {{#if stickerWidthD}}width="{{divide (multiply 90 stickerWidthD) 100}}"{{else}}width="110"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 90 stickerHeightD) 100}}"{{else}}height="110"{{/if}} media="(min-width: 992px)" type="image/png">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=png" {{#if stickerWidthD}}width="{{divide (multiply 80 stickerWidthD) 100}}"{{else}}width="100"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 80 stickerHeightD) 100}}"{{else}}height="100"{{/if}} media="(min-width: 769px)" type="image/png">
+      {{else or (contains image.name ".svg") (contains image.name "_svg")}}
+        <source srcset="//{{image.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI image.name}}" {{#if stickerWidthD}}width="{{stickerWidthD}}"{{else}}width="120"{{/if}} {{#if stickerHeightD}}height="{{stickerHeightD}}"{{else}}height="120"{{/if}} media="(min-width: 1200px)" type="image/svg+xml">
+        <source srcset="//{{image.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI image.name}}" {{#if stickerWidthD}}width="{{divide (multiply 90 stickerWidthD) 100}}"{{else}}width="110"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 90 stickerHeightD) 100}}"{{else}}height="110"{{/if}} media="(min-width: 992px)" type="image/svg+xml">
+        <source srcset="//{{image.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI image.name}}" {{#if stickerWidthD}}width="{{divide (multiply 80 stickerWidthD) 100}}"{{else}}width="100"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 80 stickerHeightD) 100}}"{{else}}height="100"{{/if}} media="(min-width: 769px)" type="image/svg+xml">
+      {{else}}
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jp2&{{desktopQuality}}" {{#if stickerWidthD}}width="{{stickerWidthD}}"{{else}}width="120"{{/if}} {{#if stickerHeightD}}height="{{stickerHeightD}}"{{else}}height="120"{{/if}} media="(min-width: 1200px)" type="image/jp2">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jpg&{{desktopQuality}}" {{#if stickerWidthD}}width="{{stickerWidthD}}"{{else}}width="120"{{/if}} {{#if stickerHeightD}}height="{{stickerHeightD}}"{{else}}height="120"{{/if}} media="(min-width: 1200px)" type="image/jpeg">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jp2&{{desktopQuality}}" {{#if stickerWidthD}}width="{{divide (multiply 90 stickerWidthD) 100}}"{{else}}width="110"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 90 stickerHeightD) 100}}"{{else}}height="110"{{/if}} media="(min-width: 992px)" type="image/jp2">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jpg&{{desktopQuality}}" {{#if stickerWidthD}}width="{{divide (multiply 90 stickerWidthD) 100}}"{{else}}width="110"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 90 stickerHeightD) 100}}"{{else}}height="110"{{/if}} media="(min-width: 992px)" type="image/jpeg">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jp2&{{desktopQuality}}" {{#if stickerWidthD}}width="{{divide (multiply 80 stickerWidthD) 100}}"{{else}}width="100"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 80 stickerHeightD) 100}}"{{else}}height="100"{{/if}} media="(min-width: 769px)" type="image/jp2">
+        <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jpg&{{desktopQuality}}" {{#if stickerWidthD}}width="{{divide (multiply 80 stickerWidthD) 100}}"{{else}}width="100"{{/if}} {{#if stickerHeightD}}height="{{divide (multiply 80 stickerHeightD) 100}}"{{else}}height="100"{{/if}} media="(min-width: 769px)" type="image/jpeg">
+      {{/or}}
+      {{#or (contains mobileImage.name ".png") (contains mobileImage.name "_png") (contains image.name ".png") (contains image.name "_png")}}
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=png{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=png{{/if}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/png">
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=png{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=png{{/if}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/png">
+      {{else or (contains mobileImage.name ".svg") (contains mobileImage.name "_svg") (contains image.name ".svg") (contains image.name "_svg")}}
+        <source srcset="{{#if mobileImage}}//{{mobileImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI mobileImage.name}}{{else}}//{{image.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI image.name}}{{/if}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/svg+xml">
+        <source srcset="{{#if mobileImage}}//{{mobileImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI mobileImage.name}}{{else}}//{{image.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI image.name}}{{/if}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/svg+xml">
+      {{else}}
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jp2&{{mobileQuality}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jp2&{{mobileQuality}}{{/if}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/jp2"> 
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jpg&{{mobileQuality}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jpg&{{mobileQuality}}{{/if}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/jpeg">
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jp2&{{mobileQuality}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jp2&{{mobileQuality}}{{/if}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/jp2"> 
+        <source srcset="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jpg&{{mobileQuality}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&fmt=jpg&{{mobileQuality}}{{/if}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/jpeg">
+      {{/or}}
+      {{#if disableLazyLoad}}
+        <img src="{{#if mobileImage}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}{{else}}//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}{{/if}}" class="aspect-ratio-img" alt="{{imageAltText}}"> 
+      {{/if}}
+    </picture>
+  {{else}}
+  {{#if disableLazyLoad}}
+    <picture class="u-full-cover-element m-d-ratio-defined">
+    {{else}}
+    <picture data-loading="lazy" data-class="d-sm-block d-md-none m-auto aspect-ratio-img" class="u-full-cover-element m-d-ratio-defined" data-iesrc="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}" data-alt="{{imageAltText}}">  
+    {{/if}}
+      {{#or (contains mobileImage.name ".png") (contains mobileImage.name "_png")}}
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=png" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/png">
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=png" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/png">
+      {{else or (contains mobileImage.name ".svg") (contains mobileImage.name "_svg")}}
+        <source srcset="//{{mobileImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI mobileImage.name}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/svg+xml">
+        <source srcset="//{{mobileImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI mobileImage.name}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/svg+xml">
+      {{else}}
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jp2&{{mobileQuality}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/jp2">
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jpg&{{mobileQuality}}" {{#if stickerWidthM}}width="{{stickerWidthM}}"{{else}}width="90"{{/if}} {{#if stickerHeightM}}height="{{stickerHeightM}}"{{else}}height="90"{{/if}} media="(max-width: 768px)" type="image/jpeg">
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jp2&{{mobileQuality}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/jp2">
+        <source srcset="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&fmt=jpg&{{mobileQuality}}" {{#if stickerWidthM}}width="{{divide (multiply 90 stickerWidthM) 100}}"{{else}}width="80"{{/if}} {{#if stickerHeightM}}height="{{divide (multiply 90 stickerHeightM) 100}}"{{else}}height="80"{{/if}} media="(max-width: 543px)" type="image/jpeg">
+      {{/or}}
+      {{#if disableLazyLoad}}
+        <img src="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}" class="d-sm-block d-md-none aspect-ratio-img" alt="{{imageAltText}}">
+      {{/if}}
+    </picture>
+  {{/if}}
+  </div>
+</div>

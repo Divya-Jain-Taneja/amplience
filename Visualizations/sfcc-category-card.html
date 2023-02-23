@@ -1,0 +1,101 @@
+<div class="at-category-card" data-qa="site_promo_category-card_wrapper">
+
+	{{#and categoryId categoryImage.0.imageAltText categoryImage.0.image.name categoryTitle}}
+	<!--If cat ID + cat image comp + cat title then -->
+		<a class="category-card-link" title="{{sanitize categoryTitle}}" href='<sfcc category-url="{{categoryId}}"></sfcc>'
+    		data-event="internal_promotion"
+    		data-promotion-id="{{promotionId}}"
+    		data-promotion-name="{{sanitize categoryTitle}}"
+    		data-creative-name="{{categoryImage.0.image.name}}"
+    		data-location-id="category_container"
+    		data-creative-slot="{{add cardCounter 1}}">
+			<div class="amps-aspect-ratio-box">
+    		{{#if disableLazyLoad}}
+		        <picture class="u-full-cover-element m-d-ratio-defined">
+		    {{else}}
+			    <picture data-loading="lazy" data-class="category-card-img" data-iesrc="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?w=163" data-alt="{{categoryImage.0.imageAltText}}" class="u-full-cover-element m-d-ratio-defined">
+            {{/if}}
+            	<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=320&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=640&fmt=jp2 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 1200px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=320&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=640&fmt=jpg 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 1200px)" type="image/jpeg">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=200&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=400&fmt=jp2 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 769px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=200&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=400&fmt=jpg 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 769px)" type="image/jpeg">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=768&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=1536&fmt=jp2 2x" {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{/with}}{{else}}width="375"height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=768&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=1536&fmt=jpg 2x" {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{/with}}{{else}}width="375"height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jpeg">
+				{{#if disableLazyLoad}}
+				    <img class="category-card-img" src="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?w=163" alt="{{categoryImage.0.imageAltText}}">
+				{{/if}}
+            </picture>
+			</div>
+			<div class="category-card-title">{{{categoryTitle}}}</div>
+		</a>
+	{{else}}
+	
+	{{#and categoryId categoryImage.0.image.name categoryImage.0.imageAltText}}
+	<!-- If cat ID + cat image then-->
+		<a class="category-card-link" title='<sfcc category-name="{{categoryId}}"></sfcc>' href='<sfcc category-url="{{categoryId}}"></sfcc>'
+    		data-event="internal_promotion"
+    		data-promotion-id="{{promotionId}}"
+    		data-promotion-name='<sfcc category-name="{{categoryId}}"></sfcc>'
+    		data-creative-name="{{categoryImage.0.image.name}}"
+    		data-location-id="category_container"
+    		data-creative-slot="{{add cardCounter 1}}">
+			<div class="amps-aspect-ratio-box">
+    		{{#if disableLazyLoad}}
+		        <picture class="u-full-cover-element m-d-ratio-defined">
+		    {{else}}
+			    <picture data-loading="lazy" data-class="category-card-img" data-iesrc="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?w=163" data-alt="{{categoryImage.0.imageAltText}}" class="u-full-cover-element m-d-ratio-defined">
+            {{/if}}
+            	<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=320&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=640&fmt=jp2 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 1200px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=320&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=640&fmt=jpg 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 1200px)" type="image/jpeg">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=200&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=400&fmt=jp2 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 769px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=200&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=400&fmt=jpg 2x" {{#if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1))) (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"width="1200"{{/if}}{{/if}} media="(min-width: 769px)" type="image/jpeg">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=768&fmt=jp2 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=1536&fmt=jp2 2x" {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{/with}}{{else}}width="375"height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jp2">
+				<source srcset="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=768&fmt=jpg 1x, //{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?$poi$&w=1536&fmt=jpg 2x" {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#if (not (eq initialWidth ''))}}width="{{initialWidth}}"{{/if}}{{#if (not (eq initialHeight ''))}}height="{{initialHeight}}"{{/if}}{{/with}}{{else}}width="375"height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jpeg">
+            {{#if disableLazyLoad}}
+                <img class="category-card-img" src="//{{categoryImage.0.image.defaultHost}}/i/{{categoryImage.0.image.endpoint}}/{{encodeURI categoryImage.0.image.name}}?w=163" alt="{{categoryImage.0.imageAltText}}">
+            {{/if}}
+            </picture>
+			</div>
+			<div class="category-card-title"><sfcc category-name="{{categoryId}}"></sfcc></div>
+		</a>
+	{{else}}
+	
+	{{#and categoryId categoryTitle}}
+	<!-- If only category ID and cart title then -->
+		 <a class="category-card-link" title="{{sanitize categoryTitle}}" href='<sfcc category-url="{{categoryId}}"></sfcc>'
+		    data-event="internal_promotion"
+    		data-promotion-id="{{promotionId}}"
+    		data-promotion-name="{{sanitize categoryTitle}}"
+    		data-creative-name="NO_IMAGE"
+    		data-location-id="category_container"
+    		data-creative-slot="{{add cardCounter 1}}">
+			<div class="amps-aspect-ratio-box">
+				<div class="u-full-cover-element m-d-ratio-defined">
+				<img {{#not disableLazyLoad}}data-loading="lazy"{{/not}} class="category-card-img" alt='{{{categoryTitle}}}' {{#not disableLazyLoad}}data-{{/not}}src='<sfcc category-img="{{categoryId}}"></sfcc>' {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}width="{{#with (JSONparse mAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="375"{{/if}}{{/if}} {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}height="{{#with (JSONparse mAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}>
+				</div>
+			</div>
+			<div class="category-card-title">{{{categoryTitle}}}</div>
+		</a>
+	{{else}}
+	
+	{{#if (neither categoryImage.0.image.name categoryTitle)}}
+	<!-- If only category ID then -->
+		<a class="category-card-link {{categoryImage.0.imageAltText}}" title='<sfcc category-name="{{categoryId}}"></sfcc>' href='<sfcc category-url="{{categoryId}}"></sfcc>'
+		    data-event="internal_promotion"
+    		data-promotion-id="{{promotionId}}"
+    		data-promotion-name='<sfcc category-name="{{categoryId}}"></sfcc>'
+    		data-creative-name="NO_IMAGE"
+    		data-location-id="category_container"
+    		data-creative-slot="{{add cardCounter 1}}">
+			<div class="amps-aspect-ratio-box">
+				<div class="u-full-cover-element m-d-ratio-defined">
+				<img {{#not disableLazyLoad}}data-loading="lazy"{{/not}} class="category-card-img" alt='<sfcc category-name="{{categoryId}}"></sfcc>' {{#not disableLazyLoad}}data-{{/not}}src='<sfcc category-img="{{categoryId}}"></sfcc>'  {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}width="{{#with (JSONparse mAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="375"{{/if}}{{/if}} {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}height="{{#with (JSONparse mAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}>
+				</div>
+		   </div>
+			<div class="category-card-title"><sfcc category-name="{{categoryId}}"></sfcc></div>
+		</a>
+	{{/if}}
+	{{/and}}
+	{{/and}}
+	{{/and}}
+</div>

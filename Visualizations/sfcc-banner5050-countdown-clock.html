@@ -1,0 +1,42 @@
+<div class="countdown-block text-center" {{#if countDownClockAndImage.0.countDownClock}}data-countdown-endTime="{{countDownClockAndImage.0.countDownClock.0.timerDate}}T{{#if countDownClockAndImage.0.countDownClock.0.time}}{{#first (split countDownClockAndImage.0.countDownClock.0.time ".")}}{{/first}}{{#if countDownClockAndImage.0.countDownClock.0.standardTime}}-05:00{{else}}-04:00{{/if}}{{/if}}"{{/if}}>
+    {{#if countDownClockAndImage.0.inlineImage}}
+        {{> sfcc-at-inline-image this}}
+    {{/if}}
+    {{#if countDownClockAndImage.0.countDownClock}}
+    <ul class="countdown-timer at-text-block flex-container d-flex justify-content-center p-0{{#if (eq countDownClockAndImage.0.countdownStyle 'Countdown Style 2')}} theme-two{{/if}}" {{#or countDownClockAndImage.0.numberBoxWidth countDownClockAndImage.0.numberBoxHeight}}style="--countdown-number-width:{{countDownClockAndImage.0.numberBoxWidth}}px; --countdown-number-height:{{countDownClockAndImage.0.numberBoxHeight}}px;"{{/or}}>
+        {{#if countDownClockAndImage.0.displayDays}}
+        <li class="time-fields">
+            <p class="countdown-number ca_days_ticker at-headline-text {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}"></p>
+            <p class="countdown-label at-body-text m-0 {{#if (eq countDownClockAndImage.0.clockTextSize countDownClockAndImage.0.clockTextSizeMobile)}}{{countDownClockAndImage.0.clockTextSize}}{{else}}d-{{countDownClockAndImage.0.clockTextSize}} {{countDownClockAndImage.0.clockTextSizeMobile}}{{/if}}">DAYS</p>
+        </li>
+        {{#and countDownClockAndImage.0.displayDays countDownClockAndImage.0.displayHours}}
+        <li class="countdown-separator {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}">:</li>
+        {{/and}}
+        {{/if}}
+        {{#if countDownClockAndImage.0.displayHours}}
+        <li class="time-fields">
+            <p class="countdown-number ca_hours_ticker at-headline-text {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}"></p>
+            <p class="countdown-label at-body-text m-0 {{#if (eq countDownClockAndImage.0.clockTextSize countDownClockAndImage.0.clockTextSizeMobile)}}{{countDownClockAndImage.0.clockTextSize}}{{else}}d-{{countDownClockAndImage.0.clockTextSize}} {{countDownClockAndImage.0.clockTextSizeMobile}}{{/if}}">HOURS</p>
+        </li>
+        {{#and countDownClockAndImage.0.displayHours countDownClockAndImage.0.displayMinutes}}
+        <li class="countdown-separator {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}">:</li>
+        {{/and}}
+        {{/if}}
+        {{#if countDownClockAndImage.0.displayMinutes}}
+        <li class="time-fields">
+            <p class="countdown-number ca_minutes_ticker at-headline-text {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}"></p>
+            <p class="countdown-label at-body-text m-0 {{#if (eq countDownClockAndImage.0.clockTextSize countDownClockAndImage.0.clockTextSizeMobile)}}{{countDownClockAndImage.0.clockTextSize}}{{else}}d-{{countDownClockAndImage.0.clockTextSize}} {{countDownClockAndImage.0.clockTextSizeMobile}}{{/if}}">MINUTES</p>
+        </li>
+        {{#and countDownClockAndImage.0.displayMinutes countDownClockAndImage.0.displaySeconds}}
+        <li class="countdown-separator {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}">:</li>
+        {{/and}}
+        {{/if}}
+        {{#if countDownClockAndImage.0.displaySeconds}}
+        <li class="time-fields">
+            <p class="countdown-number ca_seconds_ticker at-headline-text {{#if (eq countDownClockAndImage.0.clockNumberSize countDownClockAndImage.0.clockNumberSizeMobile)}}{{countDownClockAndImage.0.clockNumberSize}}{{else}}d-{{countDownClockAndImage.0.clockNumberSize}} {{countDownClockAndImage.0.clockNumberSizeMobile}}{{/if}}"></p>
+            <p class="countdown-label at-body-text m-0 {{#if (eq countDownClockAndImage.0.clockTextSize countDownClockAndImage.0.clockTextSizeMobile)}}{{countDownClockAndImage.0.clockTextSize}}{{else}}d-{{countDownClockAndImage.0.clockTextSize}} {{countDownClockAndImage.0.clockTextSizeMobile}}{{/if}}">SECONDS</p>
+        </li>
+        {{/if}}
+    </ul>
+    {{/if}}
+</div>

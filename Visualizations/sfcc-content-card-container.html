@@ -1,0 +1,262 @@
+<style>
+    {{#if columnDivider}}
+        .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} {
+            --column-divider-color: {{#if columnDividerColor}}{{columnDividerColor}};{{else}}#000000;{{/if}}
+        }
+    {{/if}}
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider {
+       overflow-x: scroll;
+       overflow-y: hidden;
+       white-space: nowrap;
+       font-size: 0;
+   }
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide {
+       display: inline-block;
+       vertical-align: top;
+       width: 40%;
+   }
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide:last-child{
+       margin-right:0px;
+   }
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide:first-child{
+       margin-left:0px;
+   }
+{{#or backgroundColor componentMaxWidth (gte desktopPaddingRow 0) (gte desktopPaddingStack 0) (gte mobilePaddingRow 0) (gte mobilePaddingStack 0) gradientColor}}
+    {{#and backgroundColor (not gradientColor)}}
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }}{
+        background-color: {{backgroundColor}};
+    }
+    {{/and}}
+    {{#if componentMaxWidth}}
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} {
+        max-width: {{componentMaxWidth}}px;
+    }
+    {{/if}}
+    @media only screen and (max-width:768px){
+        {{#and (gte mobilePaddingRow 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .card-tiles{{#if (eq mobileCards '3')}}.mob-3{{/if}}{
+                padding: 0 {{#divide mobilePaddingRow 2}}{{/divide}}px;
+            }
+        {{/and}}
+        {{#and (gte mobilePaddingStack 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }}  .card-tiles{
+                    margin-bottom: {{mobilePaddingStack}}px;
+            }
+        {{/and}}
+        {{#and (gte mobilePaddingRow 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Carousel')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .desk-carousel-mob-stack.mob-stack-{{mobileCards}} .slick-slide{
+                {{#lte mobileCards 2}}
+                    padding: 0 {{#divide mobilePaddingRow 2}}{{/divide}}px;
+                {{else}}
+                    margin-right: {{mobilePaddingRow}}px;
+                {{/lte}}
+            }
+        {{/and}}
+        {{#and (gte mobilePaddingStack 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Carousel')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .desk-carousel-mob-stack.mob-stack-{{mobileCards}} .slick-slide{
+                {{#lte mobileCards 2}}
+                    padding-bottom: {{mobilePaddingStack}}px;
+                {{else}}
+                    margin-bottom: {{mobilePaddingStack}}px;
+                {{/lte}}
+            }
+        {{/and}}
+    }
+    @media only screen and (min-width:768px){
+        {{#and (gte desktopPaddingRow 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .card-tiles{{#if (eq mobileCards '3')}}.mob-3{{/if}}{
+                padding: 0 {{#divide desktopPaddingRow 2}}{{/divide}}px;
+            }
+        {{/and}}
+        {{#and (gte desktopPaddingStack 0) (eq mobileStyle 'Stack') (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .card-tiles{
+                    margin-bottom: {{desktopPaddingStack}}px;
+            }
+        {{/and}}
+        {{#and (gte desktopPaddingRow 0) (or (eq mobileStyle 'Carousel') (eq mobileStyle 'Horizontal Scroll')) (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .content-card-container .product-slide{
+                padding: 0 {{#divide desktopPaddingRow 2}}{{/divide}}px;
+            }
+        {{/and}}
+        {{#and (gte desktopPaddingStack 0) (or (eq mobileStyle 'Carousel') (eq mobileStyle 'Horizontal Scroll')) (eq desktopStyle 'Stack')}}
+            .content-card-container-{{replace (last (split [@id] "/")) "-" "" }} .content-card-container .product-slide{
+                margin-bottom: {{desktopPaddingStack}}px;
+            }
+        {{/and}}
+    }
+{{/or}}
+{{#if gradientColor}}
+    .content-card-container-{{replace (last (split [@id] "/")) "-" "" }}{
+        --background-gradient: linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if backgroundColor}}{{backgroundColor}}{{else}}transparent{{/if}}, {{gradientColor}});
+    }
+{{/if}}
+</style>
+<div data-qa="site_promo_content-card-container_wrapper" class="mol-content-card-container container-fluid{{#if (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards) (or (eq mobileStyle 'Carousel') (eq mobileStyle 'Stack') (eq mobileStyle 'Horizontal Scroll')))}} desk-carousel{{/if}}{{#if roundedEdges}} rounded-edges{{/if}}{{#if removePadding}} no-padding{{/if}}{{#if roundedEdgeCheckbox}} u-card-rounded-edges{{/if}} content-card-container-{{replace (last (split [@id] "/")) "-" "" }} {{#if gradientColor}}u-background-gradient{{/if}}"
+{{#or (not (contains mAspectRatio "{")) (not (contains dAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""'))) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains dAspectRatio "{")}}--d-aspect-ratio:{{dAspectRatio}};{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}>
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    {{#if headerBlock}}
+     <div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="card_container" mainLinkConfigured=(length ../contentCard) headerBlockData=this }}
+        {{/each}}
+        </div>
+    </div>
+{{/if}}
+{{#if (and (eq mobileStyle 'Stack') (eq desktopStyle 'Stack'))}}
+<div class="row content-card-container{{#if columnDivider}} multi-column-divider{{/if}}{{#if (eq desktopCards '2')}} desk-stack-2{{else if (eq desktopCards '3')}} desk-stack-3{{else if (eq desktopCards '4')}} desk-stack-4{{else if (eq desktopCards '5')}} desk-stack-5{{else if (eq desktopCards '6')}} desk-stack-6{{/if}} {{#if (eq mobileStyle 'Carousel')}}desk-stack-mob-carousel{{else}}desk-mob-stack{{/if}} {{#if (eq mobileStyle 'Stack')}}{{#if (eq mobileCards '3')}}mob-grid-3{{/if}}{{/if}}">
+    {{#each contentCard}}
+    <div class="card-tiles {{#if (eq ../desktopCards '2')}}col-md-6{{else if (eq ../desktopCards '3')}}col-md-4{{else if (eq ../desktopCards '4')}}col-md-3{{else if (eq ../desktopCards '5')}}col-custom-2-4{{else if (eq ../desktopCards '6')}}col-md-2{{/if}} {{#if (eq ../mobileStyle 'Stack')}}{{#if (eq ../mobileCards '1')}}col-12{{else if (eq ../mobileCards '2')}}col-6{{else if (eq ../mobileCards '3')}}col-4 mob-3{{/if}}{{/if}}">
+        {{#if (or (test this._meta.schema (toRegex ".*/at-content-card-v2")) (test this._meta.schema (toRegex ".*/at-content-card-v3")) (test this._meta.schema (toRegex ".*/at-content-card-v4"))) ~}}
+            {{#if (eq ../desktopCards '2')}}
+                {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '3')}}
+                {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '4')}}
+                {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '5')}}
+                {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '6')}}
+                {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+            {{/if}}
+        {{else if (test this._meta.schema (toRegex ".*/at-content-card-v5"))}}
+            {{#if (eq ../desktopCards '2')}}
+                {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '3')}}
+                {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '4')}}
+                {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '5')}}
+                {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+            {{else if (eq ../desktopCards '6')}}
+                {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+            {{/if}}
+        {{else}}
+            {{>sfcc-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality}}
+        {{/if}}
+        {{#if ../columnDivider}}
+            <div class="column-divider"></div>
+        {{/if}}
+    </div>
+    {{/each}}
+</div>
+    {{else if (eq mobileStyle 'Horizontal Scroll')}}
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="content-card-container{{#if columnDivider}} multi-column-divider{{/if}} d-none d-md-block {{#if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Horizontal Scroll') (not imageIcon))}}desk-mob-carousel{{else if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Horizontal Scroll') imageIcon)}}desk-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Horizontal Scroll') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Horizontal Scroll') imageIcon)}}desk-stack-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack')  imageIcon)}}desk-stack-mob-carousel-thumbnail {{/if}}{{#if (and (eq desktopStyle 'Carousel') (eq mobileStyle 'Stack'))}}desk-carousel-mob-stack mob-stack-{{mobileCards}} {{/if}}{{#if (gt (length contentCard) desktopCards)}} desk-stack-{{desktopCards}}{{else}} desk-stack-{{length contentCard}}{{/if}}">
+            {{#if (eq desktopStyle 'Carousel')}}
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":true,"dots":true,"slidesToShow":1,"arrows":false}}]}'>
+            {{else}}
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":false,"dots":false,"infinite":false,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"slidesToShow":1,"arrows":false}}]}'>
+            {{/if}}
+                {{#each contentCard}}
+                <div class="product-slide" style="width:{{#if (eq ../desktopCards '2')}}var(--cards-2);{{else if (eq ../desktopCards '3')}}var(--cards-3);{{else if (eq ../desktopCards '4')}}var(--cards-4);{{else if (eq ../desktopCards '5')}}var(--cards-5);{{else if (eq ../desktopCards '6')}}var(--cards-6);{{/if}}display:inline-block;">
+                {{#if (or (test this._meta.schema (toRegex ".*/at-content-card-v2")) (test this._meta.schema (toRegex ".*/at-content-card-v3")) (test this._meta.schema (toRegex ".*/at-content-card-v4"))) ~}}
+                    {{#if (eq ../desktopCards '2')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '3')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '4')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '5')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '6')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{/if}}
+                {{else if (test this._meta.schema (toRegex ".*/at-content-card-v5"))}}
+                    {{#if (eq ../desktopCards '2')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '3')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '4')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '5')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '6')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{/if}}
+                {{else}}
+                    {{>sfcc-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality}}
+                {{/if}}
+                {{#if ../columnDivider}}
+                    <div class="column-divider"></div>
+                {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="content-card-container{{#if columnDivider}} multi-column-divider{{/if}} d-md-none d-sm-block mobile-horzscroll {{#if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Carousel')(not imageIcon))}}desk-mob-carousel{{else if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Carousel')  imageIcon)}}desk-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Carousel') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Carousel')  imageIcon)}}desk-stack-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack')  imageIcon)}}desk-stack-mob-carousel-thumbnail {{/if}}{{#if (and (eq desktopStyle 'Carousel') (eq mobileStyle 'Stack'))}}desk-carousel-mob-stack mob-stack-{{mobileCards}} {{/if}}{{#if (gt (length contentCard) desktopCards)}} desk-stack-{{desktopCards}}{{else}} desk-stack-{{length contentCard}}{{/if}}">
+            <div class="product-slider">
+                {{#each contentCard}}
+                    <div class="product-slide">
+                    {{#if (or (test this._meta.schema (toRegex ".*/at-content-card-v2")) (test this._meta.schema (toRegex ".*/at-content-card-v3")) (test this._meta.schema (toRegex ".*/at-content-card-v4"))) ~}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (test this._meta.schema (toRegex ".*/at-content-card-v5"))}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else}}
+                        {{>sfcc-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality}}
+                    {{/if}}
+                    {{#if ../columnDivider}}
+                        <div class="column-divider"></div>
+                    {{/if}}
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{else}}
+<div class="row">
+    <div class="col-12 p-lg-0">
+        <div class="content-card-container{{#if columnDivider}} multi-column-divider{{/if}} {{#if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Carousel')(not imageIcon))}}desk-mob-carousel{{else if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Carousel')  imageIcon)}}desk-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Carousel') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Carousel')  imageIcon)}}desk-stack-mob-carousel-thumbnail {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack') (not imageIcon))}}desk-stack-mob-carousel {{else if (and (or (eq desktopStyle 'Stack') (and (eq desktopStyle 'Carousel') (gte  desktopCards (length contentCard)))) (eq mobileStyle 'Stack')  imageIcon)}}desk-stack-mob-carousel-thumbnail {{/if}}{{#if (and (eq desktopStyle 'Carousel') (eq mobileStyle 'Stack'))}}desk-carousel-mob-stack mob-stack-{{mobileCards}} {{/if}}{{#if (gt (length contentCard) desktopCards)}} desk-stack-{{desktopCards}}{{else}} desk-stack-{{length contentCard}}{{/if}}">
+            {{#if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (eq mobileStyle 'Carousel') (not imageIcon))}}
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":true,"dots":true,"slidesToShow":1,"arrows":false}}]}'>
+            {{else if (and (and (eq desktopStyle 'Carousel') (gt (length contentCard) desktopCards)) (or (or (eq mobileStyle 'Stack') imageIcon) (and (eq mobileStyle 'Carousel') imageIcon)))}}
+                <div class="product-tile-slider"  data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"slidesToShow":1,"arrows":false}}]}'>
+            {{else if (and (or (eq desktopStyle 'Stack') (eq desktopStyle 'Carousel')) (and (eq mobileStyle 'Carousel') (not imageIcon)))}}
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":false,"dots":false,"infinite":false,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":true,"dots":true,"slidesToShow":1,"arrows":false,"infinite":true}}]}'>
+            {{else if (and (or (eq desktopStyle 'Stack') (eq desktopStyle 'Carousel')) (or (and (eq mobileStyle 'Stack') (not imageIcon)) (and (eq mobileStyle 'Stack') imageIcon) (and (eq mobileStyle 'Carousel') imageIcon)) )}}
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":false,"dots":false,"infinite":false,"initialSlide":0,"slidesToShow":{{desktopCards}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"slidesToShow":1,"arrows":false}}]}'>
+            {{/if}}
+                {{#each contentCard}}
+                <div class="product-slide" style="width:{{#if (eq ../desktopCards '2')}}var(--cards-2);{{else if (eq ../desktopCards '3')}}var(--cards-3);{{else if (eq ../desktopCards '4')}}var(--cards-4);{{else if (eq ../desktopCards '5')}}var(--cards-5);{{else if (eq ../desktopCards '6')}}var(--cards-6);{{/if}}display:inline-block;">
+                {{#if (or (test this._meta.schema (toRegex ".*/at-content-card-v2")) (test this._meta.schema (toRegex ".*/at-content-card-v3")) (test this._meta.schema (toRegex ".*/at-content-card-v4"))) ~}}
+                    {{#if (eq ../desktopCards '2')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '3')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '4')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '5')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '6')}}
+                        {{>sfcc-media-asset-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{/if}}
+                {{else if (test this._meta.schema (toRegex ".*/at-content-card-v5"))}}
+                    {{#if (eq ../desktopCards '2')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=960 desktopImageRetina=1920 tabletImageNormal=700 tabletImageRetina=1400 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '3')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=640 desktopImageRetina=1280 tabletImageNormal=467 tabletImageRetina=934 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '4')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=480 desktopImageRetina=960 tabletImageNormal=350 tabletImageRetina=700 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '5')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=384 desktopImageRetina=768 tabletImageNormal=280 tabletImageRetina=560 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{else if (eq ../desktopCards '6')}}
+                        {{>sfcc-atomic-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=320 desktopImageRetina=640 tabletImageNormal=233 tabletImageRetina=466 mobileImageNormal=384 mobileImageRetina=768}}
+                    {{/if}}
+                {{else}}
+                    {{>sfcc-content-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) imageIcon=../imageIcon disableLazyLoad=../disableLazyLoad creativeSlot=(prepend (stringify (add 1 @index)) "CD") mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio mobileQuality=../mobileQuality desktopQuality=../desktopQuality}}
+                {{/if}}
+                {{#if ../columnDivider}}
+                    <div class="column-divider"></div>
+                {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+</div>

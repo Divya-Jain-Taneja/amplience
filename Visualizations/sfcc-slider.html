@@ -1,0 +1,14 @@
+{{#if backgroundColor}}
+<style>
+    .slider-container-{{replace (last (split [@id] "/")) "-" "" }}{
+		background-color: {{backgroundColor}};
+    }
+</style>
+{{/if}}
+<div class="slider-container mol-product-carousel p-0 container-fluid slider-container-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_slider_wrapper">
+    <div class="product-tile-slider card-tile-slider" data-config={"adaptiveHeight":false,{{#if autoSlideTime}}"autoplay":{{#or (eq autoSlideTime 'Disable') (isFalsey sliderLoop)}}false{{else}}true{{/or}},"autoplaySpeed":{{#if (eq autoSlideTime '6 sec')}}6000{{/if}}{{#if (eq autoSlideTime '7 sec')}}7000{{/if}}{{#if (eq autoSlideTime '8 sec')}}8000{{/if}}{{#if (eq autoSlideTime '9 sec')}}9000{{/if}}{{#if (eq autoSlideTime '10 sec')}}10000{{/if}}{{#if (eq autoSlideTime 'Disable')}}3000{{/if}},{{/if}}"arrows":true,"dots":{{navDots}},"infinite":{{sliderLoop}},"initialSlide":0,"slidesToShow":1,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","pauseOnHover":false,"pauseOnFocus":false,"responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}}]}>
+        {{#each contentTypes}}
+            <div class="component-block component-block-slide-{{@index}}">{{> templateChooser this}}</div>
+        {{/each}}
+    </div>
+</div>

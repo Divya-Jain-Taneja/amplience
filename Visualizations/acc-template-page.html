@@ -1,0 +1,169 @@
+<style>
+	{{#and (not paddingBackgroundImage) (or desktopBgImage mobileBgImage)}}
+	{{#or marginTopM marginBottomM marginLeftM marginRightM marginInBetweenM marginTopD marginBottomD marginLeftD marginRightD marginInBetweenD}}
+		{{#or marginTopM marginBottomM marginLeftM marginRightM marginInBetweenM}}
+		
+		@media only screen and (max-width:768px){
+			{{#if marginTopM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-top: {{marginTopM}}px;
+				}
+			{{/if}}
+			{{#if marginBottomM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-bottom: {{marginBottomM}}px;
+				}
+			{{/if}}
+			{{#if marginLeftM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-left: {{marginLeftM}}px;
+				}
+			{{/if}}
+			{{#if marginRightM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-right: {{marginRightM}}px;
+				}
+			{{/if}}
+			{{#if marginInBetweenM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+					margin-bottom: {{marginInBetweenM}}px;
+				}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+					margin-bottom: 0;
+				}
+			{{/if}}
+		}
+		{{/or}}
+		
+		{{#or marginTopD marginBottomD marginLeftD marginRightD marginInBetweenD}}
+		@media only screen and (min-width:769px){
+			{{#if marginTopD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-top: {{marginTopD}}px;
+				}
+			{{/if}}
+			{{#if marginBottomD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-bottom: {{marginBottomD}}px;
+				}
+			{{/if}}
+			{{#if marginLeftD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-left: {{marginLeftD}}px;
+				}
+			{{/if}}
+			{{#if marginRightD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+					padding-right: {{marginRightD}}px;
+				}
+			{{/if}}
+			{{#if marginInBetweenD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+					margin-bottom: {{marginInBetweenD}}px;
+				}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+					margin-bottom: 0;
+				}
+			{{/if}}
+		}
+		{{/or}}
+	{{/or}}
+	{{else}}
+	{{#or marginTopM marginBottomM marginLeftM marginRightM marginInBetweenM marginTopD marginBottomD marginLeftD marginRightD marginInBetweenD}}
+		{{#or marginTopM marginBottomM marginLeftM marginRightM marginInBetweenM}}
+		@media only screen and (max-width:768px){
+			{{#if marginTopM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-top: {{marginTopM}}px;
+				}
+			{{/if}}
+			{{#if marginBottomM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-bottom: {{marginBottomM}}px;
+				}
+			{{/if}}
+			{{#if marginLeftM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-left: {{marginLeftM}}px;
+				}
+			{{/if}}
+			{{#if marginRightM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-right: {{marginRightM}}px;
+				}
+			{{/if}}
+			{{#if marginInBetweenM}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+					margin-bottom: {{marginInBetweenM}}px;
+				}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+					margin-bottom: 0;
+				}
+			{{/if}}
+		}
+		{{/or}}
+		
+		{{#or marginTopD marginBottomD marginLeftD marginRightD marginInBetweenD}}
+		@media only screen and (min-width:769px){
+			{{#if marginTopD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-top: {{marginTopD}}px;
+				}
+			{{/if}}
+			{{#if marginBottomD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-bottom: {{marginBottomD}}px;
+				}
+			{{/if}}
+			{{#if marginLeftD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-left: {{marginLeftD}}px;
+				}
+			{{/if}}
+			{{#if marginRightD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+					margin-right: {{marginRightD}}px;
+				}
+			{{/if}}
+			{{#if marginInBetweenD}}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+					margin-bottom: {{marginInBetweenD}}px;
+				}
+				.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+					margin-bottom: 0;
+				}
+			{{/if}}
+		}
+		{{/or}}
+	{{/or}}
+	{{/and}}
+	
+	{{#or desktopBgImage mobileBgImage}}
+		.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-group{
+			{{#if disableLazyLoad}}
+			background-image: url('{{#if mobileBgImage}}//{{mobileBgImage.defaultHost}}/i/{{mobileBgImage.endpoint}}/{{encodeURI mobileBgImage.name}}{{else}}//{{desktopBgImage.defaultHost}}/i/{{desktopBgImage.endpoint}}/{{encodeURI desktopBgImage.name}}{{/if}}');
+			{{/if}}
+			background-repeat: {{backgroundRepeat}};
+			background-size: {{backgroundSize}};
+			background-position: {{backgroundPosition}};
+		}
+		{{#if disableLazyLoad}}
+		@media only screen and (min-width:769px){
+			.amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-group{
+				background-image: url('{{#if desktopBgImage}}//{{desktopBgImage.defaultHost}}/i/{{desktopBgImage.endpoint}}/{{encodeURI desktopBgImage.name}}{{else}}//{{mobileBgImage.defaultHost}}/i/{{mobileBgImage.endpoint}}/{{encodeURI mobileBgImage.name}}{{/if}}');
+			}
+		}
+		{{/if}}
+	{{/or}}
+	</style>
+	<div class="amp-page-acc amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}">
+		{{#or desktopBgImage mobileBgImage}}
+		<div class="page-acc-list component-group w-100 {{#not paddingBackgroundImage}}noBackgroundPadding{{/not}}" {{#not disableLazyLoad}}data-loading="lazy" data-custom-event="ampsPageAccInit" data-content-type="Page Accelerator"{{/not}}
+			data-desktop-bg-image="{{#if desktopBgImage}}//{{desktopBgImage.defaultHost}}/i/{{desktopBgImage.endpoint}}/{{encodeURI desktopBgImage.name}}{{else}}//{{mobileBgImage.defaultHost}}/i/{{mobileBgImage.endpoint}}/{{encodeURI mobileBgImage.name}}{{/if}}"
+			data-mobile-bg-image="{{#if mobileBgImage}}//{{mobileBgImage.defaultHost}}/i/{{mobileBgImage.endpoint}}/{{encodeURI mobileBgImage.name}}{{else}}//{{desktopBgImage.defaultHost}}/i/{{desktopBgImage.endpoint}}/{{encodeURI desktopBgImage.name}}{{/if}}">
+		{{/or}}
+			{{#each contentTypes}}
+			<div class="component-block component-block-{{@index}}">{{> templateChooser this}}</div>
+			{{/each}}
+		{{#or desktopBgImage mobileBgImage}}</div>{{/or}}
+	</div>

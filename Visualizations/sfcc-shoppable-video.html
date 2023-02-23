@@ -1,0 +1,92 @@
+{{#or componentMaxWidth drawerBgColor drawerTextColor productBoxBgColor productBoxTextColor}}
+<style>
+	{{#if componentMaxWidth}}
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} {
+			max-width: {{componentMaxWidth}}px;
+		}
+	{{/if}}
+	{{#if drawerBgColor}}
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .drawer-handle .drawer-text {
+			background-color: {{drawerBgColor}};
+		}
+	{{/if}}
+	{{#if drawerTextColor}}
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .drawer-text,
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .drawer-text > *{
+			color:{{drawerTextColor}};
+		}
+        .shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} svg.drawer-arrow{
+            fill:{{drawerTextColor}};
+        }
+	{{/if}}
+	{{#if productBoxBgColor}}
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .drawer-container {
+			background-color: {{productBoxBgColor}};
+		}
+	{{/if}}
+	{{#if productBoxTextColor}}
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .product-container-text,
+		.shoppable-video-{{replace (last (split [@id] "/")) "-" "" }} .product-container-text > *{
+			color:{{productBoxTextColor}};
+		}
+	{{/if}}
+</style>
+{{/or}}
+<div class="mol-shoppable-video mol-shoppable-video-min-height container-fluid{{#if roundedEdges}} rounded-edges{{/if}} shoppable-video-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_shoppable-video_wrapper">
+   {{#if headerBlock}}
+	<div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="shoppable_video" mainLinkConfigured=1 headerBlockData=this }}
+		{{/each}}
+        </div>
+    </div>
+    {{/if}}
+	<div class="row">
+		<div class="col-12 p-0">
+			<div class="video-container">
+				{{#each mediaAsset}}
+					{{#if disableLazyLoad}}
+						{{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="shoppable_video" mediaAssetData=this desktopImageNormal=1920 desktopImageRetina=2240 tabletImageNormal=1400 tabletImageRetina=1920 mobileImageNormal=768 mobileImageRetina=1536}}
+					{{else}}
+						{{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="shoppable_video" mediaAssetData=this desktopImageNormal=1920 desktopImageRetina=2240 tabletImageNormal=1400 tabletImageRetina=1920 mobileImageNormal=768 mobileImageRetina=1536}}
+					{{/if}}
+                {{/each}}
+                <div class="drawer-container">
+                    <button class="container-close-btn d-none d-md-block p-0">
+                        <svg class="icon cross-icon" role="presentation" width="20" height="20">
+                            <use xlink:href="#icon-close-large"></use>
+                        </svg>
+                    </button>
+                    <div class="at-text-block{{#unless productBoxText}} no-text{{/unless}}">
+                        {{#if productBoxText}}
+                        <p class="product-container-text mb-0{{#if (eq productBoxTextSize productBoxTextSizeMobile)}} {{productBoxTextSize}}{{else}} d-{{productBoxTextSize}} {{productBoxTextSizeMobile}}{{/if}}">{{productBoxText}}</p>
+                        {{/if}}
+                    </div>
+                    <div class="product-container text-center{{#if (eq ctaLink.0.linkStyle 'Text Link')}} text-cta{{/if}}{{#unless productBoxText}} no-header{{/unless}}">
+                        {{#each products}}
+                        <div class="product-wrapper">
+                            <div class="product-details{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                                <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                                    <div>{{this}}</div>
+                                    <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                                </sfcc>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{#if ctaLink}}
+                    <div class="product-container-link">
+                        {{#each ctaLink}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="shoppable_video" creativeName=../creativeName creativeSlot=(prepend (stringify (add @index 1)) "C") }}
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="drawer-handle at-text-block d-none d-md-block">
+                    <button type="button" class="drawer-text {{drawerTextSize}}">{{drawerText}} <svg class="icon drawer-arrow" role="presentation" width="20" height="20"><use xlink:href="#icon-nav-chevron-down"></use></svg></button>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>

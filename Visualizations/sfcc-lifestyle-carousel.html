@@ -1,0 +1,151 @@
+{{#or backgroundColor (eq mobileStyle 'Horizontal Scroll')}}
+    <style>
+    {{#if backgroundColor}}
+        .sfcc-lifestyle-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    {{/if}}
+    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+    .sfcc-lifestyle-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        font-size: 0;
+    }
+    .sfcc-lifestyle-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide {
+        display: inline-block;
+        vertical-align: top;
+        width: 40%;
+        margin-right:16px;
+    }
+    .sfcc-lifestyle-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide:first-child{
+        margin-left:12px;
+    }
+    {{/if}}
+    </style>
+    {{/or}}
+<div class="mol-lifestyle-carousel container-fluid{{#if roundedEdges}} rounded-edges{{/if}} sfcc-lifestyle-carousel-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_lifestyle-carousel_wrapper">
+{{#if jumpPointID }}
+    {{> sfcc-at-jumpAnchor this }}
+{{/if}}
+    <div class="row{{#if (eq layout 'Right')}} mobile-stack{{/if}}">
+		<div class="left-container col-sm-12 col-md-6{{#if (eq layout 'Right')}} mobile-stack-left{{/if}}">
+		{{#if (eq layout 'Left')}}
+			{{#each primaryMedia}}
+				<div class="lifestyle-tiles">
+                    {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                        {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot="LCTT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                        {{#if disableLazyLoad}}
+                            {{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LC" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                        {{else}}
+                            {{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LC" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                        {{/if}}
+                    {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                        {{> sfcc-video-player this}}
+                    {{~/if}}                
+                </div>
+			{{/each}}
+		{{else}}
+        <div class="lifestyle-carousel text-center">
+            {{#if headerBlock}}
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" mainLinkConfigured=(length ../products) headerBlockData=this }}
+                {{/each}}
+            {{/if}}
+            <div class="product-tile-slider {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-md-block{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":{{#if autoPlay}}true{{else}}false{{/if}},"arrows":true,"dots":true,"infinite":true,"initialSlide":0,"slidesToShow":1,"slidesToScroll":1,"autoplaySpeed":{{#multiply 1000 scrollTime}}{{/multiply}},"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":false,"arrows":false,"dots":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}}]}'>
+                {{#each productCarousel}}
+                <div class="product-slide">
+                    <sfcc product-card="{{products}}" {{#and (not (eq ../siteName 'Tapestry_Production')) (not (eq ../siteName 'SWNA_Production'))}}bgColor="#ffffff"{{/and}}>
+                        <div>{{products}}</div>
+                        <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                    </sfcc>
+                    <div class="btn-wrapper text-center">
+                        {{#each ctaLink}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LCPC" (stringify (add 1 @../index)))}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{#if (eq mobileStyle 'Horizontal Scroll')}}
+            <div class="product-slider mobile-horzscroll d-sm-block d-md-none">
+                {{#each productCarousel}}
+                <div class="product-slide" >
+                    <sfcc product-card="{{products}}" {{#and (not (eq ../siteName 'Tapestry_Production')) (not (eq ../siteName 'SWNA_Production'))}}bgColor="#ffffff"{{/and}}>
+                        <div>{{products}}</div>
+                        <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                    </sfcc>
+                    <div class="btn-wrapper text-center">
+                        {{#each ctaLink}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LCPC" (stringify (add 1 @../index)))}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-12 col-md-6{{#if (eq layout 'Right')}} mobile-stack-right{{/if}}">
+		{{#if (eq layout 'Left')}}
+        <div class="lifestyle-carousel text-center">
+            {{#if headerBlock}}
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" mainLinkConfigured=(length ../products) headerBlockData=this }}
+                {{/each}}
+            {{/if}}
+            <div class="product-tile-slider {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-md-block{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":{{#if autoPlay}}true{{else}}false{{/if}},"arrows":true,"dots":true,"infinite":true,"initialSlide":0,"slidesToShow":1,"slidesToScroll":1,"autoplaySpeed":{{#multiply 1000 scrollTime}}{{/multiply}},"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":false,"arrows":false,"dots":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}}]}'>
+                {{#each productCarousel}}
+                <div class="product-slide">
+                    <sfcc product-card="{{products}}" {{#and (not (eq ../siteName 'Tapestry_Production')) (not (eq ../siteName 'SWNA_Production'))}}bgColor="#ffffff"{{/and}}>
+                        <div>{{products}}</div>
+                        <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                    </sfcc>
+                    <div class="btn-wrapper text-center">
+                        {{#each ctaLink}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LCPC" (stringify (add 1 @../index)))}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{#if (eq mobileStyle 'Horizontal Scroll')}}
+            <div class="product-slider mobile-horzscroll d-sm-block d-md-none">
+                {{#each productCarousel}}
+                <div class="product-slide" >
+                    <sfcc product-card="{{products}}" {{#and (not (eq ../siteName 'Tapestry_Production')) (not (eq ../siteName 'SWNA_Production'))}}bgColor="#ffffff"{{/and}}>
+                        <div>{{products}}</div>
+                        <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                    </sfcc>
+                    <div class="btn-wrapper text-center">
+                        {{#each ctaLink}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=(append "id-" (replace ../../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LCPC" (stringify (add 1 @../index)))}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+		{{else}}
+            {{#each primaryMedia}}
+            <div class="lifestyle-tiles">
+                {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                    {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot="LCTT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LC" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="lifestyle_carousel" creativeSlot=(append "LC" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="840,672,448,358,468,375"}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                    {{> sfcc-video-player this}}
+                {{~/if}}                
+            </div>
+        {{/each}}
+		{{/if}}
+		</div>
+	</div>
+</div>

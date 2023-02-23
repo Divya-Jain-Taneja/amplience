@@ -1,0 +1,69 @@
+{{#or textBlockData.eyebrowTextColor textBlockData.headlineColor textBlockData.textColor}}
+<style>
+	{{#if textBlockData.eyebrowTextColor}}
+		.at-text-block.at-text-block-{{parentid}} .at-eyebrow-text,
+		.at-text-block.at-text-block-{{parentid}} .at-eyebrow-text > *{
+			color:{{textBlockData.eyebrowTextColor}};
+		}
+	{{/if}}
+	{{#if textBlockData.headlineColor}}
+		.at-text-block.at-text-block-{{parentid}} .at-headline-text,
+		.at-text-block.at-text-block-{{parentid}} .at-headline-text > *{
+			color:{{textBlockData.headlineColor}};
+		}
+	{{/if}}
+	{{#if textBlockData.textColor}}
+		.at-text-block.at-text-block-{{parentid}} .at-body-text,
+		.at-text-block.at-text-block-{{parentid}} .at-body-text > *{
+			color:{{textBlockData.textColor}};
+		}
+	{{/if}}
+</style>
+{{/or}}
+<div class='at-text-block at-text-block-{{parentid}}' data-qa="site_promo_inline-headline_wrapper">
+	{{#if textBlockData.eyebrowText}}
+	    <p class='at-eyebrow-text {{#if (eq textBlockData.eyebrowTextSize "Standard")}}eyebrow-text{{else if (eq textBlockData.eyebrowTextSize "Small")}}eyebrow-text-sm{{else}}{{textBlockData.eyebrowTextSize}}{{/if}}'>{{{textBlockData.eyebrowText}}}</p>
+    {{/if}}
+    {{#if textBlockData.headlineText}}
+        <{{#if textBlockData.headlineTag}}{{textBlockData.headlineTag}}{{else if textBlockData.heroContent}}h1{{else}}h2{{/if}} class='at-headline-text
+        {{#if (eq textBlockData.headlineSize "Primary: XX-Large")}}text-display-xxl
+        {{else if (eq textBlockData.headlineSize "Primary: X-Large")}}text-display-xl
+        {{else if (eq textBlockData.headlineSize "Primary: Large")}}text-display-lg
+        {{else if (eq textBlockData.headlineSize "Primary: Medium")}}text-display-md
+        {{else if (eq textBlockData.headlineSize "Primary: Small")}}text-display-sm
+        {{else if (eq textBlockData.headlineSize "Primary: X-Small")}}text-display-xs
+        {{else if (eq textBlockData.headlineSize "Secondary: XX-Large")}}text-display-xxl-secondary
+        {{else if (eq textBlockData.headlineSize "Secondary: X-Large")}}text-display-xl-secondary
+        {{else if (eq textBlockData.headlineSize "Secondary: Large")}}text-display-lg-secondary
+        {{else if (eq textBlockData.headlineSize "Secondary: Medium")}}text-display-md-secondary
+        {{else if (eq textBlockData.headlineSize "Secondary: Small")}}text-display-sm-secondary
+        {{else if (eq textBlockData.headlineSize "Secondary: X-Small")}}text-display-xs-secondary
+        {{else}}
+        {{#if (eq textBlockData.headlineSize textBlockData.headlineSizeMobile)}}
+    	{{textBlockData.headlineSize}}
+    	{{else}}
+    	d-{{textBlockData.headlineSize}} {{textBlockData.headlineSizeMobile}}
+    	{{/if}}
+        {{/if}}'>
+        {{{textBlockData.headlineText}}}<{{#if textBlockData.headlineTag}}/{{textBlockData.headlineTag}}{{else if textBlockData.heroContent}}/h1{{else}}/h2{{/if}}>
+    {{/if}}
+	{{#if textBlockData.bodyText}}
+		<p class='at-body-text
+		{{#if (eq textBlockData.textSize "Primary: Large")}}body-text-lg
+		{{else if (eq textBlockData.textSize "Primary: Medium")}}body-text-md
+		{{else if (eq textBlockData.textSize "Primary: Small")}}body-text-sm
+		{{else if (eq textBlockData.textSize "Secondary: XX-Large")}}body-text-xxl-secondary
+		{{else if (eq textBlockData.textSize "Secondary: X-Large")}}body-text-xl-secondary
+		{{else if (eq textBlockData.textSize "Secondary: Large")}}body-text-lg-secondary
+		{{else if (eq textBlockData.textSize "Secondary: Medium")}}body-text-md-secondary
+		{{else if (eq textBlockData.textSize "Secondary: Small")}}body-text-sm-secondary
+		{{else}}
+		{{#if (eq textBlockData.textSize textBlockData.textSizeMobile)}}
+    	{{textBlockData.textSize}}
+    	{{else}}
+    	d-{{textBlockData.textSize}} {{textBlockData.textSizeMobile}}
+    	{{/if}}
+    	{{/if}}'>
+    	{{{textBlockData.bodyText}}}</p>
+	{{/if}}
+</div>

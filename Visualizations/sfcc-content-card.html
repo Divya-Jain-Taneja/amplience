@@ -1,0 +1,65 @@
+{{#if imageCaptionTextColor}}
+<style>
+ .content-card-container-{{parentid}} .at-content-card.{{prepend (stringify (add cardCounter 1)) 'C'}} .img-caption{
+    color: {{imageCaptionTextColor}};
+ }
+</style>
+{{/if}}
+<div class="at-content-card {{prepend (stringify (add cardCounter 1)) 'CD'}}{{#if imageIcon}} text-center{{/if}}" data-qa="site_promo_content-card_wrapper">
+    <div class="content-card-wrapper">
+        {{#if imageLink}}
+        <a class="content-card-link" href="{{{imageLink}}}" title="{{#if headerBlock.0.textBlock.headlineText}}{{sanitize headerBlock.0.textBlock.headlineText}}{{else}}{{imageAltText}}{{/if}}"
+            data-event="internal_promotion"
+            data-promotion-id="{{promotionId}}"
+            data-promotion-name="{{#if headerBlock.0.textBlock.headlineText}}{{sanitize headerBlock.0.textBlock.headlineText}}{{else}}{{imageAltText}}{{/if}}"
+            data-creative-name="{{image.name}}"
+            data-location-id="card_container"
+            data-creative-slot="{{prepend (stringify (add cardCounter 1)) 'CD'}}">
+        {{/if}}
+        {{#if imageCaption}}
+            <figure>
+        {{/if}}
+        <div {{#and (or mAspectRatio dAspectRatio) (not imageIcon)}}class="amps-aspect-ratio-box"{{/and}}>
+            {{#if disableLazyLoad}}
+                <picture {{#and (or mAspectRatio dAspectRatio) (not imageIcon)}}class="u-full-cover-element m-d-ratio-defined"{{/and}}>
+            {{else}}
+                <picture data-loading="lazy" data-class="content-card-img{{#if imageIcon}} thumbnail-image mx-auto{{/if}}" data-iesrc="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?w=640" data-alt="{{imageAltText}}" {{#and (or mAspectRatio dAspectRatio) (not imageIcon)}}class="u-full-cover-element m-d-ratio-defined"{{/and}}>
+            {{/if}}
+                {{#or (contains image.name "_png") (contains image.name ".png") }}
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=640&fmt=png 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=1280&fmt=png 2x" {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}} media="(min-width: 1200px)" type="image/png">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=340&fmt=png 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=780&fmt=png 2x"  {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}} media="(min-width: 769px)" type="image/png">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=768&fmt=png 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}/?$poi$&w=1536&fmt=png 2x" {{#if imageIcon}}width="65"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}width="{{#with (JSONparse mAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="375"{{/if}}{{/if}} {{#if imageIcon}}height="82"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}height="{{#with (JSONparse mAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/png">
+                {{else}}
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=640&fmt=jp2&{{desktopQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=1280&fmt=jp2&{{desktopQuality}} 2x" {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}}  media="(min-width: 1200px)" type="image/jp2">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=640&fmt=jpg&{{desktopQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=1280&fmt=jpg&{{desktopQuality}} 2x" {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}}  media="(min-width: 1200px)" type="image/jpeg">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=340&fmt=jp2&{{desktopQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=780&fmt=jp2&{{desktopQuality}} 2x" {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}}  media="(min-width: 769px)" type="image/jp2">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=340&fmt=jpg&{{desktopQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=780&fmt=jpg&{{desktopQuality}} 2x" {{#if imageIcon}}height="94"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}height="{{#with (JSONparse dAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} {{#if imageIcon}}width="75"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}width="{{#with (JSONparse dAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="1200"{{/if}}{{/if}}  media="(min-width: 769px)" type="image/jpeg">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=768&fmt=jp2&{{mobileQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=1536&fmt=jp2&{{mobileQuality}} 2x" {{#if imageIcon}}width="65"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}width="{{#with (JSONparse mAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="375"{{/if}}{{/if}} {{#if imageIcon}}height="82"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}height="{{#with (JSONparse mAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jp2">
+                    <source srcset="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=768&fmt=jpg&{{mobileQuality}} 1x, //{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?$poi$&w=1536&fmt=jpg&{{mobileQuality}} 2x" {{#if imageIcon}}width="65"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}width="{{#with (JSONparse mAspectRatio)}}{{initialWidth}}{{/with}}"{{else}}width="375"{{/if}}{{/if}} {{#if imageIcon}}height="82"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}height="{{#with (JSONparse mAspectRatio)}}{{initialHeight}}{{/with}}"{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}} media="(max-width: 768px)" type="image/jpeg">
+                {{/or}}
+                {{#if disableLazyLoad}}
+                    <img  class="content-card-img{{#if imageIcon}} thumbnail-image mx-auto{{/if}}" src="//{{image.defaultHost}}/i/{{image.endpoint}}/{{encodeURI image.name}}?w=640" alt="{{imageAltText}}">
+                {{/if}}
+            </picture>
+            </div>
+        {{#if imageCaption}}
+            <figcaption class="img-caption body-text-sm {{#if (eq imageCaptionAlignment 'Center')}}text-center{{else}}text-left{{/if}}">{{imageCaption}}</figcaption>
+        </figure>
+        {{/if}}
+        {{#if imageLink}}</a>{{/if}}
+        {{#if inlineCTA}}
+        <div class="inline-cta{{#if imageCaption}} cta-bottom{{/if}}">
+            {{#each inlineCTA}}
+                {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=../promotionId locationId="card_container" creativeName=../creativeName creativeSlot=(prepend 'C' ( prepend (stringify (add ../cardCounter 1)) 'CD')) }}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+    {{#if headerBlock}}
+    <div class="content-card-text-block">
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=../childId promotionId=../promotionId locationId="card_container" mainLinkConfigured=(length ../contentCard) creativeSlot=../creativeSlot headerBlockData=this }}
+        {{/each}}
+    </div>
+    {{/if}}
+</div>

@@ -1,0 +1,79 @@
+{{#or backgroundColor componentMaxWidth gradientColor (eq mobileStyle 'Horizontal Scroll')}}
+<style>
+    {{#and backgroundColor (not gradientColor)}}
+            .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+                background-color: {{backgroundColor}};
+            }
+    {{/and}}
+    {{#if componentMaxWidth}}
+            .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+                max-width: {{componentMaxWidth}}px;
+            }
+    {{/if}}
+    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+    .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            font-size: 0;
+        }
+    .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide {
+            display: inline-block;
+            vertical-align: top;
+            width: 40%;
+        }
+    .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }} .slick-slide{
+        height:auto;
+    }
+    {{/if}}
+    {{#if gradientColor}}
+        .sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+            --background-gradient: linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if backgroundColor}}{{backgroundColor}}{{else}}transparent{{/if}}, {{gradientColor}});
+        }
+    {{/if}}
+</style>
+{{/or}}
+<div class="mol-product-carousel container-fluid{{#if roundedEdges}} rounded-edges{{/if}} sfcc-carousel-{{replace (last (split [@id] "/")) "-" "" }}  {{#if removePadding}}p-0{{/if}}{{#if gradientColor}} u-background-gradient{{/if}}" data-qa="site_promo_product-carousel_wrapper">
+	{{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_carousel" mainLinkConfigured=(length ../products) headerBlockData=this }}
+		{{/each}}
+        </div>
+    </div>
+    <div class="row {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-md-block{{/if}}">
+        <div class="col-12 p-0">
+            <div class="product-carousel-container">
+                <div class="product-tile-slider" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":4,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":true,"slidesToShow":1,"dots":true,"arrows":false}}]}'>
+                    {{#each products}}
+                    <div class="product-slide">
+                        <sfcc product-card="{{this}}" lazyOverride {{#if ../colorSwatches}}colorSwatchesEnabled{{/if}}{{#if ../starRating}} ratingsEnabled{{/if}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+                    {{/each}}  
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+    <div class="row d-sm-block d-md-none mobile-horzscroll">
+        <div class="col-12 p-0">
+            <div class="product-slider">
+                    {{#each products}}
+                    <div class="product-slide">
+                        <sfcc product-card="{{this}}" lazyOverride {{#if ../colorSwatches}}colorSwatchesEnabled{{/if}}{{#if ../starRating}} ratingsEnabled{{/if}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+                    {{/each}}  
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

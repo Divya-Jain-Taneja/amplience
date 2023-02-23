@@ -1,0 +1,40 @@
+{{#or ctaColorInverse ctaTextColor ctaBgColor}}
+<style>
+    {{#if ctaTextColor}}
+        .btn-{{parentId}}-{{creativeSlot}}.btn-link, .btn-{{parentId}}-{{creativeSlot}}.btn-primary, .btn-{{parentId}}-{{creativeSlot}}.btn-secondary, .btn-{{parentId}}-{{creativeSlot}}.btn-link.light, .btn-{{parentId}}-{{creativeSlot}}.btn-primary.light, .btn-{{parentId}}-{{creativeSlot}}.btn-secondary.light{
+            color: {{ctaTextColor}};
+        }
+        .btn-{{parentId}}-{{creativeSlot}}.btn-link, .btn-{{parentId}}-{{creativeSlot}}.btn-link.light {
+            border-bottom-color: {{ctaTextColor}};
+        }
+    {{/if}}
+    {{#if ctaBgColor}}
+    .btn-{{parentId}}-{{creativeSlot}}.btn-primary, .btn-{{parentId}}-{{creativeSlot}}.btn-secondary, .btn-{{parentId}}-{{creativeSlot}}.btn-primary.light, .btn-{{parentId}}-{{creativeSlot}}.btn-secondary.light{
+            background-color: {{ctaBgColor}};
+        }
+    {{/if}}
+    {{#and ctaColorInverse ctaBgColor}}
+        .btn-{{parentId}}-{{creativeSlot}}.btn-primary:hover,
+        .btn-{{parentId}}-{{creativeSlot}}.btn-secondary.light:hover {
+            background-color: {{#if ctaTextColor}}{{ctaTextColor}}{{else}}#ffffff{{/if}};
+            color: {{ctaBgColor}};
+        }
+        .btn-{{parentId}}-{{creativeSlot}}.btn-secondary:hover,
+        .btn-{{parentId}}-{{creativeSlot}}.btn-primary.light:hover{
+            background-color: {{#if ctaTextColor}}{{ctaTextColor}}{{else}}#000000{{/if}};
+            color: {{ctaBgColor}};
+        }
+    {{/and}}
+</style>
+{{/or}}
+<a 
+    href="{{{linkURL}}}" 
+    title="{{label}}"
+    data-event="internal_promotion"
+    data-promotion-id="{{promotionId}}"
+    data-promotion-name="{{label}}"
+    data-creative-name="{{#if creativeName}}{{creativeName}}{{else}}NO_IMAGE{{/if}}"
+    data-location-id="{{locationId}}"
+    data-creative-slot="{{#isFalsey mainLinkConfigured}}{{#if creativeSlot}}{{creativeSlot}}{{else}}{{add ctaCounter 1}}{{/if}}{{else}}{{#if (gt mainLinkConfigured 1)}}{{add mainLinkConfigured (add ctaCounter 1)}}{{else}}{{add ctaCounter 2}}{{/if}}{{/isFalsey}}"
+    {{#if target}}target="_blank"{{/if}}
+    class="btn text-cta-underline {{#or ctaTextColor ctaBgColor}}btn-{{parentId}}-{{creativeSlot}}{{/or}} {{#if (eq linkStyle 'Primary Button')}}btn-primary{{else if (eq linkStyle 'Primary Button - Light')}}btn-primary light{{else if (eq linkStyle 'Secondary Button')}}btn-secondary{{else if (eq linkStyle 'Secondary Button - Light')}}btn-secondary light{{else if (eq linkStyle 'Text Link')}}btn-link {{else}}btn-link light {{/if}}{{#if (eq linkSize 'Medium')}}btn-medium{{else if (eq linkSize 'Small')}}btn-small{{else}} {{linkSize}}{{/if}}">{{{label}}}</a>

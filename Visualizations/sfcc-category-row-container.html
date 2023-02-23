@@ -1,0 +1,58 @@
+{{#or backgroundColor  componentMaxWidth gradientColor (eq mobileStyle 'Horizontal Scroll')}}
+<style>
+{{#and backgroundColor (not gradientColor)}}
+	.category-row-{{replace (last (split [@id] "/")) "-" "" }} {
+		background-color: {{backgroundColor}};
+	}
+{{/and}}
+{{#if componentMaxWidth}}
+	.category-row-{{replace (last (split [@id] "/")) "-" "" }} {
+		max-width: {{componentMaxWidth}}px;	
+	}
+{{/if}}
+{{#if gradientColor}}
+    .category-row-{{replace (last (split [@id] "/")) "-" "" }} {
+        background-image: linear-gradient(to bottom right, {{#if backgroundColor}}{{backgroundColor}}{{else}}transparent{{/if}}, {{gradientColor}});
+    }
+{{/if}}
+{{#if (eq mobileStyle 'Horizontal Scroll')}}
+    .category-row-{{replace (last (split [@id] "/")) "-" "" }} .row{
+        margin: 0px;
+    }
+    @media screen and (max-width:768px){
+        .category-row-{{replace (last (split [@id] "/")) "-" "" }} .at-category-card{
+            margin-right:16px;
+        }
+    }
+{{/if}}
+</style>
+{{/or}}
+<div class="mol-category-row container-fluid{{#if roundedEdges}} rounded-edges{{/if}} category-row-{{replace (last (split [@id] "/")) "-" "" }}{{#if removePadding}} p-0{{/if}}" data-qa="site_promo_category-row-container_wrapper"
+{{#or (not (contains mAspectRatio "{")) (not (contains dAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""'))) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains dAspectRatio "{")}}--d-aspect-ratio:{{dAspectRatio}};{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}>
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+	<div class="row">
+		{{#if headerBlock}}
+		<div class="mol-header-block-container col-sm-12 p-0">
+		{{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="category_container" mainLinkConfigured=(length ../categoryRow) headerBlockData=this }}
+		{{/each}}
+		</div>
+		{{/if}}
+		<div class="mol-cateory-row-container col-sm-12 p-0">
+		    <div class="product-tile-slider {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-md-block{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":false,"dots":false,"infinite":false,"initialSlide":0,"slidesToShow":{{length categoryRow}},"responsive":[{"breakpoint":769,"settings":{"centerMode":true,"slidesToShow":1,"dots":true,"arrows":false,"infinite":true}}]}'>
+    		{{#each categoryRow}}
+    		    {{> sfcc-category-card categoryCardData=this cardCounter=@index promotionId=(append "id-" (replace ../_meta.name " " ""))  disableLazyLoad=../disableLazyLoad  mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio}}
+    	    {{/each}}
+    	    </div>
+    	    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+		    <div class="category-row d-md-none d-sm-block mobile-horzscroll">
+    		{{#each categoryRow}}
+    		    {{> sfcc-category-card categoryCardData=this cardCounter=@index promotionId=(append "id-" (replace ../_meta.name " " ""))  disableLazyLoad=../disableLazyLoad  mAspectRatio=../mAspectRatio dAspectRatio=../dAspectRatio}}
+    	    {{/each}}
+    	    </div>
+    	    {{/if}}
+		</div>
+	</div>
+</div>

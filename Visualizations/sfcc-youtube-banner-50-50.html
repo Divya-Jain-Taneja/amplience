@@ -1,0 +1,81 @@
+<style>
+    {{#if topTextPosition}}
+		.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+			top:{{topTextPosition}}%;
+		}
+	{{/if}}
+	{{#if leftTextPosition}}
+		.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+			left:{{leftTextPosition}}%;
+		}
+	{{/if}}
+	.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+		transform: translate(-{{#if leftTextPosition}}{{leftTextPosition}}{{else}}50{{/if}}%, -{{#if topTextPosition}}{{topTextPosition}}{{else}}50{{/if}}%);
+	}
+	{{#if TextBackgroundColor}}
+	.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .bg-color{
+		background-color: {{TextBackgroundColor}};
+	}
+	{{/if}}
+	{{#if componentMaxWidth}}
+		.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} {
+			max-width: {{componentMaxWidth}}px;
+		}
+	{{/if}}
+</style>
+
+<div class="mol-banner-50-50 container-fluid mol-banner-50-50-min-height mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_youtube-banner-50-50_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+	<div class="row{{#and (eq chooseLayout 'Left (Image/Video Left, Text Right)') (eq headerBlockPosition 'Top of the media')}} header-block-top{{/and}}{{#and (eq chooseLayout 'Right (Image/Video Right, Text Left)') (eq headerBlockPosition 'Bottom of the media')}} header-block-bottom{{/and}}">
+		<div class="left-container col-sm-12 col-md-6 p-0 {{#if TextBackgroundColor}}bg-color{{/if}}">
+		{{#if (eq chooseLayout 'Right (Image/Video Right, Text Left)')}}
+			<div class="mol-header-block-container col-sm-12 col-lg-8 header-block-position">
+			{{#if contentTypes.0.mobileImage}}
+				{{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=contentTypes.0.mobileImage.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{else}}
+			    {{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=contentTypes.0.image.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{/if}}
+			</div>
+		{{else}}
+		
+		{{#each contentTypes}}
+    		{{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                {{#if disableLazyLoad}}
+				    {{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+    			{{else}}
+    				{{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}	
+    			{{/if}}
+            {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                {{> sfcc-youtube-player parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner5050" youtubeplayerData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+            {{~/if}} 
+        {{/each}}
+		
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-12 col-md-6 p-0 {{#if TextBackgroundColor}}bg-color{{/if}}">
+		{{#if (eq chooseLayout 'Right (Image/Video Right, Text Left)')}}
+		{{#each contentTypes}}
+    		{{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                {{#if disableLazyLoad}}
+				    {{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+    			{{else}}
+    				{{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}	
+    			{{/if}}
+            {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                {{> sfcc-youtube-player parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner5050" youtubeplayerData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+            {{~/if}} 
+        {{/each}}
+		{{else}}
+			<div class="mol-header-block-container col-sm-12 col-lg-8 header-block-position">
+			{{#if contentTypes.0.mobileImage}}
+				{{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=contentTypes.0.mobileImage.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{else}}
+			    {{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=contentTypes.0.image.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{/if}}
+			</div>
+		{{/if}}
+		</div>
+	</div>
+</div>

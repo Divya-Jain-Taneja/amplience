@@ -1,0 +1,38 @@
+<style>
+    {{#or backgroundColor componentMaxWidth  gradientColor}}
+        {{#and backgroundColor (not gradientColor)}}
+            .feature-benefit-{{replace (last (split [@id] "/")) "-" "" }}{
+                background-color: {{backgroundColor}};
+            }
+        {{/and}}
+        {{#if componentMaxWidth}}
+            @media only screen and (min-width: 767px) {
+                .feature-benefit-{{replace (last (split [@id] "/")) "-" "" }}{
+                    max-width: {{componentMaxWidth}}px;
+                    margin: auto;
+                }
+            }
+        {{/if}}
+    {{/or}}
+    {{#if gradientColor}}
+        .feature-benefit-{{replace (last (split [@id] "/")) "-" "" }}{
+            --background-gradient: linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if backgroundColor}}{{backgroundColor}}{{else}}transparent{{/if}}, {{gradientColor}});
+        }
+    {{/if}}
+</style>
+<div data-qa="site_promo_feature-benefit_wrapper" class="mol-feature-benefit feature-benefit-{{replace (last (split [@id] "/")) "-" "" }}{{#if gradientColor}} u-background-gradient{{/if}}">
+    {{#if headerBlock}}
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="feature_benefit" mainLinkConfigured=(length ../featureBenefitCard) headerBlockData=this }}
+        {{/each}}
+    {{/if}}
+    <div data-qa="cntnr_feature_benefit_cards" class="container padding-l-r-0 feature-benefit-cards">
+        <div class="row margin-l-r-0 justify-content-center {{#if (eq desktopCards '3')}}cardWidth-3{{else if (eq desktopCards '4')}}cardWidth-4{{else if (eq desktopCards '5')}}cardWidth-5{{/if}} card-container">
+            {{#each featureBenefitCard}}
+                <div data-qa="tile_feature_benefit_card" class="col-sm-12 {{#if (eq ../desktopCards '3')}}col-md-4{{else if (eq ../desktopCards '4')}}col-md-3{{else if (eq ../desktopCards '5')}}col-custom-2-4{{/if}} padding-l-r-0 feature-benefit-card-tile">
+                    {{>sfcc-feature-benefit-card contentCardData=this cardCounter=@index parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " "")) creativeSlot=(prepend (stringify (add 1 @index)) "FB") }}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

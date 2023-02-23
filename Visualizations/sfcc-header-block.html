@@ -1,0 +1,10 @@
+<div class="mol-header-block{{#if marqueeVariation}} marquee-variation{{/if}}{{#if headerWidth}} u-block-max-width{{/if}} mol-header-block-{{parentid}} bg-transparent{{#if headerBlockData.alignItems}}{{#if (eq headerBlockData.alignItems 'Center')}} text-center{{else if (eq headerBlockData.alignItems 'Left')}} text-left{{else if (eq headerBlockData.alignItems 'Right')}} text-right{{/if}}{{else}} text-center{{/if}}">
+    {{>sfcc-headline parentid=parentid textBlockData=headerBlockData.textBlock marqueeVariation=marqueeVariation}}
+	{{#if headerBlockData.links}}
+    <div class="links-container{{#if headerBlockData.ctaView}} flex-column{{else}} flex-wrap align-items-end{{/if}}{{#if headerBlockData.alignItems}}{{#if (eq headerBlockData.alignItems 'Center')}} justify-content-center{{else if (eq headerBlockData.alignItems 'Left')}} justify-content-start{{else if (eq headerBlockData.alignItems 'Right')}} justify-content-end{{/if}}{{else}} justify-content-center{{/if}}{{#and headerBlockData.alignItems headerBlockData.ctaView}}{{#if (eq headerBlockData.alignItems 'Center')}} align-items-center{{else if (eq headerBlockData.alignItems 'Left')}} align-items-start{{else if (eq headerBlockData.alignItems 'Right')}} align-items-end{{/if}}{{/and}}">
+		{{#each headerBlockData.links}}
+			{{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=../promotionId locationId=../locationId creativeName=../creativeName creativeSlot=(prepend (prepend (stringify (add @index 1)) "C") ../creativeSlot) mainLinkConfigured=../mainLinkConfigured }}
+		{{/each}}
+	</div>
+	{{/if}}
+</div>

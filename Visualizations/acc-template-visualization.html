@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amplience Accelerators Visualization</title>
+    <style>
+        html, body, div {margin: 0;padding: 0;font-family: Arial, Helvetica, sans-serif;}
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!--
+        Amplience accelerators dependencies
+            Updating these references to your own version will allow you to make style and code changes and observe them in the visualization.
+            Further guidance can be found on the github project: https://github.com/amplience/dc-accelerators-content-rendering-service
+    -->
+    <link rel="stylesheet" href="https://unpkg.com/dc-accelerators-content-rendering-service@v4/dist/styles.min.css"/>
+    <script src="https://unpkg.com/dc-accelerators-content-rendering-service@v4/dist/utils.min.js"></script>
+    <script src="https://unpkg.com/dc-accelerators-content-rendering-service@v4/dist/lory.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!--Development env-->
+    <script defer src="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/js/vendors.js"></script>
+    <script defer src="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/js/vendor1.js"></script>
+    <script defer src="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/js/main.js"></script>
+    <script defer src="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/js/homepageContent.js"></script>
+
+    <link rel="stylesheet" href="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/css/global.critical.css">
+    <link rel="stylesheet" href="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/css/global.css">
+    <link rel="stylesheet" href="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/css/customerCareContent.css">
+    <link rel="stylesheet" href="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/css/homePage.css">
+    <link rel="stylesheet" href="https://development.stuartweitzman.com/on/demandware.static/Sites-sw_us_rt-Site/-/en_US/v1632449317868/css/searchResults.css">
+
+    <svg width="0" height="0" style="position:absolute">
+        <symbol viewBox="0 0 24 24" id="icon-video-pause" xmlns="http://www.w3.org/2000/svg"><path d="M4 3h6v18H4zm10 0h6v18h-6z" fill="#FFF" fill-rule="evenodd"/></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-video-play" xmlns="http://www.w3.org/2000/svg"><path d="M19 12L5 21V3z" fill="#FFF" fill-rule="evenodd"/></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-video-volume" xmlns="http://www.w3.org/2000/svg"><path d="M12.007 19.955a1.085 1.085 0 01-1.09 1.086c-.25 0-.496-.085-.695-.25l-5.959-4.92H1.09c-.602 0-1.09-.486-1.09-1.086v-4.327c0-.6.488-1.086 1.09-1.086h3.174l5.958-4.92a1.088 1.088 0 011.785.836v14.667zm4.189-1.697a1.088 1.088 0 01-.849-.315l-.146-.146a1.083 1.083 0 01-.105-1.415 6.251 6.251 0 001.247-3.76c0-1.467-.49-2.843-1.415-3.979a1.082 1.082 0 01.075-1.452l.146-.146a1.096 1.096 0 011.615.081 8.576 8.576 0 011.962 5.496c0 1.89-.6 3.69-1.735 5.203-.19.252-.48.41-.795.433zm4.506 3.357a1.093 1.093 0 01-.788.384L19.87 22c-.289 0-.566-.114-.771-.318l-.143-.143a1.084 1.084 0 01-.064-1.467 11.568 11.568 0 002.726-7.45c0-2.83-1.036-5.556-2.918-7.673a1.082 1.082 0 01.044-1.486l.143-.143c.212-.212.487-.33.803-.32.3.01.584.141.783.365A13.9 13.9 0 0124 12.622c0 3.288-1.17 6.481-3.298 8.993z" fill="#FFF" fill-rule="evenodd"/></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-video-volume-mute" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M16.007 19.955a1.085 1.085 0 01-1.09 1.086c-.25 0-.496-.085-.695-.25l-5.959-4.92H5.09c-.602 0-1.09-.486-1.09-1.086v-4.327c0-.6.488-1.086 1.09-1.086h3.174l5.958-4.92a1.088 1.088 0 011.785.836v14.667z"/><path d="M3.293 3.293a1 1 0 011.32-.083l.094.083 16.97 16.97a1 1 0 01-1.32 1.498l-.094-.083-16.97-16.97a1.002 1.002 0 010-1.415z"/></g></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-nav-chevron-right" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.646 5.646a.501.501 0 01.638-.057l.07.057 6 6a.501.501 0 01.057.638l-.057.07-6 6a.501.501 0 01-.765-.638l.057-.07L14.293 12 8.646 6.354a.501.501 0 01-.057-.638l.057-.07z"></path></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-nav-chevron-left" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14.646 5.646a.501.501 0 01.765.638l-.057.07L9.707 12l5.647 5.646a.501.501 0 01.057.638l-.057.07a.501.501 0 01-.638.057l-.07-.057-6-6a.501.501 0 01-.057-.638l.057-.07 6-6z"></path></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-nav-chevron-up" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M24 0H0v24h24z"></path><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M18 15l-6-6-6 6"></path></g></symbol>
+        <symbol viewBox="0 0 24 24" id="icon-nav-chevron-down" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.646 8.646a.501.501 0 01.638-.057l.07.057L12 14.293l5.646-5.647a.501.501 0 01.638-.057l.07.057a.501.501 0 01.057.638l-.057.07-6 6a.501.501 0 01-.638.057l-.07-.057-6-6a.502.502 0 010-.708z"></path></symbol>
+        <symbol viewBox="0 0 32 32" id="icon-close-large" xmlns="http://www.w3.org/2000/svg"><path d="M7.646 7.646a.5.5 0 01.638-.057l.07.057L16 15.293l7.646-7.647a.5.5 0 01.765.638l-.057.07L16.707 16l7.647 7.646.057.07a.5.5 0 01-.695.695l-.07-.057L16 16.707l-7.646 7.647a.5.5 0 01-.765-.638l.057-.07L15.293 16 7.646 8.354l-.057-.07a.5.5 0 01.057-.638z" fill-rule="nonzero"></path></symbol>
+        <symbol viewBox="0 0 80 80" id="icon-youtube-play" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill-opacity=".4"></circle><path fill-rule="evenodd" d="M31 24l24 16-24 16V24z" clip-rule="evenodd"></path></symbol>
+        <symbol viewBox="0 0 32 30" id="icon-coachtopia-video-play" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#FFFFFE" fill-rule="evenodd">
+                <path d="M25.7094 3.56485C24.4694 2.56485 23.3694 1.86485 22.2494 1.36485C18.6694 -0.245149 13.5294 -0.455149 9.74943 0.864851C4.04943 2.86485 0.229428 7.81485 0.00942813 13.4749C-0.140572 17.3149 1.49942 22.5449 4.91942 25.0849C8.41942 27.6949 12.0594 28.9548 16.0394 28.9548H16.0994C19.5494 28.9448 23.0594 27.6448 25.7394 25.3948C28.4094 23.1548 30.2694 20.8148 30.7294 16.7048L30.7594 16.3548C31.1994 11.3348 29.2594 6.43485 25.6994 3.56485H25.7094ZM29.0794 16.2048L29.0494 16.5148C28.7094 19.6348 27.5194 21.6848 24.6594 24.0948C22.2794 26.0948 19.1594 27.2449 16.1094 27.2549C12.4594 27.3049 9.15942 26.1148 5.94942 23.7148C3.02942 21.5448 1.59943 16.8448 1.71943 13.5348C1.90943 8.57485 5.28943 4.22484 10.3194 2.46484C11.7894 1.94484 13.5294 1.69484 15.2794 1.69484C17.5194 1.69484 19.7794 2.10484 21.5494 2.90484C22.5294 3.34484 23.5094 3.97484 24.6294 4.88484C27.7594 7.40484 29.4594 11.7448 29.0694 16.2048H29.0794Z"/>
+                <path d="M22.5095 13.5146C21.7395 13.0746 20.7995 12.5646 19.8695 12.0446C18.9395 11.5346 18.0095 11.0246 17.2495 10.5846L15.2595 9.44463C14.5995 9.06463 13.6128 8.47797 12.2995 7.68464C12.0395 7.52464 11.7195 7.52463 11.4595 7.66463C11.1895 7.80463 11.0195 8.07464 11.0095 8.37464C10.9795 9.03464 10.9895 9.69464 10.9995 10.3546C10.9995 10.8946 11.0095 11.4246 10.9995 11.9646C10.9195 14.8646 10.9295 17.9046 11.0395 21.2446C11.0395 21.5546 11.2295 21.8346 11.4995 21.9746C11.6195 22.0346 11.7495 22.0646 11.8895 22.0646C12.0595 22.0646 12.2195 22.0146 12.3695 21.9146L14.3195 20.6046C18.4995 17.7946 22.0195 15.4246 22.6395 14.9046C22.8595 14.7246 22.9695 14.4546 22.9495 14.1746C22.9295 13.8946 22.7695 13.6446 22.5195 13.5046L22.5095 13.5146Z"/>
+            </g>
+        </symbol>
+        <symbol viewBox="0 0 24 24" id="icon-coachtopia-fullscreen" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.91656 4.02767H4.02767V7.91656C4.02767 8.56089 3.50533 9.08322 2.861 9.08322C2.21667 9.08322 1.69434 8.56089 1.69434 7.91656V2.861C1.69434 2.21667 2.21667 1.69434 2.861 1.69434H7.91656C8.56089 1.69434 9.08322 2.21667 9.08322 2.861C9.08322 3.50533 8.56089 4.02767 7.91656 4.02767ZM7.91656 19.9721H4.02767V16.0832C4.02767 15.4389 3.50533 14.9166 2.861 14.9166C2.21667 14.9166 1.69434 15.4389 1.69434 16.0832V21.1388C1.69434 21.7831 2.21667 22.3054 2.861 22.3054H7.91656C8.56089 22.3054 9.08322 21.7831 9.08322 21.1388C9.08322 20.4944 8.56089 19.9721 7.91656 19.9721ZM19.9721 4.02767H16.0832C15.4389 4.02767 14.9166 3.50533 14.9166 2.861C14.9166 2.21667 15.4389 1.69434 16.0832 1.69434H21.1388C21.7831 1.69434 22.3054 2.21667 22.3054 2.861V7.91656C22.3054 8.56089 21.7831 9.08322 21.1388 9.08322C20.4944 9.08322 19.9721 8.56089 19.9721 7.91656V4.02767ZM16.0832 19.9721H19.9721V16.0832C19.9721 15.4389 20.4944 14.9166 21.1388 14.9166C21.7831 14.9166 22.3054 15.4389 22.3054 16.0832V21.1388C22.3054 21.7831 21.7831 22.3054 21.1388 22.3054H16.0832C15.4389 22.3054 14.9166 21.7831 14.9166 21.1388C14.9166 20.4944 15.4389 19.9721 16.0832 19.9721Z" fill="#FFF"/>
+        </symbol>
+    </svg>
+<style>
+sfcc:not([product-card='']) {
+    display:inline-block;
+}
+/* Product carousel Mobile UI fix */
+@media only screen and (max-width: 768px) and (min-width: 470px) {
+    .mol-product-carousel .slick-slide sfcc:not([product-card='']){
+          display:inline;
+    }
+}
+/* Shoppable video dummy image size */
+@media only screen and (min-width:769px){
+    .mol-shoppable-video .product-details img {
+        width: 88px !important;
+    }
+    .mol-shoppable-video .product-container{
+        text-align: left !important;
+    }
+}
+/*Menu item image fixed*/
+.amps-menu-img{
+    display: inline-block;
+    position: relative;
+}
+.amps-menu-img span{
+    position: absolute;
+    display: block;
+    bottom: 10px;
+    right: 20px;
+    color: #fff;
+}
+.amps-menu-img img{
+    max-width: 500px;
+}
+/*Promo tiles - inline Banner fixed*/
+.mol-banner.inline,
+.mol-banner-50-50.inline,
+.at-media-asset.one-up img,
+.at-media-asset.four-up img {
+    width: 100%;
+}
+/* 2UP Carousel dummy images card numbers UI */
+.mol-2up-carousel .product-slide{
+    position: relative;
+}
+.mol-2up-carousel .product-id{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+/* Atomic content card UI */
+.at-content-card {
+    width: 318px;
+    min-height: 400px;
+}
+.content-card-container .at-content-card {
+    width: 100%;
+    min-height: auto;
+}
+@media only screen and (min-width:769px){
+    .mol-banner.inline,
+    .mol-banner-50-50.inline,
+    .at-media-asset[class$="-up"] img{
+        height: 415px;
+        overflow: hidden;
+    }
+    .mol-banner.inline.one-up,
+    .at-media-asset.one-up img,
+    .at-media-asset.one-up.inline-media{
+        width: 228px !important;
+    }
+    .mol-banner.inline.two-up,
+    .mol-banner-50-50.inline.one-up,
+    .mol-banner-50-50.inline.two-up,
+    .at-media-asset.two-up img,
+    .at-media-asset.two-up.inline-media{
+        width: 480px !important;
+    }
+    .mol-banner.inline.four-up,
+    .mol-banner-50-50.inline.four-up,
+    .at-media-asset.four-up img,
+    .at-media-asset.four-up.inline-media{
+        max-width: 984px;
+        width: calc(100% - 2px);
+    }
+    .at-media-asset.inline-media{
+        width: calc(100% - 2px);
+        margin: 1px auto 0;
+    }
+    /* Promo tile - inside frame with color */
+    .one-up .inside-frame, .two-up .inside-frame {
+        top: 12px;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+    }
+}
+@media only screen and (max-width:769px) and (min-width:544px){
+        .mol-banner.inline.one-up,
+        .at-media-asset.one-up img,
+        .at-media-asset.one-up.inline-media{
+            width: 369px !important;
+            height: 409px;
+        }
+        .mol-banner.inline.one-up .banner-container{
+            height: 409px;
+        }
+}
+@media only screen and (max-width:543px){
+    .mol-banner.inline.one-up,
+    .at-media-asset.one-up img,
+    .at-media-asset.one-up.inline-media{
+        width: 262px !important;
+        height: 409px;
+    }
+    .mol-banner.inline.one-up .banner-container{
+        height: 409px;
+    }
+}
+</style>
+    <!-- Replace category card src with dummy images -->
+    <script>
+        var playVideoOnOrientationChange = function ($this){
+            $this[0].load();
+            try {
+                var playPromise = $this[0].play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        $this.next().find('#ac-toggle-playback use, .ac-toggle-playback use').attr('xlink:href', '#icon-video-pause');
+                    }).catch(() => { })
+                }
+            } catch (e) {
+                $this.trigger('play');
+                $this.next().find('#ac-toggle-playback use, .ac-toggle-playback use').attr('xlink:href', '#icon-video-pause');
+            }
+        };
+        
+        // Desktop and mobile video's src update as per viewport
+        function windowResizeVideo() {
+            const $video = $(".content-video");
+        
+            if ($video.length){
+                $video.each(function () {
+                    var $this = $(this);
+                    if ($this.attr('data-loading') === undefined) {
+        
+                        if (window.innerWidth >= 769) {
+                                if ($this.find('source').attr('src') != $this.data("desktop-video-src")){
+                                    $this.attr('poster', $this.data("desktop-poster-src"));
+                                    $this.find('source').attr('src', $this.data("desktop-video-src"));
+                                    playVideoOnOrientationChange($this);
+                                }
+                        }
+                        else {
+                            if ($this.find('source').attr('src') != $this.data("mobile-video-src")){
+                                $this.attr('poster', $this.data("mobile-poster-src"));
+                                $this.find('source').attr('src', $this.data("mobile-video-src"));
+                                playVideoOnOrientationChange($this);
+                            }
+                        }
+                        autoplayVideoOnViewFold($this);
+                    }
+                });
+            }
+        }
+        
+        function autoplayVideoOnViewFold(video) {
+            var videos = document.getElementsByClassName("ac-video");
+            for (var i = 0; i < videos.length; i++) {
+                var video = videos[i];
+                var $mediaAsset = $(video).parents('.at-media-asset');
+                var videoControls =$mediaAsset.find('.ac-video-controls');
+                var $videoPlayButton = $mediaAsset.find('.video-play-button');
+                var $icon = videoControls.find('#ac-toggle-playback use, .ac-toggle-playback use');
+                var buttonStatus = false;
+                if (videoControls.length > 0){
+                    buttonStatus = videoControls.find('#ac-toggle-playback, .ac-toggle-playback').attr('aria-pressed');
+                }
+                var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > video.HAVE_CURRENT_DATA;
+                if (!isPlaying) {
+                    if (buttonStatus === 'true' &&  $videoPlayButton.length <= 0) {
+                        return;
+                    } else
+                    if((!$(video).hasClass('video-paused') && $(video).hasClass('autoplay')) || $(video).hasClass('inline-video')) {
+                        video.play();
+                        $icon.attr('xlink:href', '#icon-video-pause');
+                    } else {
+                        video.pause();
+                        $icon.attr('xlink:href', '#icon-video-play');
+                    }
+                }
+                if($(video).hasClass('loop')) {
+                    video.loop = true;
+                } else {
+                    video.loop = false;
+            }
+            }
+        }
+        
+        $(document).ready(function() {
+            if($('.mol-category-row').length){
+                $('.at-category-card').each(function(){
+                    var $categoryImg = $(this).find('img');
+                    if($categoryImg.attr('data-src').includes("<sfcc")){
+                        $categoryImg.attr('data-src', 'https://i8.amplience.net/i/tapestry/category-card')
+                    }
+                });
+            }
+            if($('.content-video').length){
+            $(window).trigger('resize');
+            }
+            windowResizeVideo();
+            $(window).on("resize", function(){
+                windowResizeVideo();
+            });
+        });  
+    </script>
+<!-- TODO: include CSS from SFCC here -->
+        
+</head>
+<body>
+    <div>
+        {{> templateChooser this}}
+    </div>
+</body>
+</html>

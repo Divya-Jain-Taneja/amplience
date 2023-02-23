@@ -1,0 +1,126 @@
+{{#or solidBgFill promoTextColor bylineTextColor backgroundOpacity eyebrowTextColor headlineColor textColor gradientColor insideFrame}}
+<style>
+    {{#and solidBgFill (not gradientColor)}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .solid-background{
+        background-color: {{solidBgFill}};
+    }
+    {{/and}}
+    {{#if promoTextColor}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .promo-text{
+        color: {{promoTextColor}};
+    }
+    {{/if}}
+    {{#if bylineTextColor}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .byline-text{
+        color: {{bylineTextColor}};
+    }
+    {{/if}}
+    {{#if backgroundOpacity}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .header-block-container{
+        background: rgba(0,0,0,calc({{backgroundOpacity}}/100));
+    }
+    {{/if}}
+    {{#if eyebrowTextColor}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-eyebrow-text,
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-eyebrow-text > *{
+        color:{{eyebrowTextColor}};
+    }
+    {{/if}}
+    {{#if headlineColor}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-headline-text,
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-headline-text > *{
+        color:{{headlineColor}};
+    }
+    {{/if}}
+    {{#if textColor}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-body-text,
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .at-body-text > *{
+        color:{{textColor}};
+    }
+    {{/if}}
+    {{#and insideFrame.0.frameColor mediaAsset}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame{
+        border-color: {{insideFrame.0.frameColor}};
+        box-shadow: {{#if insideFrame.0.colorFrame}}0 0 0 45px {{insideFrame.0.colorFrame}};{{else}}0 0 0 0 transparent;{{/if}}
+    }
+    {{/and}}
+    {{#and insideFrame.0.frameColor (not mediaAsset)}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame{
+        border-color: {{insideFrame.0.frameColor}};
+        box-shadow: {{#if insideFrame.0.colorFrame}}0 0 0 45px {{insideFrame.0.colorFrame}};{{else}}0 0 0 0 transparent;{{/if}}
+    }
+    {{/and}}
+    {{#and (not insideFrame.0.frameColor) mediaAsset}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame{
+        box-shadow: {{#if insideFrame.0.colorFrame}}0 0 0 45px {{insideFrame.0.colorFrame}};{{else}}0 0 0 0 transparent;{{/if}}
+    }
+    {{/and}}
+    {{#and (not insideFrame.0.frameColor) (not mediaAsset)}}
+    .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame{
+        box-shadow: {{#if insideFrame.0.colorFrame}}0 0 0 45px {{insideFrame.0.colorFrame}};{{else}}0 0 0 0 transparent;{{/if}}
+    }
+    {{/and}}
+    {{#if gradientColor}}
+        .mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }}{
+            --background-gradient: linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if solidBgFill}}{{solidBgFill}}{{else}}transparent{{/if}}, {{gradientColor}});
+        }
+    {{/if}}    
+</style>
+{{/or}}
+
+<div class="mol-membership-tile mol-membership-tile-{{replace (last (split [@id] "/")) "-" "" }} m-auto{{#if insideFrame.0.frameColor}} tile-with-frame{{/if}} container-fluid{{#if gradientColor}} u-background-gradient{{/if}}" data-qa="site_promo_membership-tile_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="row">
+        <div class="mol-banner col-12 p-0 text-center{{#if (not mediaAsset)}} solid-background{{#if frameColor}} solid-frame{{/if}}{{/if}}{{#if insideFrame}} with-frame{{/if}}{{#if mediaAsset.0.roundedEdges}} rounded-edges{{/if}}">
+            {{#and (not mediaAsset) insideFrame}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/and}}
+            {{#if promoText}}<p class="{{promoTextSize}} promo-text">{{{promoText}}}</p>{{/if}}
+            <div class="header-block-container w-100{{#if mediaAsset}} header-block-position{{/if}}{{#if backgroundOpacity}} opacity-enabled{{/if}}{{#if mediaAsset.0.link}} click-enabled{{/if}}">
+                <div class="mol-header-block m-auto">
+                    <div class="at-text-block">
+                        {{#and inlineImage (eq inlineImagePosition "Top most position")}}
+                            <img data-loading="lazy" class="inline-img mx-auto" alt="{{inlineImageAltText}}" data-src="{{#if (contains inlineImage.name ".svg")}}//{{inlineImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI inlineImage.name}}{{else}}//{{inlineImage.defaultHost}}/i/{{inlineImage.endpoint}}/{{encodeURI inlineImage.name}}{{/if}}">
+                        {{/and}}
+                        {{#if eyebrowText}}
+                            <p class='at-eyebrow-text {{#if (eq eyebrowTextSize "Standard")}}eyebrow-text{{else if (eq eyebrowTextSize "Small")}}eyebrow-text-sm{{else}}{{eyebrowTextSize}}{{/if}}'>{{{eyebrowText}}}</p>
+                        {{/if}}
+                        {{#and inlineImage (eq inlineImagePosition "Immediately after eyebrow")}}
+                            <img data-loading="lazy" class="inline-img mx-auto" alt="{{inlineImageAltText}}" data-src="{{#if (contains inlineImage.name ".svg")}}//{{inlineImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI inlineImage.name}}{{else}}//{{inlineImage.defaultHost}}/i/{{inlineImage.endpoint}}/{{encodeURI inlineImage.name}}{{/if}}">
+                        {{/and}}
+                        {{#if headlineText}}
+                            <{{#if heroContent}}h1{{else}}h2{{/if}} class='at-headline-text {{#if (eq headlineSize headlineSizeMobile)}}{{headlineSize}}{{else}}d-{{headlineSize}} {{headlineSizeMobile}}{{/if}}'>
+                            {{{headlineText}}}<{{#if heroContent}}/h1{{else}}/h2{{/if}}>
+                        {{/if}}
+                        {{#and inlineImage (eq inlineImagePosition "Immediately after headline")}}
+                            <img data-loading="lazy" class="inline-img mx-auto" alt="{{inlineImageAltText}}" data-src="{{#if (contains inlineImage.name ".svg")}}//{{inlineImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI inlineImage.name}}{{else}}//{{inlineImage.defaultHost}}/i/{{inlineImage.endpoint}}/{{encodeURI inlineImage.name}}{{/if}}">
+                        {{/and}}
+                        {{#if bodyText}}
+                            <p class='at-body-text {{#if (eq textSize textSizeMobile)}}{{textSize}}{{else}}d-{{textSize}} {{textSizeMobile}}{{/if}}'>
+                            {{{bodyText}}}</p>
+                        {{/if}}
+                        {{#and inlineImage (eq inlineImagePosition "Immediately after body copy")}}
+                            <img data-loading="lazy" class="inline-img mx-auto" alt="{{inlineImageAltText}}" data-src="{{#if (contains inlineImage.name ".svg")}}//{{inlineImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI inlineImage.name}}{{else}}//{{inlineImage.defaultHost}}/i/{{inlineImage.endpoint}}/{{encodeURI inlineImage.name}}{{/if}}">
+                        {{/and}}
+                    </div>
+                    <div class="links-container d-flex p-0 {{#if stackCTAs}}flex-column{{else}}flex-wrap align-items-end{{/if}} align-items-center justify-content-center">
+                        {{#each links}}
+                            {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="membership-tile" creativeName="NO_IMAGE" creativeSlot=(prepend (stringify (add @index 1)) "C") mainLinkConfigured=../mainLinkConfigured }}
+                        {{/each}}
+                    </div>
+                    {{#and inlineImage (eq inlineImagePosition "Bottom most position")}}
+                        <img data-loading="lazy" class="inline-img mx-auto" alt="{{inlineImageAltText}}" data-src="{{#if (contains inlineImage.name ".svg")}}//{{inlineImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI inlineImage.name}}{{else}}//{{inlineImage.defaultHost}}/i/{{inlineImage.endpoint}}/{{encodeURI inlineImage.name}}{{/if}}">
+                    {{/and}}
+                </div>
+            </div>
+            {{#each mediaAsset}}
+                {{#if disableLazyLoad}}
+                    {{> sfcc-media-asset insideFrame=../insideFrame parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="membership-tile" mediaAssetData=this desktopImageNormal=312 desktopImageRetina=624 tabletImageNormal=312 tabletImageRetina=624 mobileImageNormal=312 mobileImageRetina=624}}
+                {{else}}
+                    {{> sfcc-media-asset-lazy-load insideFrame=../insideFrame parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="membership-tile" mediaAssetData=this desktopImageNormal=312 desktopImageRetina=624 tabletImageNormal=312 tabletImageRetina=624 mobileImageNormal=312 mobileImageRetina=624}}
+                {{/if}}
+            {{/each}}
+            {{#if bylineText}}<p class="disclaimer-text byline-text {{bylineTextSize}}">{{{bylineText}}}</p>{{/if}}
+        </div>
+    </div>
+</div>

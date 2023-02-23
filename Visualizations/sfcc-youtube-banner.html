@@ -1,0 +1,100 @@
+{{#or contentTypes solidBgFill backgroundOpacity promoTextColor bylineTextColor componentMaxWidth}}
+<style>
+{{#if contentTypes}}
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+        top:{{#if topTextPosition}}{{topTextPosition}}{{else}}50{{/if}}%;
+    }
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+        left:{{#if leftTextPosition}}{{leftTextPosition}}{{else}}50{{/if}}%;
+    }
+    .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+        transform: translate(-{{#if leftTextPosition}}{{leftTextPosition}}{{else}}50{{/if}}%, -{{#if topTextPosition}}{{topTextPosition}}{{else}}50{{/if}}%);
+    }
+{{/if}}
+{{#if solidBgFill}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .solid-background{
+    background-color: {{solidBgFill}};
+}
+{{/if}}
+{{#if promoTextColor}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .promo-line-text{
+    color: {{promoTextColor}};
+}
+{{/if}}
+{{#if bylineTextColor}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .byline-text{
+    color: {{bylineTextColor}};
+}
+{{/if}}
+{{#if componentMaxWidth}}
+.mol-banner-{{replace (last (split [@id] "/")) "-" "" }} {
+    max-width: {{componentMaxWidth}}px;
+}
+{{/if}}
+{{#if backgroundOpacity}}
+    {{#if (eq mobileTextPosition 'Over The Media')}}
+        .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+            background: rgba(0,0,0,calc({{backgroundOpacity}}/100));
+        }
+        {{else}}
+        @media only screen and (min-width:769px) {
+            .mol-banner-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position,
+            .mol-banner .mol-header-block-container.opacity-enabled{
+                background: rgba(0,0,0,calc({{backgroundOpacity}}/100));
+            }
+        }
+    {{/if}}
+{{/if}}
+</style>
+{{/or}}
+
+<div class="mol-banner mol-banner-{{replace (last (split [@id] "/")) "-" "" }} container-fluid"  data-qa="site_promo_youtube-banner_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="row">
+        <div class="banner-container{{#if (not contentTypes)}} solid-background{{/if}} col-12 p-0">
+            {{#if promoText}}<p class="eyebrow-text promo-line-text {{#if contentTypes}}promo-text-over-media{{else}}promo-text{{/if}} {{#if (and (not (eq mobileTextPosition 'Over The Media')) contentTypes)}}d-none d-md-block{{/if}}">{{{promoText}}}</p>{{/if}}
+            {{#if (and headerBlock (or (eq mobileTextPosition 'Above The Media') (eq mobileTextPosition 'Over The Media'))) }}
+                <div class="mol-header-block-container {{#if contentTypes}}header-block-position {{#if backgroundOpacity}}opacity-enabled{{/if}} {{#if (and (eq mobileTextPosition 'Above The Media') solidBgFill)}}solid-background{{/if}} {{/if}} {{#or (mediaAsset.0.link) (test contentTypes.0.[@type] (toRegex ".*/at-youtube-player.json")) }}click-enabled{{/or}} {{#if (and (eq mobileTextPosition 'Above The Media') contentTypes)}}mob-text-above-img{{else}}mob-text-over-img{{/if}}">
+                    {{#if promoText}}{{#if (and (eq mobileTextPosition 'Above The Media') contentTypes)}}<p class="promo-text promo-line-text eyebrow-text d-sm-block d-md-none">{{{promoText}}}</p>{{/if}}{{/if}}
+                    {{#each headerBlock}}
+                        {{#if contentTypes.0.mobileImage}}
+                            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner" creativeName=contentTypes.0.mobileImage.name mainLinkConfigured=contentTypes.0.link headerBlockData=this }}
+                        {{else}}
+                            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner" creativeName=contentTypes.0.image.name mainLinkConfigured=contentTypes.0.link headerBlockData=this }}
+                        {{/if}}
+                    {{/each}}
+                    {{#if bylineText}}{{#if (and (eq mobileTextPosition 'Above The Media') contentTypes)}}<p class="disclaimer-text byline-text {{bylineTextSize}} d-sm-block d-md-none">{{{bylineText}}}</p>{{/if}}{{/if}}
+                </div>
+            {{/if}}
+
+            {{#each contentTypes}}
+                {{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner" mediaAssetData=this desktopImageNormal=1920 desktopImageRetina=2240 tabletImageNormal=1400 tabletImageRetina=1920 mobileImageNormal=768 mobileImageRetina=1536}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner" mediaAssetData=this desktopImageNormal=1920 desktopImageRetina=2240 tabletImageNormal=1400 tabletImageRetina=1920 mobileImageNormal=768 mobileImageRetina=1536}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                    {{> sfcc-youtube-player parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner" youtubeplayerData=this desktopImageNormal=1920 desktopImageRetina=2240 tabletImageNormal=1400 tabletImageRetina=1920 mobileImageNormal=768 mobileImageRetina=1536}}
+                {{~/if}}
+            {{/each}}
+
+            {{#if (and headerBlock (eq mobileTextPosition 'Below The Media'))}}
+                <div class="mol-header-block-container {{#if contentTypes}}header-block-position {{#if backgroundOpacity}}opacity-enabled{{/if}} {{#if solidBgFill}}solid-background{{/if}}{{/if}} {{#or (mediaAsset.0.link) (test contentTypes.0.[@type] (toRegex ".*/at-youtube-player.json")) }}click-enabled{{/or}} {{#if contentTypes}}mob-text-below-img{{/if}}">
+                    {{#if (and promoText contentTypes)}}<p class="promo-text promo-line-text eyebrow-text d-sm-block d-md-none">{{{promoText}}}</p>{{/if}}
+                    {{#each headerBlock}}
+                        {{#if contentTypes.0.mobileImage}}
+                            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner" creativeName=contentTypes.0.mobileImage.name mainLinkConfigured=contentTypes.0.link headerBlockData=this }}
+                        {{else}}
+                            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="banner" creativeName=contentTypes.0.image.name mainLinkConfigured=contentTypes.0.link headerBlockData=this }}
+                        {{/if}}
+                    {{/each}}
+                    {{#if (and bylineText contentTypes)}}<p class="disclaimer-text byline-text {{bylineTextSize}} d-sm-block d-md-none">{{{bylineText}}}</p>{{/if}}
+                </div>
+            {{/if}}
+            {{#if bylineText}}<p class="{{bylineTextSize}} byline-text {{#if contentTypes}}disclaimer-text-over-media{{else}}disclaimer-text{{/if}} {{#if (and (not (eq mobileTextPosition 'Over The Media')) contentTypes)}}d-none d-md-block{{/if}}">{{{bylineText}}}</p>{{/if}}
+        </div>
+    </div>
+</div>

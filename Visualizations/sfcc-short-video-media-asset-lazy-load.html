@@ -1,0 +1,228 @@
+<{{#if link}}a{{else}}div{{/if}} class="at-media-asset media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}}{{#if iconsColor}} icon-black{{/if}}" 
+{{#or (not (contains mAspectRatio "{")) (not (contains dAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""'))) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains dAspectRatio "{")}}--d-aspect-ratio:{{dAspectRatio}};{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}
+{{#if link}}
+href="{{{link}}}"
+data-event="internal_promotion"
+data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}{{/if}}"
+data-promotion-name="{{#if promotionName}}{{sanitize promotionName}}{{else}}{{imageAltText}}{{/if}}"
+data-creative-name="{{#if mobileImage}}{{mobileImage.name}}{{else}}{{image.name}}{{/if}}"
+data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}"
+{{/if}}>
+{{#and desktopVideoURL mobileVideoURL}}
+<div class="amps-aspect-ratio-box-video">
+    <div class="ac-video-container">
+        <video data-loading="lazy" class="ac-video content-video u-full-cover-element-video m-d-ratio-defined loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}}" muted loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}} playsinline disablepictureinpicture controlslist="nodownload noplaybackrate" preload="metadata"
+            data-poster="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=624"
+            data-mobile-video-src="{{#or (contains mobileVideoURL "amplience.net") (contains mobileVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol mobileVideoURL}}?protocol=https{{else}}https:{{stripProtocol mobileVideoURL}}{{/or}}"
+            data-desktop-video-src="{{#or (contains desktopVideoURL "amplience.net") (contains desktopVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol desktopVideoURL}}?protocol=https{{else}}https:{{stripProtocol desktopVideoURL}}{{/or}}"
+            data-mobile-poster-src="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=340{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+            data-desktop-poster-src="{{#if desktopImage}}//{{desktopImage.defaultHost}}/i/{{desktopImage.endpoint}}/{{encodeURI desktopImage.name}}{{else}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}{{/if}}?&w=624{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+            {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="170"{{/if}}{{/if}}
+            {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1))) (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+            data-event="internal_promotion"
+            data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+            data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+            data-creative-name="{{mobileImage.name}}"
+            data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+            data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+            <source data-src="" type="video/mp4">
+        </video>
+        {{#or topScrim middleScrim bottomScrim}}
+            <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+        {{/or}}
+        <div class="ac-video-controls{{#if iconsColor}} icon-black{{/if}}">
+            <div class="video-play-pause-icons">
+                <div class="left-controls">
+                    <button type="button" class="ac-toggle-playback" aria-pressed="false" aria-label="playback">
+                        <svg class="icon icon-play" role="presentation">
+                            <use xlink:href="#icon-video-pause"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="right-controls">
+                    <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+                        <svg class="icon icon-volumn" role="presentation">
+                            <use xlink:href="#icon-video-volume-mute"></use>
+                        </svg>
+                    </button>
+                    <div class="short-video-modal-btn">
+                        <svg class="icon icon-modal-open" role="presentation">
+                            <use xlink:href="#icon-coachtopia-fullscreen"></use>
+                        </svg>
+                        <svg class="icon icon-modal-close" role="presentation" qa="short_video_modal_close_icon">
+                            <use xlink:href="#icon-coachtopia-minimize"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="video-progress"></div>
+                <div class="video-progress-filled" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="short-video-play-wrapper">
+            <div class="short-video-play-btn">
+                <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="32" height="32">
+                    <use xlink:href="#icon-coachtopia-video-play"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+    {{#if mobileVideoURL}}
+        <div class="d-sm-flex d-md-none amps-aspect-ratio-box-video">
+            <div class="ac-video-container">
+                <video data-loading="lazy" class="ac-video content-video u-full-cover-element-video m-d-ratio-defined loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}}" muted loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}} playsinline disablepictureinpicture controlslist="nodownload noplaybackrate" preload="metadata"
+                    data-poster="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=624"
+                    data-mobile-video-src="{{#or (contains mobileVideoURL "amplience.net") (contains mobileVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol mobileVideoURL}}?protocol=https{{else}}https:{{stripProtocol mobileVideoURL}}{{/or}}"
+                    data-desktop-video-src="{{#or (contains desktopVideoURL "amplience.net") (contains desktopVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol desktopVideoURL}}?protocol=https{{else}}https:{{stripProtocol desktopVideoURL}}{{/or}}"
+                    data-mobile-poster-src="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=340{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                    data-desktop-poster-src="{{#if desktopImage}}//{{desktopImage.defaultHost}}/i/{{desktopImage.endpoint}}/{{encodeURI desktopImage.name}}{{else}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}{{/if}}?&w=624{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                    {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="170"{{/if}}{{/if}}
+                    {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1))) (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+                    data-event="internal_promotion"
+                    data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+                    data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+                    data-creative-name="{{mobileImage.name}}"
+                    data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+                    data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+                    <source data-src="" type="video/mp4">
+                </video>
+                {{#or topScrim middleScrim bottomScrim}}
+                    <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+                {{/or}}
+                <div class="ac-video-controls{{#if iconsColor}} icon-black{{/if}}">
+                    <div class="video-play-pause-icons">
+                        <div class="left-controls">
+                            <button type="button" class="ac-toggle-playback" aria-pressed="false" aria-label="playback">
+                                <svg class="icon icon-play" role="presentation">
+                                    <use xlink:href="#icon-video-pause"></use>
+                                </svg>
+                            </button>   
+                        </div>
+                        <div class="right-controls">
+                            <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+                                <svg class="icon icon-volumn" role="presentation">
+                                    <use xlink:href="#icon-video-volume-mute"></use>
+                                </svg>
+                            </button>
+                            <div class="short-video-modal-btn">
+                                <svg class="icon icon-modal-open" role="presentation">
+                                    <use xlink:href="#icon-coachtopia-fullscreen"></use>
+                                </svg>
+                                <svg class="icon icon-modal-close" role="presentation" qa="short_video_modal_close_icon">
+                                    <use xlink:href="#icon-coachtopia-minimize"></use>
+                                </svg>                        
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="video-progress"></div>
+                        <div class="video-progress-filled" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="short-video-play-wrapper">
+                    <div class="short-video-play-btn">
+                        <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="32" height="32">
+                            <use xlink:href="#icon-coachtopia-video-play"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-md-flex amps-aspect-ratio-box">
+            <picture data-loading="lazy" class="u-full-cover-element m-d-ratio-defined d-flex justify-content-center" data-class="aspect-ratio-img" data-iesrc="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&w=624" data-alt="{{imageAltText}}">
+                {{> sfcc-short-video-image-source this}}
+            </picture>
+            {{#or topScrim middleScrim bottomScrim}}
+                <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+            {{/or}}
+        </div>
+    {{/if}}
+
+    {{#if desktopVideoURL}}
+    <div class="d-none d-md-flex amps-aspect-ratio-box-video">
+        <div class="ac-video-container">
+            <video data-loading="lazy" class="ac-video content-video u-full-cover-element-video m-d-ratio-defined loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}}" muted loop {{#if (test componentName (toRegex ".*/mol-cloud-animation.json")) ~}}autoplay{{~/if}} playsinline disablepictureinpicture controlslist="nodownload noplaybackrate" preload="metadata"
+                data-poster="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=624"
+                data-mobile-video-src="{{#or (contains mobileVideoURL "amplience.net") (contains mobileVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol mobileVideoURL}}?protocol=https{{else}}https:{{stripProtocol mobileVideoURL}}{{/or}}"
+                data-desktop-video-src="{{#or (contains desktopVideoURL "amplience.net") (contains desktopVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol desktopVideoURL}}?protocol=https{{else}}https:{{stripProtocol desktopVideoURL}}{{/or}}"
+                data-mobile-poster-src="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?&w=340{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                data-desktop-poster-src="{{#if desktopImage}}//{{desktopImage.defaultHost}}/i/{{desktopImage.endpoint}}/{{encodeURI desktopImage.name}}{{else}}//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}{{/if}}?&w=624{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="170"{{/if}}{{/if}}
+                {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1))) (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+                data-event="internal_promotion"
+                data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+                data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+                data-creative-name="{{mobileImage.name}}"
+                data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+                data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+                <source data-src="" type="video/mp4">
+            </video>
+            {{#or topScrim middleScrim bottomScrim}}
+                <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+            {{/or}}
+            <div class="ac-video-controls{{#if iconsColor}} icon-black{{/if}}">
+                <div class="video-play-pause-icons">
+                    <div class="left-controls">
+                        <button type="button" class="ac-toggle-playback" aria-pressed="false" aria-label="playback">
+                            <svg class="icon icon-play" role="presentation">
+                                <use xlink:href="#icon-video-pause"></use>
+                            </svg>
+                        </button>   
+                    </div>
+                    <div class="right-controls">
+                        <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+                            <svg class="icon icon-volumn" role="presentation">
+                                <use xlink:href="#icon-video-volume-mute"></use>
+                            </svg>
+                        </button>
+                        <div class="short-video-modal-btn">
+                            <svg class="icon icon-modal-open" role="presentation">
+                                <use xlink:href="#icon-coachtopia-fullscreen"></use>
+                            </svg>
+                            <svg class="icon icon-modal-close" role="presentation" qa="short_video_modal_close_icon">
+                                <use xlink:href="#icon-coachtopia-minimize"></use>
+                            </svg>                        
+                        </div> 
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="video-progress"></div>
+                    <div class="video-progress-filled" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="short-video-play-wrapper">
+                <div class="short-video-play-btn">
+                    <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="32" height="32">
+                        <use xlink:href="#icon-coachtopia-video-play"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="d-sm-flex d-md-none amps-aspect-ratio-box">
+        <picture class="u-full-cover-element m-d-ratio-defined d-flex justify-content-center">
+            {{> sfcc-short-video-image-source this}}
+            <img class="aspect-ratio-img" src="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&w=624" alt="{{imageAltText}}">
+        </picture>
+        {{#or topScrim middleScrim bottomScrim}}
+            <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+        {{/or}}
+    </div>
+    {{/if}}
+
+    {{#neither desktopVideoURL mobileVideoURL}}
+    <div class="amps-aspect-ratio-box">
+        <picture data-loading="lazy" class="u-full-cover-element m-d-ratio-defined d-flex justify-content-center" data-class="aspect-ratio-img" data-iesrc="//{{mobileImage.defaultHost}}/i/{{mobileImage.endpoint}}/{{encodeURI mobileImage.name}}?$poi$&w=624" data-alt="{{imageAltText}}">
+            {{> sfcc-short-video-image-source this}}
+        </picture>
+        {{#or topScrim middleScrim bottomScrim}}
+            <div class="media-scrim media-scrim-{{parentid}}{{#if topScrim}} u-top-scrim{{/if}}{{#if middleScrim}} u-middle-scrim{{/if}}{{#if bottomScrim}} u-bottom-scrim{{/if}}"></div>
+        {{/or}}
+    </div>
+    {{/neither}}
+{{/and}}
+</{{#if link}}a{{else}}div{{/if}}>

@@ -1,0 +1,11 @@
+<a 
+    href="{{{linkURL}}}" 
+    title="{{label}}"
+    data-event="internal_promotion"
+    data-promotion-id="{{promotionId}}"
+    data-promotion-name="{{label}}"
+    data-creative-name="{{#if creativeName}}{{creativeName}}{{else}}NO_IMAGE{{/if}}"
+    data-location-id="{{locationId}}"
+    data-creative-slot="{{#isFalsey mainLinkConfigured}}{{#if creativeSlot}}{{creativeSlot}}{{else}}{{add ctaCounter 1}}{{/if}}{{else}}{{#if (gt mainLinkConfigured 1)}}{{add mainLinkConfigured (add ctaCounter 1)}}{{else}}{{add ctaCounter 2}}{{/if}}{{/isFalsey}}"
+    {{#if target}}target="_blank"{{/if}}
+    class="btn {{#if (eq linkStyle 'Primary Button')}}btn-primary{{else if (eq linkStyle 'Primary Button - Light')}}btn-primary light{{else if (eq linkStyle 'Secondary Button')}}btn-secondary{{else if (eq linkStyle 'Secondary Button - Light')}}btn-secondary light{{else if (eq linkStyle 'Text Link')}}btn-link{{else}}btn-link light{{/if}}{{#if (eq linkSize 'Medium')}}btn-medium{{else if (eq linkSize 'Small')}}btn-small{{else}} {{linkSize}}{{/if}}">{{label}}</a>

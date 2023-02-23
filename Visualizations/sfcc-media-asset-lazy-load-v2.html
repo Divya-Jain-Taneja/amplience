@@ -1,0 +1,209 @@
+{{#if imageCaptionTextColor}}
+  <style>
+    .media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}} .at-media-asset__caption,
+    .media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}}.at-media-asset__caption {
+      color: {{imageCaptionTextColor}};
+    }
+  </style>
+{{/if}}
+<{{#if link}}a{{else}}div{{/if}} class="at-media-asset{{#if disableRightClick}} disable-video-click{{/if}}{{#if roundedEdges}} rounded-edges{{/if}}{{#not parentid}} mol-media{{/not}} media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}}"
+{{#if (not aspectRatio)}}{{#or (not (contains mAspectRatio "{")) (not (contains dAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""'))) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains dAspectRatio "{")}}--d-aspect-ratio:{{dAspectRatio}};{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}{{/if}}
+{{#if link}}
+href="{{{link}}}"
+data-event="internal_promotion"
+data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}{{/if}}"
+data-promotion-name="{{#if promotionName}}{{sanitize promotionName}}{{else}}{{imageAltText}}{{/if}}"
+data-creative-name="{{#if mobileImage.imageUrl}}{{mobileImage.name}}{{else}}{{image.name}}{{/if}}"
+data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}"
+{{/if}}>
+{{#if link}}
+<span class="hidden-text">{{#if promotionName}}{{sanitize promotionName}}{{else}}{{imageAltText}}{{/if}}</span>
+{{/if}}
+{{#and insideFrame (not (or mAspectRatio dAspectRatio)) (and desktopVideoURL mobileVideoURL)}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/and}}
+{{#not promotionId}}
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+{{/not}}
+  {{#and desktopVideoURL mobileVideoURL}}
+  <div {{#if aspectRatio}}class="d-block {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box"{{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="d-block amps-aspect-ratio-box-video"{{/if}}>
+    <video data-loading="lazy" class="ac-video content-video d-block u-full-cover-element-video m-d-ratio-defined{{#if disableRightClick}} disable-video-click{{/if}}{{#if aspectRatio}} aspect-ratio-img{{/if}} {{#not removeAutoPlay}}autoplay{{/not}} loop" {{#not removeAutoPlay}} autoplay{{/not}} playsinline loop muted 
+      data-poster="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?&w=640{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?&w={{#and desktopImageNormal (or parentid promotionId)}}{{desktopImageNormal}}{{else}}1920{{/and}}{{else}}{{image.imageUrl}}?$mobileProductTile${{/if}}{{/if}}" preload="metadata" 
+      data-desktop-video-src="{{#or (contains desktopVideoURL "amplience.net") (contains desktopVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol desktopVideoURL}}?protocol=https{{else}}https:{{stripProtocol desktopVideoURL}}{{/or}}"
+      data-mobile-video-src="{{#or (contains mobileVideoURL "amplience.net") (contains mobileVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol mobileVideoURL}}?protocol=https{{else}}https:{{stripProtocol mobileVideoURL}}{{/or}}"
+      data-desktop-poster-src="{{#if image.imageFromAmplience}}{{image.imageUrl}}?&w={{#and desktopImageNormal (or parentid promotionId)}}{{desktopImageNormal}}{{else}}1920{{/and}}{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{image.imageUrl}}?$desktopProductTile${{/if}}"
+      data-mobile-poster-src="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?&w=640{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?&w=640{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{image.imageUrl}}?$mobileProductTile${{/if}}{{/if}}"
+      {{#if mobileWidth}}width="{{mobileWidth}}"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="375"{{/if}}{{/if}} {{#if mobileHeight}}height="{{mobileHeight}}"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+      data-event="internal_promotion"
+      data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+      data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+      data-creative-name="{{#if mobileImage.imageUrl}}{{mobileImage.name}}{{else}}{{image.name}}{{/if}}"
+      data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+      data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+      <source data-src="" type="video/mp4">
+      </video>
+      {{#and insideFrame (or mAspectRatio dAspectRatio)}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/and}}
+      <div class="ac-video-controls{{#if removeAutoPlay}} invisible{{/if}}">
+        <button type="button" class="ac-toggle-playback{{#if removeAudioControl}} mx-auto{{/if}}" aria-pressed="false" aria-label="playback">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-pause"></use>
+          </svg>
+        </button>
+        {{#not removeAudioControl}}
+        <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-volume-mute"></use>
+          </svg>
+        </button>
+        {{/not}}
+      </div>
+      {{#if removeAutoPlay}}
+        <button type="button" class="ac-toggle-playback video-play-button" aria-pressed="false" aria-label="playback">
+          <svg {{#if iconsColor}}class="icon-black"{{/if}} role="presentation" width="80" height="80">
+              <use xlink:href="#icon-youtube-play"></use>
+          </svg>
+        </button>
+      {{/if}}
+      </div>
+{{else}}
+
+{{#if desktopVideoURL}}
+    <div {{#if aspectRatio}}class="d-none d-md-block {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box"{{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="d-none d-md-block amps-aspect-ratio-box-video"{{/if}}>
+      <video data-loading="lazy" class="ac-video d-none d-md-block u-full-cover-element-video m-d-ratio-defined{{#if disableRightClick}} disable-video-click{{/if}}{{#if aspectRatio}} aspect-ratio-img{{/if}} {{#not removeAutoPlay}}autoplay{{/not}} loop" {{#not removeAutoPlay}} autoplay{{/not}} playsinline loop muted 
+        poster="{{#if image.imageFromAmplience}}{{image.imageUrl}}?&w={{#and desktopImageNormal (or parentid promotionId)}}{{desktopImageNormal}}{{else}}1920{{/and}}{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{image.imageUrl}}?$desktopProductTile${{/if}}" preload="metadata"
+         {{#if desktopWidth}}width="{{desktopWidth}}"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="1200"{{/if}}{{/if}} {{#if desktopHeight}}height="{{desktopHeight}}"{{else if dAspectRatio}}{{#if (contains dAspectRatio "{")}}{{#with (JSONparse dAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 1200 (toInt (itemAt (split dAspectRatio "/") 1)))  (toInt (itemAt (split dAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+          data-event="internal_promotion"
+          data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+          data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+          data-creative-name="{{#if mobileImage.imageUrl}}{{mobileImage.name}}{{else}}{{image.name}}{{/if}}"
+          data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+          data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+          <source data-src="{{#or (contains desktopVideoURL "amplience.net") (contains desktopVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol desktopVideoURL}}?protocol=https{{else}}https:{{stripProtocol desktopVideoURL}}{{/or}}" type="video/mp4">
+        </video>
+        {{#if insideFrame}}<div class="d-none d-md-block inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+        <div class="ac-video-controls d-none d-md-block{{#if removeAutoPlay}} invisible{{/if}}">
+          <button type="button" class="ac-toggle-playback{{#if removeAudioControl}} mx-auto{{/if}}" aria-pressed="false" aria-label="playback">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-pause"></use>
+          </svg>
+        </button>
+        {{#not removeAudioControl}}
+        <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-volume-mute"></use>
+          </svg>
+        </button>
+        {{/not}}
+      </div>
+      {{#if removeAutoPlay}}
+        <button type="button" class="ac-toggle-playback video-play-button d-none d-md-block" aria-pressed="false" aria-label="playback">
+          <svg {{#if iconsColor}}class="icon-black"{{/if}} role="presentation" width="80" height="80">
+              <use xlink:href="#icon-youtube-play"></use>
+          </svg>
+        </button>
+      {{/if}}
+      </div>
+      {{#if imageCaption}}
+        <figure {{#if aspectRatio}}class="mobile-img d-sm-block d-md-none {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box" {{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="mobile-img d-sm-block d-md-none amps-aspect-ratio-box" {{/if}}>
+        {{else}}
+        <div {{#if aspectRatio}}class="mobile-img d-sm-block d-md-none {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box" {{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="mobile-img d-sm-block d-md-none amps-aspect-ratio-box" {{/if}}>
+        {{/if}}
+            <picture data-loading="lazy" class="{{#if insideFrame}}d-block position-relative{{/if}}{{#and (or mAspectRatio dAspectRatio) (not imageIcon)}} u-full-cover-element m-d-ratio-defined{{/and}}" data-class="mobile-img d-sm-block d-md-none aspect-ratio-img{{#if imageCaption}} caption{{/if}}{{#if imageIcon}} thumbnail-image mx-auto{{/if}}" data-iesrc="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?$poi$&w=640{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?$poi$&w=640{{else}}{{image.imageUrl}}?$desktopProductTile${{/if}}{{/if}}" data-alt="{{imageAltText}}">
+              {{> sfcc-image-source-v2 this }}
+              {{#if insideFrame}}<div class="mobile-img d-sm-block d-md-none inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}          
+            </picture>
+        {{#if imageCaption}}
+            <figcaption class="at-media-asset__caption body-text-sm text-body1-s d-sm-block d-md-none {{#if (eq imageCaptionAlignment 'Center')}}text-center{{else}}text-left{{/if}}">{{imageCaption}}</figcaption>
+        </figure>
+        {{else}}
+        </div>
+        {{/if}}
+{{/if}}
+{{#if mobileVideoURL}}
+    <div {{#if aspectRatio}}class="d-sm-block d-md-none {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box" {{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="d-sm-block d-md-none amps-aspect-ratio-box-video"{{/if}}>
+      <video data-loading="lazy" class="ac-video d-sm-block d-md-none u-full-cover-element-video m-d-ratio-defined{{#if disableRightClick}} disable-video-click{{/if}}{{#if aspectRatio}} aspect-ratio-img{{/if}} {{#not removeAutoPlay}}autoplay{{/not}} loop" {{#not removeAutoPlay}} autoplay{{/not}} playsinline loop muted 
+        poster="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?&w=640{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?&w=640{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}{{else}}{{image.imageUrl}}?$mobileProductTile${{/if}}{{/if}}" preload="metadata"
+        {{#if mobileWidth}}width="{{mobileWidth}}"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="375"{{/if}}{{/if}} {{#if mobileHeight}}height="{{mobileHeight}}"{{else if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{/if}}
+        data-event="internal_promotion"
+        data-promotion-id="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}}-video{{/if}}"
+        data-promotion-name="{{#if promotionId}}{{promotionId}}{{else}}{{append "id-" (replace _meta.name " " "")}} video{{/if}}"
+        data-creative-name="{{#if mobileImage.imageUrl}}{{mobileImage.name}}{{else}}{{image.name}}{{/if}}"
+        data-location-id="{{#if locationId}}{{locationId}}{{else}}media{{/if}}"
+        data-creative-slot="{{#if creativeSlot}}{{creativeSlot}}{{else}}1{{/if}}">
+        <source data-src="{{#or (contains mobileVideoURL "amplience.net") (contains mobileVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol mobileVideoURL}}?protocol=https{{else}}https:{{stripProtocol mobileVideoURL}}{{/or}}" type="video/mp4">
+      </video>
+      {{#if insideFrame}}<div class="d-sm-block d-md-none inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+      <div class="ac-video-controls d-sm-block d-md-none{{#if removeAutoPlay}} invisible{{/if}}">
+        <button type="button" class="ac-toggle-playback{{#if removeAudioControl}} mx-auto{{/if}}" aria-pressed="false" aria-label="playback">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-pause"></use>
+          </svg>
+        </button>
+        {{#not removeAudioControl}}
+        <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+          <svg class="icon{{#if iconsColor}} icon-black{{/if}}" role="presentation" width="18" height="18">
+              <use xlink:href="#icon-video-volume-mute"></use>
+          </svg>
+        </button>
+        {{/not}}
+      </div>
+      {{#if removeAutoPlay}}
+        <button type="button" class="ac-toggle-playback video-play-button d-sm-block d-md-none" aria-pressed="false" aria-label="playback">
+          <svg {{#if iconsColor}}class="icon-black"{{/if}} role="presentation" width="80" height="80">
+              <use xlink:href="#icon-youtube-play"></use>
+          </svg>
+        </button>
+      {{/if}}
+      </div>
+      {{#if imageCaption}}
+        <figure {{#if aspectRatio}}class="desktop-img d-none d-md-block {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box"{{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="desktop-img d-none d-md-block amps-aspect-ratio-box" {{/if}}>
+        {{else}}
+        <div {{#if aspectRatio}}class="desktop-img d-none d-md-block {{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box"{{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="desktop-img d-none d-md-block amps-aspect-ratio-box" {{/if}}>
+        {{/if}}
+            <picture data-loading="lazy" class="{{#if insideFrame}}d-block position-relative{{/if}}{{#if imageCaption}} caption{{/if}}{{#and (or mAspectRatio dAspectRatio) (not imageIcon)}} u-full-cover-element m-d-ratio-defined{{/and}}" data-class="desktop-img d-none d-md-block aspect-ratio-img{{#if imageCaption}} caption{{/if}}{{#if imageIcon}} thumbnail-image mx-auto{{/if}}" data-iesrc="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?$poi$&w=640{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?$poi$&w=640{{else}}{{image.imageUrl}}?$desktopProductTile${{/if}}{{/if}}" data-alt="{{imageAltText}}">
+              {{> sfcc-image-source-v2 this }}
+              {{#if insideFrame}}<div class="desktop-img d-none d-md-block inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+            </picture>
+        {{#if imageCaption}}
+            <figcaption class="at-media-asset__caption body-text-sm text-body1-s d-none d-md-block {{#if (eq imageCaptionAlignment 'Center')}}text-center{{else}}text-left{{/if}}">{{imageCaption}}</figcaption>
+        </figure>
+        {{else}}
+        </div>
+        {{/if}}
+{{/if}}
+{{#neither desktopVideoURL mobileVideoURL}}
+    {{#if imageCaption}}
+    <figure {{#if aspectRatio}}class="{{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box" {{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="amps-aspect-ratio-box"{{/if}}>
+    {{else}}
+    <div {{#if aspectRatio}}class="{{append "aspect-ratio-" (join (split aspectRatio '/') '_')}} aspect-ratio-box" {{else if (and (or mAspectRatio dAspectRatio) (not imageIcon))}}class="amps-aspect-ratio-box"{{/if}}>
+    {{/if}}
+        <picture data-loading="lazy" class="{{#if insideFrame}}d-block position-relative{{/if}}{{#if imageCaption}} caption{{/if}}{{#and (or mAspectRatio dAspectRatio) (not imageIcon)}} u-full-cover-element m-d-ratio-defined{{/and}}" data-class="aspect-ratio-img{{#if imageCaption}} caption{{/if}}{{#if imageIcon}} thumbnail-image mx-auto{{else}} w-100{{/if}}" data-iesrc="{{#if mobileImage.imageUrl}}{{#if mobileImage.imageFromAmplience}}{{mobileImage.imageUrl}}?$poi$&w=640{{else}}{{mobileImage.imageUrl}}?$mobileProductTile${{/if}}{{else}}{{#if image.imageFromAmplience}}{{image.imageUrl}}?$poi$&w=640{{else}}{{image.imageUrl}}?$desktopProductTile${{/if}}{{/if}}" data-alt="{{imageAltText}}">
+          {{> sfcc-image-source-v2 this }}
+          {{#if insideFrame}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+        </picture>
+        {{#if imageCaption}}
+        <figcaption class="at-media-asset__caption body-text-sm text-body1-s {{#if (eq imageCaptionAlignment 'Center')}}text-center{{else}}text-left{{/if}}">{{imageCaption}}</figcaption>
+    </figure>
+    {{else}}
+    </div>
+    {{/if}}
+{{/neither}}
+{{/and}}
+</{{#if link}}a{{else}}div{{/if}}>
+{{#and desktopVideoURL mobileVideoURL}}
+  {{#if imageCaption}}
+    <div class="media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}} at-media-asset__caption body-text-sm text-body1-s{{#if (eq imageCaptionAlignment 'Center')}} text-center{{else}} text-left{{/if}}">{{imageCaption}}</div>
+  {{/if}}
+{{/and}}
+{{#and desktopVideoURL (not mobileVideoURL)}}
+  {{#if imageCaption}}
+    <div class="media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}} at-media-asset__caption body-text-sm text-body1-s d-none d-md-block{{#if (eq imageCaptionAlignment 'Center')}} text-center{{else}} text-left{{/if}}">{{imageCaption}}</div>
+  {{/if}}
+{{/and}}
+
+{{#and mobileVideoURL (not desktopVideoURL)}}
+  {{#if imageCaption}}
+   <div class="media-{{#if parentid}}{{parentid}}{{else}}{{append "asset-" (replace (last (split [@id] "/")) "-" "") }}{{/if}} at-media-asset__caption body-text-sm text-body1-s d-sm-block d-md-none{{#if (eq imageCaptionAlignment 'Center')}} text-center{{else}} text-left{{/if}}">{{imageCaption}}</div>
+  {{/if}}
+{{/and}}

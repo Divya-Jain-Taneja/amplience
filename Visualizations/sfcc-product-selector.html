@@ -1,0 +1,17 @@
+<div class="container" data-qa="site_promo_product-selector_wrapper">
+    <div class="row">
+        {{#each productSelector}}
+        <div class="col-6 col-sm-4">
+            <sfcc product-card="{{this}}" lazyOverride style="inline-block">
+        <!--
+                {{#if (eq @index 0)}}
+                    Selected Product IDs are:
+                {{/if}}
+        -->
+                <div>{{this}}</div>
+                <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:300px" />
+            </sfcc>
+        </div>
+        {{/each}}
+    </div>
+</div>

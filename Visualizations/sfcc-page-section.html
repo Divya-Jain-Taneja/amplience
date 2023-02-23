@@ -1,0 +1,31 @@
+{{#or bottomSpaceD bottomSpaceM leftRightSpaceD leftRightSpaceM}}
+<style>
+    {{#or bottomSpaceM leftRightSpaceM}}
+    @media only screen and (max-width:768px){
+        .amp-page-acc-{{parentId}} .component-block.component-block-{{sectionCounter}}{
+            {{#if bottomSpaceM}}
+                margin-bottom:{{bottomSpaceM}}px;
+            {{/if}}
+            {{#if leftRightSpaceM}}
+                 margin-left:{{leftRightSpaceM}}px;
+                 margin-right:{{leftRightSpaceM}}px;
+            {{/if}}
+        }
+    }
+    {{/or}}
+    {{#or bottomSpaceD leftRightSpaceD}}
+    @media only screen and (min-width:769px){
+        .amp-page-acc-{{parentId}} .component-block.component-block-{{sectionCounter}}{
+            {{#if bottomSpaceD}}
+                 margin-bottom:{{bottomSpaceD}}px;
+            {{/if}}
+            {{#if leftRightSpaceD}}
+                 margin-left:{{leftRightSpaceD}}px;
+                 margin-right:{{leftRightSpaceD}}px;
+            {{/if}}
+        }
+    }
+    {{/or}}
+</style>
+{{/or}}
+<div class="{{#and displayDesktopOnly (not displayMobileOnly)}}for-desktop {{/and}}{{#and displayMobileOnly (not displayDesktopOnly)}}for-mobile {{/and}}component-block component-block-{{sectionCounter}}" data-qa="site_promo_page-section_wrapper">{{> templateChooser pageContentTypes pageSectionLink=pageSectionLink pageSectionLinkTarget=pageSectionLinkTarget}}</div>

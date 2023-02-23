@@ -1,0 +1,136 @@
+{{#or backgroundColor (eq mobileStyle 'Horizontal Scroll')}}
+<style>
+    {{#if backgroundColor}}
+        .sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    {{/if}}
+    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+    .sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        font-size: 0;
+    }
+    .sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide {
+        display: inline-block;
+        vertical-align: top;
+        width: 40%;
+        margin-right:16px;
+    }
+    .sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .product-slide:first-child{
+        margin-left:12px;
+    }
+    {{/if}}
+</style>
+{{/or}}
+<div class="mol-2up-carousel container-fluid{{#if roundedEdges}} rounded-edges{{/if}} sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_2up-carousel_wrapper">
+{{#if jumpPointID }}
+    {{> sfcc-at-jumpAnchor this }}
+{{/if}}
+    {{#if headerBlock}}
+	<div class="row mobile-header">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this }}
+		{{/each}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="row{{#if (eq layout 'Right')}} mobile-stack{{/if}}">
+		<div class="left-container col-sm-6">
+		{{#if (eq layout 'Left')}}
+			{{#each primaryMedia}}
+				<div class="primary-block">
+                    {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                        {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot="2UPCT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                        {{#if disableLazyLoad}}
+                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                        {{else}}
+                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                        {{/if}}
+                    {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                        {{> sfcc-video-player this}}
+                    {{~/if}}
+                </div>
+			{{/each}}
+        {{else}}
+            <div class="desktop-header">
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this }}
+                {{/each}}
+            </div>
+            <div class="product-tile-slider{{#if (eq mobileStyle 'Horizontal Scroll')}} d-none d-sm-block{{/if}}{{#if (eq (length productCards) 2)}} two-cards{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":2,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":true,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}},{"breakpoint":544,"settings":{"slidesToShow":1,"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"arrows":false}}]}'>
+                {{#each productCards}}
+                    <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                        <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+                {{/each}}
+            </div>
+            {{#if (eq mobileStyle 'Horizontal Scroll')}}
+            <div class="product-slider mobile-horzscroll d-xs-block d-md-none{{#if (eq (length productCards) 2)}} two-cards{{/if}}">
+                {{#each productCards}}
+                    <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                        <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+                {{/each}}
+            </div>
+            {{/if}}
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-6">
+        {{#if (eq layout 'Left')}}
+            <div class="desktop-header">
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this }}
+                {{/each}}
+            </div>
+            <div class="product-tile-slider {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-sm-block{{/if}}{{#if (eq (length productCards) 2)}} two-cards{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":2,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":true,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}},{"breakpoint":544,"settings":{"slidesToShow":1,"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"arrows":false}}]}'>
+                {{#each productCards}}
+                <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                        <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+				{{/each}}
+            </div>
+            {{#if (eq mobileStyle 'Horizontal Scroll')}}
+            <div class="product-slider mobile-horzscroll d-md-none d-xs-block{{#if (eq (length productCards) 2)}} two-cards{{/if}}">
+                {{#each productCards}}
+                <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                        <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                            <div>{{this}}</div>
+                            <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                        </sfcc>
+                    </div>
+				{{/each}}
+            </div>
+            {{/if}}
+		{{else}}
+			{{#each primaryMedia}}
+            <div class="primary-block">
+                {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                    {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot="2UPCT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                    {{> sfcc-video-player this}}
+                {{~/if}}
+            </div>
+			{{/each}}
+		{{/if}}
+		</div>
+	</div>
+</div>

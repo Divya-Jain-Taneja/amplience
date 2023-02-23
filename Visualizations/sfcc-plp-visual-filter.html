@@ -1,0 +1,26 @@
+{{#if backgroundColor}}
+    <style>
+        .plp-filter-{{replace (last (split [@id] "/")) "-" "" }} {
+            background-color: {{backgroundColor}};
+        }
+    </style>
+{{/if}}
+<div class="mol-plp-visual-filter{{#isTruthy noImage}} text-only{{/isTruthy}} container-fluid plp-filter-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_plp-visual-filter_wrapper" {{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}--d-aspect-ratio:75/94;"{{else}}style="--d-aspect-ratio:75/94;"{{/or}}>
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="row">
+        {{#if headerBlock}}
+        <div class="mol-header-block-container col-sm-12 p-0">
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="plp_visual_filter" mainLinkConfigured=(length ../categoryRow) headerBlockData=this }}
+        {{/each}}
+        </div>
+        {{/if}}
+        <div class="mol-plp-filter-container col-sm-12 p-0 text-center">
+        {{#each categoryRow}}
+            {{> sfcc-plp-filter-card noImage=../noImage categoryCardData=this cardCounter=@index promotionId=(append "id-" (replace ../_meta.name " " "")) disableLazyLoad=../disableLazyLoad  mAspectRatio=../mAspectRatio}}
+        {{/each}}
+        </div>
+    </div>
+</div>

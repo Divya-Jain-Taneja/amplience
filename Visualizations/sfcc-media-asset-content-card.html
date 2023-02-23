@@ -1,0 +1,66 @@
+{{#or cardOutlineCheckbox cardBackgroundColor cardGradientColor}}
+    <style>
+        {{#if cardOutlineCheckbox}}
+            .content-card-container-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.card-outline'}},
+            .content-card-container-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.card-outline-media'}} img,
+            .content-card-container-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.card-outline-media'}} video {
+                border: 5px solid {{#if cardOutlineColor}}{{cardOutlineColor}}{{else}}#000{{/if}};
+            }
+        {{/if}}
+        {{#and cardBackgroundColor (not cardGradientColor)}}
+            .content-card-container-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.card-backgroundColor'}} {
+                background-color: {{cardBackgroundColor}};
+            }
+        {{/and}}
+        {{#if cardGradientColor}}
+            .content-card-container-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.CD'}} {
+                --background-gradient:linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if cardBackgroundColor}}{{cardBackgroundColor}}{{else}}transparent{{/if}}, {{cardGradientColor}});
+            }
+        {{/if}}
+    </style>
+{{/or}}
+<div class="at-content-card{{#or headerBlock.0.textBlock.headlineText headerBlock.0.textBlock.eyebrowText headerBlock.0.textBlock.bodyText}} has-content-header{{/or}}{{#and headerPosition (not (eq headerPosition 'Below the card'))}} inline-header{{/and}} {{prepend (stringify (add cardCounter 1)) 'CD'}}{{#if imageIcon}} text-center{{/if}}{{#if (not mediaAsset)}} no-media{{#if cardOutlineCheckbox}} {{prepend (stringify (add cardCounter 1)) 'card-outline'}} header-outline{{/if}}{{#if cardBackgroundColor}} {{prepend (stringify (add cardCounter 1)) 'card-backgroundColor'}}{{/if}}{{#if cardGradientColor}} u-background-gradient{{/if}}{{/if}}"  data-qa="site_promo_content-card_wrapper">
+    {{#if mediaAsset}}
+    <div class="content-card-wrapper{{#if cardOutlineCheckbox}} {{prepend (stringify (add cardCounter 1)) 'card-outline-media'}}{{/if}}">
+    {{#each mediaAsset}}
+        {{#if (test this._meta.schema (toRegex ".*/at-media-asset-v2"))}}
+            {{#if disableLazyLoad}}
+                {{> sfcc-media-asset-v2 parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="card_container" mediaAssetData=this imageIcon=../imageIcon mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=../desktopImageNormal desktopImageRetina=../desktopImageRetina tabletImageNormal=../tabletImageNormal tabletImageRetina=../tabletImageRetina mobileImageNormal=../mobileImageNormal mobileImageRetina=../mobileImageRetina}}
+            {{else}}
+                {{> sfcc-media-asset-lazy-load-v2 parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="card_container" mediaAssetData=this imageIcon=../imageIcon mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=../desktopImageNormal desktopImageRetina=../desktopImageRetina tabletImageNormal=../tabletImageNormal tabletImageRetina=../tabletImageRetina mobileImageNormal=../mobileImageNormal mobileImageRetina=../mobileImageRetina}}
+            {{/if}}
+        {{else}}
+            {{#if disableLazyLoad}}
+                {{> sfcc-media-asset parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="card_container" mediaAssetData=this imageIcon=../imageIcon mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=../desktopImageNormal desktopImageRetina=../desktopImageRetina tabletImageNormal=../tabletImageNormal tabletImageRetina=../tabletImageRetina mobileImageNormal=../mobileImageNormal mobileImageRetina=../mobileImageRetina}}
+            {{else}}
+                {{> sfcc-media-asset-lazy-load parentid=../childId promotionId=../promotionId promotionName=(sanitize ../headerBlock.0.textBlock.headlineText) locationId="card_container" mediaAssetData=this imageIcon=../imageIcon mobileQuality=../mobileQuality desktopQuality=../desktopQuality desktopImageNormal=../desktopImageNormal desktopImageRetina=../desktopImageRetina tabletImageNormal=../tabletImageNormal tabletImageRetina=../tabletImageRetina mobileImageNormal=../mobileImageNormal mobileImageRetina=../mobileImageRetina}}
+            {{/if}}
+        {{/if}}
+    {{/each}}
+        {{#if inlineCTA}}
+        <div class="inline-cta{{#if imageCaption}} cta-bottom{{/if}}">
+            {{#each inlineCTA}}
+                {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=../promotionId locationId="card_container" creativeName=../creativeName creativeSlot=(prepend 'C' ( prepend (stringify (add ../cardCounter 1)) 'CD')) }}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+    {{/if}}
+    {{#if headerBlock}}
+    <div class="content-card-text-block{{#if (eq headerPosition 'Inline - Top position')}} header-top{{else if (eq headerPosition 'Inline - Center aligned')}} header-center{{else if (eq headerPosition 'Inline - Bottom position')}} header-bottom{{#if mediaAsset.0.imageCaption}} with-caption{{/if}}{{/if}}{{#and mediaAsset.0.link headerPosition (not (eq headerPosition 'Below the card'))}} cursor-pointer{{/and}}"
+    {{#and mediaAsset.0.link headerPosition (not (eq headerPosition 'Below the card'))}}
+    tabindex="0" role="link"
+    data-comp-url="{{{mediaAsset.0.link}}}"
+    data-event="internal_promotion"
+    data-promotion-id="{{promotionId}}"
+    data-promotion-name="{{headerBlock.0.textBlock.headlineText}}"
+    data-creative-name="{{mediaAsset.0.image.name}}"
+    data-location-id="card_container"
+    data-creative-slot="{{prepend (stringify (add cardCounter 1)) 'CD'}}"
+    {{/and}}>
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=../childId promotionId=../promotionId locationId="card_container" mainLinkConfigured=(length ../contentCard) creativeSlot=../creativeSlot headerBlockData=this }}
+        {{/each}}
+    </div>
+    {{/if}}
+</div>

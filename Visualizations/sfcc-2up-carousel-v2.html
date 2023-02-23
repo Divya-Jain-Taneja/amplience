@@ -1,0 +1,151 @@
+{{#if backgroundColor}}
+<style>
+    .sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }}{
+        --bg-color: {{backgroundColor}};
+    }
+</style>
+{{/if}}
+<div class="mol-2up-carousel container-fluid{{#if roundedEdges}} rounded-edges{{/if}}{{#if backgroundColor}} u-background-color{{/if}}{{#if transparentBg}} transparent-cards{{/if}}{{#if productCards.0.productCard}} product-cards{{/if}}{{#if (eq mobileLayout 'Header Block with Media Asset')}} mobile-layout2{{/if}} sfcc-2up-carousel-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_2up-carousel_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    {{#or headerBlock countDownClockAndImage}}
+    <div class="row mobile-header">
+        <div class="col-12 p-0 d-flex{{#if (eq countDownClockAndImage.0.headerBlockPosition 'bottom most')}} flex-column-reverse{{else}} flex-column{{/if}}">
+            {{#each headerBlock}}
+                {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this primaryMedia=../primaryMedia }}
+            {{/each}}
+            {{#if countDownClockAndImage}}{{> sfcc-banner5050-countdown-clock}}{{/if}}
+        </div>
+    </div>
+    {{/or}}
+    <div class="row{{#if (eq layout 'Right')}} mobile-stack{{/if}}">
+        <div class="left-container col-sm-6">
+        {{#if (eq layout 'Left')}}
+            {{#each primaryMedia}}
+            <div class="primary-block">
+                {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                    {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot="2UPCT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                    {{> sfcc-video-player this}}
+                {{~/if}}
+            </div>
+            {{/each}}
+        {{else}}
+            <div class="desktop-header{{#if (eq countDownClockAndImage.0.headerBlockPosition 'bottom most')}} flex-column-reverse{{else}} flex-column{{/if}}">
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this primaryMedia=../primaryMedia}}
+                {{/each}}
+                {{#if countDownClockAndImage}}{{> sfcc-banner5050-countdown-clock}}{{/if}}
+            </div>
+            <div class="product-tile-slider{{#if (eq (length productCards) 2)}} two-cards{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":2,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":true,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}},{"breakpoint":544,"settings":{"slidesToShow":2,"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"arrows":false}}]}'>
+                {{#each productCards}}
+                    {{#if productCard}}
+                    <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                        <sfcc product-card="{{productCard}}" {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                            <div class="product-id">{{productCard}}</div>
+                            <image class="w-100" src="https://i8.amplience.net/i/tapestry/product_tile1?$poi$&w=384&sm=aspect&aspect=4:5" />
+                        </sfcc>
+                    </div>
+                    {{else}}
+                    <div class="product-slide aspect-ratio-4_5 aspect-ratio-box">
+                        {{#if link}}<a href="{{{link}}}">{{/if}}
+                            <picture class="u-full-cover-element m-d-ratio-defined">
+                                {{#if productImage.imageSelector.imageFromAmplience}}
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=480&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=960&fmt=webp 2x" media="(min-width: 1200px)" type="image/webp">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=480&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=960&fmt=jpg 2x" media="(min-width: 1200px)" type="image/jpeg">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=700&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=1400&fmt=webp 2x" media="(min-width: 769px)" type="image/webp">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=700&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=1400&fmt=jpg 2x" media="(min-width: 769px)" type="image/jpeg">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=384&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=768&fmt=webp 2x" media="(max-width: 768px)" type="image/webp">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=384&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=768&fmt=jpg 2x" media="(max-width: 768px)" type="image/jpeg">
+                                {{else}}
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$desktopProductTile$" media="(min-width: 1200px)">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$tabletProductTile$" media="(min-width: 769px)">
+                                    <source srcset="{{productImage.imageSelector.imageUrl}}?$mobileProductTile$" media="(max-width: 768px)">
+                                {{/if}}
+                                <img class="w-100 aspect-ratio-img" src="{{#if productImage.imageSelector.imageFromAmplience}}{{productImage.imageSelector.imageUrl}}?w=384{{else}}{{productImage.imageSelector.imageUrl}}/?$desktopProductTile${{/if}}" width="212" height="265" alt="{{productImageAltText}}">
+                            </picture>
+                        {{#if link}}</a>{{/if}}
+                    </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        {{/if}}
+        </div>
+        <div class="right-container col-sm-6">
+            {{#if (eq layout 'Left')}}
+                <div class="desktop-header{{#if (eq countDownClockAndImage.0.headerBlockPosition 'bottom most')}} flex-column-reverse{{else}} flex-column{{/if}}">
+                    {{#each headerBlock}}
+                        {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" mainLinkConfigured=1 headerBlockData=this primaryMedia=../primaryMedia }}
+                    {{/each}}
+                    {{#if countDownClockAndImage}}{{> sfcc-banner5050-countdown-clock}}{{/if}}
+                </div>
+                <div class="product-tile-slider{{#if (eq (length productCards) 2)}} two-cards{{/if}}" data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":true,"initialSlide":0,"slidesToShow":2,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"slidesToShow":1,"infinite":true,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false}},{"breakpoint":544,"settings":{"slidesToShow":2,"infinite":false,"initialSlide":0,"draggable":false,"swipeToSlide":false,"swipe":false,"touchMove":false,"arrows":false}}]}'>
+                    {{#each productCards}}
+                        {{#if productCard}}
+                        <div class="product-slide{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                            <sfcc product-card="{{productCard}}" {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                                <div class="product-id">{{productCard}}</div>
+                                <image class="w-100" src="https://i8.amplience.net/i/tapestry/product_tile1?$poi$&w=384&sm=aspect&aspect=4:5" />
+                            </sfcc>
+                        </div>
+                        {{else}}
+                        <div class="product-slide aspect-ratio-4_5 aspect-ratio-box">
+                            {{#if link}}<a href="{{{link}}}">{{/if}}
+                                <picture class="u-full-cover-element m-d-ratio-defined">
+                                    {{#if productImage.imageSelector.imageFromAmplience}}
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=480&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=960&fmt=webp 2x" media="(min-width: 1200px)" type="image/webp">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=480&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=960&fmt=jpg 2x" media="(min-width: 1200px)" type="image/jpeg">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=700&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=1400&fmt=webp 2x" media="(min-width: 769px)" type="image/webp">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=700&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=1400&fmt=jpg 2x" media="(min-width: 769px)" type="image/jpeg">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=384&fmt=webp 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=768&fmt=webp 2x" media="(max-width: 768px)" type="image/webp">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$poi$&w=384&fmt=jpg 1x, {{productImage.imageSelector.imageUrl}}?$poi$&w=768&fmt=jpg 2x" media="(max-width: 768px)" type="image/jpeg">
+                                    {{else}}
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$desktopProductTile$" media="(min-width: 1200px)">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$tabletProductTile$" media="(min-width: 769px)">
+                                        <source srcset="{{productImage.imageSelector.imageUrl}}?$mobileProductTile$" media="(max-width: 768px)">
+                                    {{/if}}
+                                    <img class="w-100 aspect-ratio-img" src="{{#if productImage.imageSelector.imageFromAmplience}}{{productImage.imageSelector.imageUrl}}?w=384{{else}}{{productImage.imageSelector.imageUrl}}/?$desktopProductTile${{/if}}" width="212" height="265" alt="{{productImageAltText}}">
+                                </picture>
+                            {{#if link}}</a>{{/if}}
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            {{else}}
+                {{#each primaryMedia}}
+                <div class="primary-block">
+                    {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                        {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot="2UPCT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                        {{#if disableLazyLoad}}
+                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                        {{else}}
+                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeSlot=(append "2UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536 imageDimension="835,672,445,356,468,375"}}
+                        {{/if}}
+                    {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                        {{> sfcc-video-player this}}
+                    {{~/if}}
+                </div>
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+    {{#if (eq mobileLayout 'Header Block with Media Asset')}}
+        <div class="row bottom-cta d-block d-sm-none">
+            <div class="mol-header-block{{#if headerBlock.0.alignItems}}{{#if (eq headerBlock.0.alignItems 'Center')}} text-center{{else if (eq headerBlock.0.alignItems 'Left')}} text-left{{else if (eq headerBlock.0.alignItems 'Right')}} text-right{{/if}}{{else}} text-center{{/if}} mol-header-block-{{replace (last (split [@id] "/")) "-" "" }}">
+                <div class="links-container d-flex{{#if headerBlock.0.ctaView}} flex-column{{else}} flex-wrap align-items-end{{/if}}{{#if headerBlock.0.alignItems}}{{#if (eq headerBlock.0.alignItems 'Center')}} justify-content-center{{else if (eq headerBlock.0.alignItems 'Left')}} justify-content-start{{else if (eq headerBlock.0.alignItems 'Right')}} justify-content-end{{/if}}{{else}} justify-content-center{{/if}}{{#and headerBlock.0.alignItems headerBlock.0.ctaView}}{{#if (eq headerBlock.0.alignItems 'Center')}} align-items-center{{else if (eq headerBlock.0.alignItems 'Left')}} align-items-start{{else if (eq headerBlock.0.alignItems 'Right')}} align-items-end{{/if}}{{/and}}">
+                    {{#each headerBlock.0.links}}
+                        {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="2up_carousel" creativeName="NO_IMAGE" creativeSlot=(prepend (prepend (stringify (add @index 1)) "C") ../creativeSlot) mainLinkConfigured=1 }}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</div>

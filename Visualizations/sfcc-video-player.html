@@ -1,0 +1,29 @@
+<div data-qa="site_promo_video-player_wrapper" class="amps-video video-wrapper video-wrapper-{{replace (last (split [@id] "/")) "-" "" }} {{#if (eq variation 'Full Bleed')}}container-fluid{{else}}container{{/if}}" 
+{{#or (not (contains mAspectRatio "{")) (not (contains dAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""'))) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}style="{{#not (contains mAspectRatio "{")}}--m-aspect-ratio:{{mAspectRatio}};{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains dAspectRatio "{")}}--d-aspect-ratio:{{dAspectRatio}};{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}>
+{{#not parentid}}
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+{{/not}}
+<div class="row">
+    <div class="video-container w-100">
+        <div class="ca-padding-0{{#if (eq variation '12 Column')}} col-12{{else if (eq variation '10 Column')}} offset-md-1 col-md-10{{else if (eq variation '8 Column')}} offset-md-2 col-md-8{{else}} col-12{{/if}}{{#if (or mAspectRatio dAspectRatio)}} amps-aspect-ratio-box-video{{/if}}">
+                <video class="d-block w-100 ac-video u-full-cover-element-video m-d-ratio-defined{{#if loop}} loop{{/if}}{{#if autoPlay}} autoplay{{/if}}{{#if disableRightClick}} disable-video-click{{/if}}" data-loading="lazy" preload="metadata"
+                {{#if posterImage}}
+                data-poster="//{{posterImage.defaultHost}}/i/{{posterImage.endpoint}}/{{encodeURI posterImage.name}}?&w=1920"
+                data-desktop-poster-src="//{{posterImage.defaultHost}}/i/{{posterImage.endpoint}}/{{encodeURI posterImage.name}}?&w=1920{{#if dAspectRatio}}{{#or (not (contains dAspectRatio "{")) (and (not (contains dAspectRatio '"initialHeight":""')) (not (contains dAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains dAspectRatio "{")}}{{replace dAspectRatio "/" ":"}}{{else}}{{#with (JSONparse dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                data-mobile-poster-src="//{{posterImage.defaultHost}}/i/{{posterImage.endpoint}}/{{encodeURI posterImage.name}}?&w=640{{#if mAspectRatio}}{{#or (not (contains mAspectRatio "{")) (and (not (contains mAspectRatio '"initialHeight":""')) (not (contains mAspectRatio '"initialWidth":""')))}}&sm=aspect&aspect={{#not (contains mAspectRatio "{")}}{{replace mAspectRatio "/" ":"}}{{else}}{{#with (JSONparse mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}{{initialWidth}}:{{initialHeight}}{{/and}}{{/with}}{{/not}}{{/or}}{{/if}}"
+                {{/if}}
+                {{#isFalsey controls}} controls {{/isFalsey}}
+                {{#if loop}} loop {{/if}}
+                {{#if autoPlay}} autoplay muted {{/if}} playsinline
+                disablePictureInPicture controlsList="nodownload" crossorigin="anonymous" {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialWidth "")}}width="{{initialWidth}}"{{/not}}{{/with}}{{else}}width="375"{{/if}}{{else if mobileWidth}}width="{{mobileWidth}}"{{/if}} {{#if mAspectRatio}}{{#if (contains mAspectRatio "{")}}{{#with (JSONparse mAspectRatio)}}{{#not (is initialHeight "")}}height="{{initialHeight}}"{{/not}}{{/with}}{{else}}height="{{#divide (multiply 375 (toInt (itemAt (split mAspectRatio "/") 1)))  (toInt (itemAt (split mAspectRatio "/") 0))}}{{/divide}}"{{/if}}{{else if mobileHeight}}height="{{mobileHeight}}"{{/if}}>
+                <source data-src="{{#or (contains videoURL "amplience.net") (contains videoURL "cms.stuartweitzman.com") }}https:{{stripProtocol videoURL}}?protocol=https{{else}}https:{{stripProtocol videoURL}}{{/or}}" type="video/mp4">
+                {{#if webVTTFileURL}}
+                <track label="English" kind="subtitles" srclang="en" src="https:{{stripProtocol webVTTFileURL}}" default>
+                {{/if}}
+                </video>
+            </div>
+        </div>
+    </div>
+</div>

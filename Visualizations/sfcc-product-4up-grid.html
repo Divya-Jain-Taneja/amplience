@@ -1,0 +1,87 @@
+{{#if backgroundColor}}
+    <style>
+        .sfcc-product-4up-grid-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    </style>
+{{/if}}
+<div class="mol-product-4up-grid container-fluid{{#if roundedEdges}} rounded-edges{{/if}} sfcc-product-4up-grid-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_product-4up-grid_wrapper">
+{{#if jumpPointID }}
+    {{> sfcc-at-jumpAnchor this }}
+{{/if}}
+    {{#if headerBlock}}
+	<div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+			{{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" mainLinkConfigured=(length ../gridItems) headerBlockData=this }}
+		{{/each}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="row{{#if (eq layout 'Right')}} mobile-stack{{/if}}">
+		<div class="left-container col-sm-12 col-md-6">
+		{{#if (eq layout 'Left')}}
+			{{#each primaryMedia}}
+				<div class="primary-block">
+                    {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                        {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot="4UPGT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375" }}
+                    {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                        {{#if disableLazyLoad}}
+                            {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot=(append "4UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                        {{else}}
+                            {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot=(append "4UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                        {{/if}}
+                    {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                        {{> sfcc-video-player this}}
+                    {{~/if}}                
+                </div>
+			{{/each}}
+		{{else}}
+            <div class="grid-block">
+                {{#each gridItems}}
+                    <div class="grid-wrapper">
+                        <div class="grid-item{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                            <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                                <div>{{this}}</div>
+                                <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                            </sfcc>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-12 col-md-6">
+		{{#if (eq layout 'Left')}}
+			<div class="grid-block">
+                {{#each gridItems}}
+                    <div class="grid-wrapper">
+                        <div class="grid-item{{#or (eq ../cardOptions 'Name only') (eq ../cardOptions 'Name + Ratings')}} no-price{{else or (eq ../cardOptions 'Price only') (eq ../cardOptions 'Price + Ratings')}} no-name{{else if (eq ../cardOptions 'Ratings only')}} no-name no-price{{/or}}">
+                            <sfcc product-card="{{this}}" lazyOverride {{#or (eq ../cardOptions 'Ratings only') (eq ../cardOptions 'Name + Ratings') (eq ../cardOptions 'Price + Ratings') (eq ../cardOptions 'Name + Price + Ratings')}}ratingsEnabled{{/or}}>
+                                <div>{{this}}</div>
+                                <image src="https://i8.amplience.net/i/tapestry/product_tile1?dfg123=ert" style="width:100%" />
+                            </sfcc>
+                        </div>
+                    </div>
+				{{/each}}
+			</div>
+		{{else}}
+			{{#each primaryMedia}}
+            <div class="primary-block">
+                {{#if (test this.[@type] (toRegex ".*/at-img-hotspot.json")) ~}}
+                    {{> sfcc-image-hotspot promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot="4UPGT" desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                {{else if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                    {{#if disableLazyLoad}}
+                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot=(append "4UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                    {{else}}
+                        {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="product_4up_grid" creativeSlot=(append "4UP" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536  aspectRatio="4/5" imageDimension="835,672,445,356,468,375"}}
+                    {{/if}}
+                {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                    {{> sfcc-video-player this}}
+                {{~/if}}                
+            </div>
+			{{/each}}
+		{{/if}}
+		</div>
+	</div>
+</div>

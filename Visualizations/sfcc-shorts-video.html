@@ -1,0 +1,46 @@
+<style>
+    .shorts-video-{{replace (last (split [@id] "/")) "-" "" }}{
+        --bg-color: {{backgroundColor}};
+        --delay-animation: {{delayAnimation}}ms;
+    }
+</style>
+<div class="mol-shorts-video amp-coachtopia container-fluid{{#if backgroundColor}} u-background-color{{/if}} shorts-video-{{replace (last (split [@id] "/")) "-" "" }}{{#if (eq mobileStyle 'Grid without padding')}} mob-padding-0{{/if}}{{#if (eq mobileStyle 'Grid with padding')}} grid-padding{{/if}}" data-qa="site_promo_shorts_video_wrapper" delay="{{delayAnimation}}">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    {{#if headerBlock}}
+        <div class="row m-0">
+            <div class="col-12 p-0 2">
+            {{#each headerBlock}}
+                {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="shorts_video" mainLinkConfigured=(length ../mediaAssetTiles) headerBlockData=this }}
+            {{/each}}
+            </div>
+        </div>
+    {{/if}}
+    <div class="row m-0">
+        {{#if (eq mobileStyle 'Carousel View - Infinite')}}
+            <div class="media-tiles-container content__media{{#if (eq mobileStyle 'Carousel View - Infinite')}} carousel-view-infinite product-tile-slider{{/if}}" data-config='{"autoplay":false,"slidesToShow":5,"responsive":[{"breakpoint":769,"settings":{"slidesToShow":2,"autoplay":false,"arrows":false,"infinite":true}}]}'{{#if (eq mobileStyle 'Carousel View - Bidirectional')}}qa="short_video_carousel_tiles"{{/if}}>
+                {{#each mediaAssetTiles}}
+                    {{> sfcc-short-video-media-tile cardCounter=@index shortsVideoData=this componentName=../this.[@type] mAspectRatio = ../mAspectRatio mobileQuality = ../mobileQuality dAspectRatio = ../dAspectRatio desktopQuality = ../desktopQuality mobileStyle=../mobileStyle parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " ""))}}
+                {{/each}}
+            </div>
+        {{/if}}
+        <div class="media-tiles-container content__media{{#if (eq mobileStyle 'Carousel View - Bidirectional')}} carousel-view{{else if (eq mobileStyle 'Carousel View - Infinite')}} carousel-view-infinite-hide{{else}} row{{/if}}" qa="short_video_carousel_tiles">
+            {{#each mediaAssetTiles}}
+                {{> sfcc-short-video-media-tile cardCounter=@index shortsVideoData=this componentName=../this.[@type] mAspectRatio = ../mAspectRatio mobileQuality = ../mobileQuality dAspectRatio = ../dAspectRatio desktopQuality = ../desktopQuality mobileStyle=../mobileStyle parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " ""))}}
+            {{/each}}
+        </div>        
+    </div>
+    {{#and mediaAssetTiles.0.mediaAsset.0.mobileVideoURL mediaAssetTiles.0.mediaAsset.0.desktopVideoURL}}
+    <!-- Modal -->
+    <div class="short-video-modal amp-modal-wrapper" id="shortVideoModal" tabindex="-1" style="display: none;" qa="short_video_modal_wrapper">
+        <div class="modal-body">
+            <div class="product-tile-slider" data-config={"adaptiveHeight":false,"autoplay":false,"arrows":true,"dots":false,"infinite":false,"initialSlide":0,"slidesToShow":1,"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":false,"slidesToShow":1,"arrows":false,"vertical":true,"verticalSwiping":true}}]} qa="short_video_carousel_tiles">
+                {{#each mediaAssetTiles}}
+                    {{> sfcc-short-video-media-tile shortsVideoData=this componentName=../this.[@type] mAspectRatio = ../mAspectRatio mobileQuality = ../mobileQuality dAspectRatio = ../dAspectRatio desktopQuality = ../desktopQuality mobileStyle=../mobileStyle parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " ""))}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    {{/and}}
+</div>

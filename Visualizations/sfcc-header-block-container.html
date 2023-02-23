@@ -1,0 +1,10 @@
+{{#if backgroundColor}}
+    <style>
+        .header-block-container-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    </style>
+{{/if}}
+<div class="header-block-container{{#if roundedEdges}} rounded-edges{{/if}} header-block-container-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_header-block-container_wrapper">
+	{{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=promotionId locationId=locationId creativeSlot=creativeSlot headerBlockData=headerBlock}}
+</div>

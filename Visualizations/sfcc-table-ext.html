@@ -1,0 +1,26 @@
+<div class="mol-table-{{replace (last (split [@id] "/")) "-" "" }} table-container table-bordered {{#if anchorTableHeader}}fixed-height{{/if}}" data-qa="site_promo_table-ext_wrapper">
+<table class="sfcc-table table {{#if tableSort}}sort-table{{/if}} {{#if anchorTableHeader}}fixed-header{{/if}}" data-class="sfcc-table-ext-{{uniqueid}}">
+{{#if table.headercols.length}}
+<thead>
+<tr>
+{{#each table.headercols}}
+	<th class="table-header-{{@index}}">
+        {{{this}}}
+	</th>
+{{/each}}
+</tr>
+{{/if}}
+</thead>
+<tbody>
+{{#each table.row}}
+<tr>
+    {{#each this.col}}
+	<td class="row-{{@../index}}-col-{{@index}}">
+        {{{this}}}
+	</td>
+    {{/each}}
+</tr>
+{{/each}}
+</tbody>
+</table>
+</div>

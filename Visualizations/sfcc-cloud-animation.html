@@ -1,0 +1,126 @@
+<style>
+    .cloud-animation-{{replace (last (split [@id] "/")) "-" "" }}{
+        --bg-color: {{backgroundColor}};
+        --animation-duration: {{animationDuration}}ms;
+    }
+</style>
+<div class="mol-cloud-animation amp-coachtopia container-fluid{{#if backgroundColor}} u-background-color{{/if}} cloud-animation-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_cloud_animation_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="content-wrapper row">
+        <div class="content__box col-12 d-flex{{#if (eq headerPosition 'Below Media Asset')}} flex-column-reverse{{else}} flex-column{{/if}}">
+            {{#if headerBlock}}
+            <div class="content__header {{#if (test this.[@type] (toRegex ".*/mol-cloud-animation.json")) ~}} mol-cloud-animation{{~/if}}">
+                {{#each headerBlock}}
+                    {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="cloud_animation" mainLinkConfigured=(length ../mediaAssetTiles) headerBlockData=this }}
+                {{/each}}
+            </div>
+            {{/if}}
+            {{#if mediaAsset}}
+            <div class="content__media">
+                {{#each mediaAsset}}
+                    {{> sfcc-short-video-media-tile autoplay=true cardCounter=@index shortsVideoData=this componentName=../this.[@type] mAspectRatio = ../mAspectRatio mobileQuality = ../mobileQuality dAspectRatio = ../dAspectRatio desktopQuality = ../desktopQuality mobileStyle=../mobileStyle parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " ""))}}
+                {{/each}}
+                <div class="content__media-fullscreen d-none">
+                    <div class="modal-btn">
+                        <svg class="icon icon-modal-open" role="presentation" qa="cloud_animation_modal_open_icon">
+                            <use xlink:href="#icon-coachtopia-fullscreen"></use>
+                        </svg>
+                        <svg class="icon icon-modal-close d-none" role="presentation" qa="cloud_animation_modal_close_icon">
+                            <use xlink:href="#icon-coachtopia-minimize"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        {{#if ctaLink}}
+        <div class="content__cta col-12 text-center">
+            {{#each ctaLink}}
+                {{> sfcc-cta-link ctaData=this ctaCounter=@index parentId=../parentid promotionId=../promotionId locationId=../locationId creativeName=../creativeName creativeSlot=(prepend (prepend (stringify (add @index 1)) "C") ../creativeSlot) mainLinkConfigured=../mainLinkConfigured }}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+    <div class="animation-wrapper row">
+        <div class="animation__clouds">
+            <picture id="animation__cloud-1">
+                {{#or (contains animateIcon.name ".png") (contains animateIcon.name "_png")}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="310" height="310" media="(min-width: 769px)" type="image/png">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="220" height="220" media="(max-width: 768px)" type="image/png">
+                {{else or (contains animateIcon.name ".svg") (contains animateIcon.name "_svg")}}
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="310" height="310" media="(min-width: 769px)" type="image/svg+xml">
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="220" height="220" media="(max-width: 768px)" type="image/svg+xml">
+                {{else}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="310" height="310" media="(min-width: 769px)" type="image/jpeg">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="220" height="220" media="(max-width: 768px)" type="image/jpeg">
+                {{/or}}
+                <img class="" src="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}" alt="{{animateIconAltText}}">
+            </picture>
+            <picture id="animation__cloud-2">
+                {{#or (contains animateIcon.name ".png") (contains animateIcon.name "_png")}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="310" height="310" media="(min-width: 769px)" type="image/png">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="220" height="220" media="(max-width: 768px)" type="image/png">
+                {{else or (contains animateIcon.name ".svg") (contains animateIcon.name "_svg")}}
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="310" height="310" media="(min-width: 769px)" type="image/svg+xml">
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="220" height="220" media="(max-width: 768px)" type="image/svg+xml">
+                {{else}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="310" height="310" media="(min-width: 769px)" type="image/jpeg">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="220" height="220" media="(max-width: 768px)" type="image/jpeg">
+                {{/or}}
+                <img class="" src="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}" alt="{{animateIconAltText}}">
+            </picture>
+            <picture id="animation__cloud-3">
+                {{#or (contains animateIcon.name ".png") (contains animateIcon.name "_png")}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="310" height="310" media="(min-width: 769px)" type="image/png">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="220" height="220" media="(max-width: 768px)" type="image/png">
+                {{else or (contains animateIcon.name ".svg") (contains animateIcon.name "_svg")}}
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="310" height="310" media="(min-width: 769px)" type="image/svg+xml">
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="220" height="220" media="(max-width: 768px)" type="image/svg+xml">
+                {{else}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="310" height="310" media="(min-width: 769px)" type="image/jpeg">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="220" height="220" media="(max-width: 768px)" type="image/jpeg">
+                {{/or}}
+                <img class="" src="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}" alt="{{animateIconAltText}}">
+            </picture>
+            <picture id="animation__cloud-4">
+                {{#or (contains animateIcon.name ".png") (contains animateIcon.name "_png")}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="310" height="310" media="(min-width: 769px)" type="image/png">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=png" width="220" height="220" media="(max-width: 768px)" type="image/png">
+                {{else or (contains animateIcon.name ".svg") (contains animateIcon.name "_svg")}}
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="310" height="310" media="(min-width: 769px)" type="image/svg+xml">
+                    <source srcset="//{{animateIcon.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI animateIcon.name}}" width="220" height="220" media="(max-width: 768px)" type="image/svg+xml">
+                {{else}}
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="310" height="310" media="(min-width: 769px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="310" height="310" media="(min-width: 769px)" type="image/jpeg">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=webp" width="220" height="220" media="(max-width: 768px)" type="image/webp">
+                    <source srcset="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}?$poi$&fmt=jpg" width="220" height="220" media="(max-width: 768px)" type="image/jpeg">
+                {{/or}}
+                <img class="" src="//{{animateIcon.defaultHost}}/i/{{animateIcon.endpoint}}/{{encodeURI animateIcon.name}}" alt="{{animateIconAltText}}">
+            </picture>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="amp-modal-wrapper" tabindex="-1" style="display:none;" qa="cloud_animation_modal_wrapper">
+        <div class="modal-body">
+            {{#each mediaAsset}}
+                {{> sfcc-short-video-media-tile cardCounter=@index shortsVideoData=this componentName=../this.[@type] mAspectRatio = ../mAspectRatio mobileQuality = ../mobileQuality dAspectRatio = ../dAspectRatio desktopQuality = ../desktopQuality mobileStyle=../mobileStyle parentid=(replace (last (split ../[@id] "/")) "-" "") childId=(append (replace (last (split ../[@id] "/")) "-" "") (stringify @index)) promotionId=(append "id-" (replace ../_meta.name " " ""))}}
+            {{/each}}
+        </div>
+    </div>
+</div>

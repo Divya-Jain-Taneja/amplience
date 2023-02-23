@@ -1,0 +1,27 @@
+{{#if backgroundColor}}
+    <style>
+        .mol-plp-block.mol-plp-block-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+    </style>
+{{/if}}
+<div class='mol-plp-block mol-plp-block-{{replace (last (split [@id] "/")) "-" "" }}' data-qa="site_promo_plp-block_wrapper">
+    {{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+    <div class="row">
+        <div class="col-12">
+            <div class="plp-block-container m-auto">
+                {{#if bodyTextLess}}
+                    {{{bodyTextLess.HTMLEditorObj}}}
+                {{/if}}
+                {{#if bodyTextMore}}
+                <div class='collapse' id="collapseText">
+                    {{{bodyTextMore.HTMLEditorObj}}}
+                </div>
+                {{/if}}
+                <a class="toggleContentBlock"><span class="plp-block-show-more">SHOW MORE</span><span class="plp-block-show-less d-none">SHOW LESS</span><svg class="icon" role="presentation" width="16" height="16"><use xlink:href="#icon-nav-chevron-down"></use></svg></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<style>
+    {{#if cardBackgroundColor}}
+        .feature-benefit-{{parentid}} {{prepend (stringify (add cardCounter 1)) '.card-backgroundColor'}} {
+            background-color: {{cardBackgroundColor}};
+        }
+    {{/if}}
+</style>
+<div class="feature-benefit-card {{#if cardBackgroundColor}} {{prepend (stringify (add cardCounter 1)) 'card-backgroundColor'}}{{/if}} row">
+    <div class="feature-benefit-card_top-block">
+        {{#if cardImage}}
+            <div class="card-img-container">
+                <img data-qa="img_card_image" data-loading="lazy" class="card-image" data-src="{{#if (or (contains cardImage.name ".svg") (contains cardImage.name "_svg"))}}//{{cardImage.endpoint}}.a.bigcontent.io/v1/static/{{encodeURI cardImage.name}}{{else}}//{{cardImage.defaultHost}}/i/{{cardImage.endpoint}}/{{encodeURI cardImage.name}}{{/if}}" height="48"  width="48" alt="{{imageAltText}}">
+            </div>
+        {{/if}}
+        <div class="headerBlock_top at-text-block d-flex d-md-none align-items-center">
+            {{#if cardHeaderBlock}}
+                {{#each cardHeaderBlock}}
+                    <{{#if textBlock.headlineTag}}{{textBlock.headlineTag}}{{else if textBlock.heroContent}}h1{{else}}h2{{/if}} class='at-headline-text
+                    {{#if (eq textBlock.headlineSize textBlock.headlineSizeMobile)}}
+                    {{textBlock.headlineSize}}
+                    {{else}}
+                    d-{{textBlock.headlineSize}} {{textBlock.headlineSizeMobile}}
+                    {{/if}}'>
+                    {{{textBlock.headlineText}}}<{{#if textBlock.headlineTag}}/{{textBlock.headlineTag}}{{else if textBlock.heroContent}}/h1{{else}}/h2{{/if}}>      
+                {{/each}}
+            {{/if}}
+        </div>
+        <div class="d-md-none drawer d-flex align-items-center">
+            <div class="drawer-icon">
+                <svg class="icon" role="presentation" width="16" height="16">
+                    <use xlink:href="#icon-nav-chevron-down"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="feature-benefit-card_bottom-block">
+        <div class="headerBlock_bottom">
+            {{#if cardHeaderBlock}}
+                {{#each cardHeaderBlock}}
+                    {{> sfcc-header-block parentid=../childId promotionId=../promotionId locationId="feature-benefit" mainLinkConfigured=(length ../contentCard) creativeSlot=../creativeSlot headerBlockData=this }}
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</div>

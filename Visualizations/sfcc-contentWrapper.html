@@ -1,0 +1,7 @@
+{{#if (test this.[@type] (toRegex ".*/sfcc-slot-accelerators.json")) ~}}
+{{> templateChooser this.content }}
+{{~/if}}
+{{#or (test this.[@type] (toRegex ".*/sfcc-contentasset-flexible.json")) (test this.[@type] (toRegex ".*/sfcc-contentasset-flexible-localizable.json")) ~}}
+{{> templateChooser this.content-asset-body }}
+{{~/or}}
+

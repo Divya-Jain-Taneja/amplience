@@ -1,0 +1,161 @@
+<style>
+    {{#if componentMaxWidth}}
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }} {
+            max-width: {{componentMaxWidth}}px;
+        }
+    {{/if}}
+{{#if backgroundColor}}
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}{
+            background-color: {{backgroundColor}};
+        }
+{{/if}}
+{{#if (and (eq mobileStyle "Stack") paddingSize)}}
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .col-split-tiles{
+        padding: 0 0 {{paddingSize}}px 0;  
+    }
+    @media only screen and (min-width:769px){
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .col-split-tiles{
+            padding: 0 {{divide paddingSize 2}}px;
+        }
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .col-split-tiles:last-child{
+            padding: 0 {{divide paddingSize 2}}px;  
+        }
+    }
+{{/if}}
+{{#if (and (eq mobileStyle "Carousel") paddingSize)}}
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-center-mode .col-spilt-card{
+            padding: 0 {{divide paddingSize 2}}px;
+        }
+        @media only screen and (min-width:769px){
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-center-mode .slick-slide{
+                margin: 0 {{divide paddingSize 2}}px;
+            }
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-center-mode .slick-list{
+            margin: 0 -{{divide paddingSize 2}}px;
+        }
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-center-mode .col-spilt-card{
+            padding: 0;
+        }
+    }
+{{/if}}
+{{#if (and (eq mobileStyle "Looping") paddingSize)}}
+    @media only screen and (min-width:769px){
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-looping .slick-slide{
+            margin: 0 {{divide paddingSize 2}}px;
+        }
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}.mol-col-split-container .carousel-looping .slick-list{
+            margin: 0 -{{divide paddingSize 2}}px;
+        }
+    }
+{{/if}}
+    {{#if (eq mobileStyle 'Horizontal Scroll')}}
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            font-size: 0;
+        }
+        .sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }} .product-slider .col-spilt-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 40%;
+            margin-right:16px;
+        }
+    {{/if}}
+</style>
+
+<div class="mol-col-split-container container-fluid sfcc-col-split-container-{{replace (last (split [@id] "/")) "-" "" }}  {{#if removePadding}}p-0{{/if}}" data-qa="site_promo_col-split-container_wrapper">
+{{#if jumpPointID }}
+    {{> sfcc-at-jumpAnchor this }}
+{{/if}}
+    {{#if headerBlock}}
+    <div class="row">
+        <div class="col-12 p-0">
+        {{#each headerBlock}}
+            {{> sfcc-header-block parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" mainLinkConfigured=(length ../contentTypes) headerBlockData=this }}
+        {{/each}}
+        </div>
+    </div>
+    {{/if}}
+    {{#and  (eq mobileStyle "Stack") (eq desktopStyle "Row")}}
+    <div class="row col-split-stack">
+        {{#each contentTypes}}
+        {{#lt @index ../columnSelector}}
+        <div class="col-split-tiles col-12 {{#if (eq ../columnSelector '2')}}col-md-6{{else if (eq ../columnSelector '3')}}col-md-4{{else if (eq ../columnSelector '4')}}col-md-3{{/if}} p-mob-0" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+            {{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                {{#if disableLazyLoad}}
+                    {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                {{else}}
+                    {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                {{/if}}
+            {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                {{> sfcc-video-player parentid=(replace (last (split ../[@id] "/")) "-" "") videoData=this}}
+            {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                {{> sfcc-youtube-player promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) youtubePlayerData=this}}
+            {{~/if}}
+        </div>
+        {{/lt}}
+        {{/each}}
+    </div>
+    {{else}}
+    <div class="row">
+        <div class="col-12 p-mob-0 {{#if (eq mobileStyle "Looping")}}carousel-looping{{else}}carousel-center-mode{{/if}} {{#if (eq desktopStyle "Row")}}desk-row{{else}}desk-carousel{{/if}}">
+            <div class="col-split-carousel">
+                <div class="product-tile-slider {{#if (eq mobileStyle 'Horizontal Scroll')}}d-none d-md-block{{/if}}"
+                {{#if (eq desktopStyle "Carousel")}}
+                    data-config='{"adaptiveHeight":false,"autoplay":{{#if deskAutoMove}}true{{else}}false{{/if}},"arrows":true,"dots":true,"autoplaySpeed":{{#if autoMoveTime}}{{#multiply 1000 autoMoveTime}}{{/multiply}}{{else}}500{{/if}},"speed":1000,"infinite":true,"initialSlide":0,"slidesToShow":{{columnSelector}},"slidesToScroll":1,"sliderPrevArrow":"SLIDER_PREV_ARROW","sliderNextArrow":"SLIDER_NEXT_ARROW","responsive":[{"breakpoint":769,"settings":{"centerMode":true,"slidesToShow":1,"dots":true,"speed":{{#if autoMoveTime}}{{#multiply 1000 autoMoveTime}}{{/multiply}}{{else}}500{{/if}},"arrows":false}}]}'>
+                {{else}} 
+                    data-config='{"adaptiveHeight":false,"autoplay":false,"arrows":false,"dots":false,"swipe":false,"initialSlide":0,"slidesToShow":{{columnSelector}},"slidesToScroll":1,"responsive":[{"breakpoint":769,"settings":{"centerMode":{{#if (eq mobileStyle "Carousel")}}true{{else}}false{{/if}},"infinite":true,"autoplay":{{#if (eq mobileStyle "Carousel")}}false{{else}}true{{/if}},"autoplaySpeed":{{#multiply 1000 loopingTime}}{{/multiply}},"speed":0,"cssEase":{{#if (eq mobileStyle "Carousel")}}"ease"{{else}}"linear"{{/if}},"slidesToShow":1,"dots":{{#if (eq mobileStyle "Carousel")}}true{{else}}false{{/if}},"infinite":true,"pauseOnFocus":false,"pauseOnHover":false,"swipe":{{#if (eq mobileStyle "Carousel")}}true{{else}}false{{/if}},"arrows":false}}]}'>
+                {{/if}}
+                    {{#each contentTypes}}
+                        {{#or (eq ../desktopStyle "Carousel") (and (eq ../desktopStyle "Row")(lt @index ../columnSelector))}}
+                            {{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{#if disableLazyLoad}}
+                                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                                {{else}}
+                                    {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                                {{/if}}
+                            </div>
+                            {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{> sfcc-video-player parentid=(replace (last (split ../[@id] "/")) "-" "") videoData=this}}
+                            </div>
+                            {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{> sfcc-youtube-player promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) youtubePlayerData=this}}
+                            </div>
+                            {{~/if}}
+                        {{/or}}
+                    {{/each}}  
+                </div>
+                {{#if (eq mobileStyle 'Horizontal Scroll')}}
+                <div class="product-slider mobile-horzscroll d-sm-block d-md-none">
+                {{#each contentTypes}}
+                        {{#or (eq ../desktopStyle "Carousel") (and (eq ../desktopStyle "Row")(lt @index ../columnSelector))}}
+                            {{#if (test this.[@type] (toRegex ".*/at-media-asset.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{#if disableLazyLoad}}
+                                        {{> sfcc-media-asset promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                                {{else}}
+                                    {{> sfcc-media-asset-lazy-load promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=600 tabletImageRetina=1200 mobileImageNormal=768 mobileImageRetina=1536}}
+                                {{/if}}
+                            </div>
+                            {{else if (test this.[@type] (toRegex ".*/at-video-player.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{> sfcc-video-player parentid=(replace (last (split ../[@id] "/")) "-" "") videoData=this}}
+                            </div>
+                            {{else if (test this.[@type] (toRegex ".*/at-youtube-player.json")) ~}}
+                            <div class="col-spilt-card" style="width:{{#if (eq ../columnSelector '2')}}var(--col-split-cards-2){{else if (eq ../columnSelector '3')}}var(--col-split-cards-3){{else if (eq ../columnSelector '4')}}var(--col-split-cards-4){{/if}};display:inline-block;">
+                                {{> sfcc-youtube-player promotionId=(append "id-" (replace ../_meta.name " " "")) locationId="columnsplitcontainer" creativeSlot=(append "CSCM" (stringify (add 1 @index))) youtubePlayerData=this}}
+                            </div>
+                            {{~/if}}
+                        {{/or}}
+                    {{/each}}  
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/and}}
+</div>

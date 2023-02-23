@@ -1,0 +1,244 @@
+<style>
+{{#or space.0.marginTopM space.0.marginBottomM space.0.marginLeftM space.0.marginRightM space.0.marginInBetweenM space.0.marginTopD space.0.marginBottomD space.0.marginLeftD space.0.marginRightD space.0.marginInBetweenD}}
+    .amp-page-acc-bg-video-{{replace (last (split [@id] "/")) "-" "" }} {
+        {{#or space.0.marginRightD space.0.marginLeftD}}--block-width-desktop: {{#and space.0.marginRightD space.0.marginLeftD}} calc(100% - {{#add space.0.marginRightD space.0.marginLeftD}}{{/add}}px); {{else}} {{#if space.0.marginRightD}} calc(100% - {{space.0.marginRightD}}px);{{/if}}{{#if space.0.marginLeftD}} calc(100% - {{space.0.marginLeftD}}px);{{/if}}{{/and}}{{/or}}
+        {{#if space.0.marginRightD}}--block-right-desktop:{{space.0.marginRightD}}px;{{/if}}   
+        {{#if space.0.marginLeftD}}--block-left-desktop:{{space.0.marginLeftD}}px;{{/if}}
+        {{#or space.0.marginRightM space.0.marginLeftM}}--block-width: {{#and space.0.marginRightM space.0.marginLeftM}} calc(100% - {{#add space.0.marginRightM space.0.marginLeftM}}{{/add}}px); {{else}}{{#if space.0.marginRightM}} calc(100% - {{space.0.marginRightM}}px);{{/if}} {{#if space.0.marginLeftM}} calc(100% - {{space.0.marginLeftM}}px);{{/if}}{{/and}}{{/or}}
+        {{#if space.0.marginRightM}}--block-right:{{space.0.marginRightM}}px;{{/if}}
+        {{#if space.0.marginLeftM}}--block-left:{{space.0.marginLeftM}}px;{{/if}}
+    }
+{{/or}}
+{{#and (not pageBg.0.paddingBackgroundImage) (or pageBg.0.desktopBgImage pageBg.0.mobileBgImage pageBg.0.solidBgFill pageBg.0.gradientColor)}}
+{{#or space.0.marginTopM space.0.marginBottomM space.0.marginLeftM space.0.marginRightM space.0.marginInBetweenM space.0.marginTopD space.0.marginBottomD space.0.marginLeftD space.0.marginRightD space.0.marginInBetweenD}}
+    {{#or space.0.marginTopM space.0.marginBottomM space.0.marginLeftM space.0.marginRightM space.0.marginInBetweenM}}
+    @media only screen and (max-width:768px){
+        {{#if space.0.marginTopM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-top: {{space.0.marginTopM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginBottomM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-bottom: {{space.0.marginBottomM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginLeftM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-left: {{space.0.marginLeftM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginRightM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-right: {{space.0.marginRightM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginInBetweenM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+                margin-bottom: {{space.0.marginInBetweenM}}px;
+            }
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+                margin-bottom: 0;
+            }
+        {{/if}}
+    }
+    {{/or}}
+    {{#or space.0.marginTopD space.0.marginBottomD space.0.marginLeftD space.0.marginRightD space.0.marginInBetweenD}}
+    @media only screen and (min-width:769px){
+        {{#if space.0.marginTopD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-top: {{space.0.marginTopD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginBottomD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-bottom: {{space.0.marginBottomD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginLeftD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-left: {{space.0.marginLeftD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginRightD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .noBackgroundPadding{
+                padding-right: {{space.0.marginRightD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginInBetweenD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+                margin-bottom: {{space.0.marginInBetweenD}}px;
+            }
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+                margin-bottom: 0;
+            }
+        {{/if}}
+    }
+    {{/or}}
+{{/or}}
+{{else}}
+{{#or space.0.marginTopM space.0.marginBottomM space.0.marginLeftM space.0.marginRightM space.0.marginInBetweenM space.0.marginTopD space.0.marginBottomD space.0.marginLeftD space.0.marginRightD space.0.marginInBetweenD}}
+    {{#or space.0.marginTopM space.0.marginBottomM space.0.marginLeftM space.0.marginRightM space.0.marginInBetweenM}}
+    @media only screen and (max-width:768px){
+        {{#if space.0.marginTopM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-top: {{space.0.marginTopM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginBottomM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-bottom: {{space.0.marginBottomM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginLeftM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-left: {{space.0.marginLeftM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginRightM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-right: {{space.0.marginRightM}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginInBetweenM}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+                margin-bottom: {{space.0.marginInBetweenM}}px;
+            }
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+                margin-bottom: 0;
+            }
+        {{/if}}
+    }
+    {{/or}}
+    {{#or space.0.marginTopD space.0.marginBottomD space.0.marginLeftD space.0.marginRightD space.0.marginInBetweenD}}
+    @media only screen and (min-width:769px){
+        {{#if space.0.marginTopD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-top: {{space.0.marginTopD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginBottomD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-bottom: {{space.0.marginBottomD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginLeftD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-left: {{space.0.marginLeftD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginRightD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{
+                margin-right: {{space.0.marginRightD}}px;
+            }
+        {{/if}}
+        {{#if space.0.marginInBetweenD}}
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block{
+                margin-bottom: {{space.0.marginInBetweenD}}px;
+            }
+            .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-block:last-child{
+                margin-bottom: 0;
+            }
+        {{/if}}
+    }
+    {{/or}}
+{{/or}}
+{{/and}}
+
+{{#or pageBg.0.desktopBgImage pageBg.0.mobileBgImage}}
+    .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-group{
+        {{#if pageBg.0.disableLazyLoad}}
+        background-image: url('{{#if pageBg.0.mobileBgImage}}//{{pageBg.0.mobileBgImage.defaultHost}}/i/{{pageBg.0.mobileBgImage.endpoint}}/{{encodeURI pageBg.0.mobileBgImage.name}}{{else}}//{{pageBg.0.desktopBgImage.defaultHost}}/i/{{pageBg.0.desktopBgImage.endpoint}}/{{encodeURI pageBg.0.desktopBgImage.name}}{{/if}}');
+        {{/if}}
+        background-repeat: {{pageBg.0.backgroundRepeat}};
+        background-size: {{#if (eq pageBg.0.backgroundSize 'exact match')}}100% 100%{{else}}{{pageBg.0.backgroundSize}}{{/if}};
+        background-position: {{pageBg.0.backgroundPosition}};
+    }
+    {{#if pageBg.0.disableLazyLoad}}
+    @media only screen and (min-width:769px){
+        .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .component-group{
+            background-image: url('{{#if pageBg.0.desktopBgImage}}//{{pageBg.0.desktopBgImage.defaultHost}}/i/{{pageBg.0.desktopBgImage.endpoint}}/{{encodeURI pageBg.0.desktopBgImage.name}}{{else}}//{{pageBg.0.mobileBgImage.defaultHost}}/i/{{pageBg.0.mobileBgImage.endpoint}}/{{encodeURI pageBg.0.mobileBgImage.name}}{{/if}}');
+        }
+    }
+    {{/if}}
+{{/or}}
+{{#if pageBg.0.roundedEdges}}
+    .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} {
+        border-radius: 16px;
+    }
+{{/if}}
+{{#or pageBg.0.desktopBgImage pageBg.0.mobileBgImage pageBg.0.solidBgFill pageBg.0.gradientColor}}
+    {{#if insideFrame.0.frameColor}}
+        .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} > .inside-frame {
+            border-color: {{insideFrame.0.frameColor}};
+        }
+    {{else}}
+        .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} > .inside-frame {
+            border: 0;
+        }
+    {{/if}}
+{{/or}}
+{{#if insideFrame.0.colorFrame}}
+    .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .inside-frame {
+        box-shadow: {{#if insideFrame.frameStyle}}0 0 0 34px {{insideFrame.0.colorFrame}};{{else}}0 0 0 45px {{insideFrame.0.colorFrame}};{{/if}}
+    }
+{{/if}}
+{{#and pageBg.0.solidBgFill (not pageBg.0.gradientColor)}}
+    .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} .page-bg-color{
+        background-color: {{pageBg.0.solidBgFill}};
+    }
+{{/and}}
+{{#if pageBg.0.gradientColor}}
+    .amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }} {
+        {{#if pageBg.0.gradientColor}}--background-gradient: linear-gradient(to {{#if pageBg.0.gradientType}}{{pageBg.0.gradientType}}{{else}}bottom right{{/if}}, {{#if pageBg.0.solidBgFill}}{{pageBg.0.solidBgFill}}{{else}}transparent{{/if}}, {{pageBg.0.gradientColor}});{{/if}}
+    }
+{{/if}}
+</style>
+{{#or pageBg.0.desktopBgVideoURL pageBg.0.mobileBgVideoURL}}
+<div class="amp-page-acc-bg-video amp-page-acc-bg-video-{{replace (last (split [@id] "/")) "-" "" }}{{#if insideFrame}} with-frame{{/if}}{{#if pageBg.0.paddingBackgroundImage}}{{#or space.0.marginRightD space.0.marginLeftD}} u-width-desktop{{/or}}{{#if (and space.0.marginRightD space.0.marginLeftD)}} u-right-desktop u-left-desktop{{else if (and space.0.marginRightD (not space.0.marginLeftD))}} u-right-desktop{{else if (and (not space.0.marginRightD) space.0.marginLeftD)}} u-left-desktop{{/if}}{{#or space.0.marginRightM space.0.marginLeftM}} u-width{{/or}}{{#if (and space.0.marginRightM space.0.marginLeftM)}} u-right u-left{{else if (and space.0.marginRightM (not space.0.marginLeftM))}} u-right{{else if (and (not space.0.marginRightM) space.0.marginLeftM)}} u-left{{/if}}{{/if}}">
+    <div class="at-media-asset{{#if (and pageBg.0.desktopBgVideoURL (not pageBg.0.mobileBgVideoURL))}} d-none d-md-block{{/if}}{{#if (and (not pageBg.0.desktopBgVideoURL) pageBg.0.mobileBgVideoURL)}} d-md-none d-sm-block{{/if}}{{#if (or pageBg.0.mAspectRatio pageBg.0.dAspectRatio)}} amps-aspect-ratio-box-video{{/if}}{{#if pageBg.0.roundedEdges}} rounded-edges{{/if}}" {{#if (not aspectRatio)}}{{#or (not (contains pageBg.0.mAspectRatio "{")) (not (contains pageBg.0.dAspectRatio "{")) (and (not (contains pageBg.0.mAspectRatio '"initialHeight":""')) (not (contains pageBg.0.mAspectRatio '"initialWidth":""'))) (and (not (contains pageBg.0.dAspectRatio '"initialHeight":""')) (not (contains pageBg.0.dAspectRatio '"initialWidth":""')))}}style="{{#not (contains pageBg.0.mAspectRatio "{")}}--m-aspect-ratio:{{pageBg.0.mAspectRatio}};{{else}}{{#with (JSONparse pageBg.0.mAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--m-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}{{#not (contains pageBg.0.dAspectRatio "{")}}--d-aspect-ratio:{{pageBg.0.dAspectRatio}};{{else}}{{#with (JSONparse pageBg.0.dAspectRatio)}}{{#and (not (is initialWidth "")) (not (is initialHeight ""))}}--d-aspect-ratio:{{initialWidth}}/{{initialHeight}};{{/and}}{{/with}}{{/not}}"{{/or}}{{/if}}>
+        <video {{#not pageBg.0.disableLazyLoad}}data-loading="lazy"{{/not}} class="ac-video content-video d-block {{#if pageBg.0.roundedEdges}}rounded-edges{{/if}} u-full-cover-element-video m-d-ratio-defined loop autoplay" loop autoplay muted playsinline preload="metadata"
+        {{#and pageBg.0.desktopBgVideoURL pageBg.0.mobileBgVideoURL}}data-desktop-video-src="{{#or (contains pageBg.0.desktopBgVideoURL "amplience.net") (contains pageBg.0.desktopBgVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol pageBg.0.desktopBgVideoURL}}?protocol=https{{else}}https:{{stripProtocol pageBg.0.desktopBgVideoURL}}{{/or}}" data-mobile-video-src="{{#or (contains pageBg.0.mobileBgVideoURL "amplience.net") (contains pageBg.0.mobileBgVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol pageBg.0.mobileBgVideoURL}}?protocol=https{{else}}https:{{stripProtocol pageBg.0.mobileBgVideoURL}}{{/or}}"{{/and}}>
+        {{#if (and pageBg.0.desktopBgVideoURL pageBg.0.mobileBgVideoURL)}}
+        <source {{#not pageBg.0.disableLazyLoad}}data-{{/not}}src="" type="video/mp4">
+        {{else if (and pageBg.0.desktopBgVideoURL (not pageBg.0.mobileBgVideoURL))}}
+        <source {{#not pageBg.0.disableLazyLoad}}data-{{/not}}src="{{#or (contains pageBg.0.desktopBgVideoURL "amplience.net") (contains pageBg.0.desktopBgVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol pageBg.0.desktopBgVideoURL}}?protocol=https{{else}}https:{{stripProtocol pageBg.0.desktopBgVideoURL}}{{/or}}" type="video/mp4">
+        {{else if (and (not pageBg.0.desktopBgVideoURL) pageBg.0.mobileBgVideoURL)}}
+        <source {{#not pageBg.0.disableLazyLoad}}data-{{/not}}src="{{#or (contains pageBg.0.mobileBgVideoURL "amplience.net") (contains pageBg.0.mobileBgVideoURL "cms.stuartweitzman.com") }}https:{{stripProtocol pageBg.0.mobileBgVideoURL}}?protocol=https{{else}}https:{{stripProtocol pageBg.0.mobileBgVideoURL}}{{/or}}" type="video/mp4">
+        {{/if}}
+    </video>
+        <div class="ac-video-controls">
+            <button type="button" class="ac-toggle-playback{{#if pageBg.0.removeAudioControl}} mx-auto{{/if}}" aria-pressed="false" aria-label="playback">
+                <svg class="icon {{#if pageBg.0.iconsColor}}icon-black{{/if}}" role="presentation" width="18" height="18">
+                    <use xlink:href="#icon-video-pause"></use>
+                </svg>
+            </button>
+            {{#not pageBg.0.removeAudioControl}}
+            <button type="button" class="ac-toggle-sound" aria-pressed="false" aria-label="sound">
+                <svg class="icon {{#if pageBg.0.iconsColor}}icon-black{{/if}}" role="presentation" width="18" height="18">
+                    <use xlink:href="#icon-video-volume-mute"></use>
+                </svg>
+            </button>
+            {{/not}}
+        </div>
+    </div>
+</div>
+{{/or}}
+<div class="amp-page-acc amp-page-acc-{{replace (last (split [@id] "/")) "-" "" }}{{#if insideFrame}} with-frame position-relative{{/if}}{{#if pageBg.0.desktopBgVideoURL}} bgVideo-desktop{{/if}}{{#if pageBg.0.mobileBgVideoURL}} bgVideo-mobile{{/if}}">
+    {{#if insideFrame}}<div class="inside-frame{{#not insideFrame.0.frameStyle}} frame-rounded-edges{{/not}}"></div>{{/if}}
+    {{#or (and (or pageBg.0.solidBgFill pageBg.0.gradientColor) (not (or pageBg.0.desktopBgImage pageBg.0.mobileBgImage))) (or pageBg.0.desktopBgVideoURL pageBg.0.mobileBgVideoURL)}}
+        <div class="page-bg-color {{#if pageBg.0.gradientColor}}u-background-gradient{{/if}} component-group w-100{{#if pageBg.0.roundedEdges}} rounded-edges{{/if}}{{#not pageBg.0.paddingBackgroundImage}} noBackgroundPadding{{/not}}{{#and insideFrame pageBg.0.paddingBackgroundImage}} bgimage-frame{{/and}}">
+    {{/or}}
+    {{#and (or pageBg.0.desktopBgImage pageBg.0.mobileBgImage) (or (not pageBg.0.desktopBgVideoURL) (not pageBg.0.mobileBgVideoURL))}}
+    <div class="page-acc-list component-group w-100{{#if pageBg.0.roundedEdges}} rounded-edges{{/if}}{{#not pageBg.0.paddingBackgroundImage}} noBackgroundPadding{{/not}}{{#and insideFrame pageBg.0.paddingBackgroundImage (or pageBg.0.desktopBgImage pageBg.0.mobileBgImage)}} bgimage-frame{{/and}}" {{#not pageBg.0.disableLazyLoad}}data-loading="lazy" data-content-type="Page Accelerator"{{/not}}
+        data-desktop-bg-image="{{#if pageBg.0.desktopBgImage}}//{{pageBg.0.desktopBgImage.defaultHost}}/i/{{pageBg.0.desktopBgImage.endpoint}}/{{encodeURI pageBg.0.desktopBgImage.name}}{{else}}//{{pageBg.0.mobileBgImage.defaultHost}}/i/{{pageBg.0.mobileBgImage.endpoint}}/{{encodeURI pageBg.0.mobileBgImage.name}}{{/if}}"
+        data-mobile-bg-image="{{#if pageBg.0.mobileBgImage}}//{{pageBg.0.mobileBgImage.defaultHost}}/i/{{pageBg.0.mobileBgImage.endpoint}}/{{encodeURI pageBg.0.mobileBgImage.name}}{{else}}//{{pageBg.0.desktopBgImage.defaultHost}}/i/{{pageBg.0.desktopBgImage.endpoint}}/{{encodeURI pageBg.0.desktopBgImage.name}}{{/if}}">
+    {{/and}}
+        {{#each contentTypes}}
+            {{> sfcc-page-section pageSectionData=this parentId=(replace (last (split ../[@id] "/")) "-" "") sectionCounter=@index }}
+        {{/each}}
+    {{#or pageBg.0.desktopBgImage pageBg.0.mobileBgImage pageBg.0.solidBgFill pageBg.0.gradientColor}}</div>{{/or}}
+    {{#each stickers}}
+        {{> sfcc-sticker stickersData=this parentId=(replace (last (split ../[@id] "/")) "-" "") stickerCounter=@index }}
+    {{/each}}
+</div>

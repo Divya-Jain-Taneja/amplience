@@ -1,0 +1,102 @@
+<style>
+    {{#or outlineCheckbox outlineCheckbox_Mob gradientColor bylineTextColor}}
+        .mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} {
+            --outline-color: {{#if outlineColor}}{{outlineColor}}{{else}}#000{{/if}};
+		{{#if gradientColor}}--background-gradient:linear-gradient(to {{#if gradientType}}{{gradientType}}{{else}}bottom right{{/if}}, {{#if TextBackgroundColor}}{{TextBackgroundColor}}{{else}}transparent{{/if}}, {{gradientColor}});{{/if}}
+		{{#if bylineTextColor}}--byline-text-color: {{#if bylineTextColor}}{{bylineTextColor}}{{else}}#000{{/if}};{{/if}}
+	}
+    {{/or}}
+    {{#if componentMaxWidth}}
+        .mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} {
+    		max-width: {{componentMaxWidth}}px;
+    	}
+    {{/if}}
+    {{#if topTextPosition}}
+		.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+			top:{{topTextPosition}}%;
+		}
+	{{/if}}
+	{{#if leftTextPosition}}
+		.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+			left:{{leftTextPosition}}%;
+		}
+	{{/if}}
+	.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .header-block-position{
+		transform: translate(-{{#if leftTextPosition}}{{leftTextPosition}}{{else}}50{{/if}}%, -{{#if topTextPosition}}{{topTextPosition}}{{else}}50{{/if}}%);
+	}
+	{{#and TextBackgroundColor (not gradientColor)}}
+	.mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }} .bg-color{
+		background-color: {{TextBackgroundColor}};
+	}
+	{{/and}}
+</style>
+
+<div class="mol-banner-50-50 container-fluid {{#if outlineCheckbox}}u-outline-desktop{{/if}} {{#if outlineCheckbox_Mob}}u-outline{{/if}} mol-banner-50-50-{{replace (last (split [@id] "/")) "-" "" }}" data-qa="site_promo_banner-50-50_wrapper">
+	{{#if jumpPointID }}
+        {{> sfcc-at-jumpAnchor this }}
+    {{/if}}
+	<div class="row{{#and (eq chooseLayout 'Left (Image/Video Left, Text Right)') (eq headerBlockPosition 'Top of the media')}} header-block-top{{/and}}{{#and (eq chooseLayout 'Right (Image/Video Right, Text Left)') (eq headerBlockPosition 'Bottom of the media')}} header-block-bottom{{/and}}">
+		<div class="left-container col-sm-12 col-md-6 p-0 {{#or TextBackgroundColor gradientColor}}bg-color {{#if gradientColor}}u-background-gradient{{/if}}{{/or}}{{#and (eq chooseLayout 'Right (Image/Video Right, Text Left)') pageSectionLink}} cursor-pointer{{#if pageSectionLinkTarget}} openLinkInNewTab{{/if}}{{/and}}"
+		{{#and (eq chooseLayout 'Right (Image/Video Right, Text Left)') pageSectionLink}}
+		tabindex="0" role="link"
+		data-comp-url="{{{pageSectionLink}}}"
+    	data-event="internal_promotion"
+        data-promotion-id="{{#append "id-" (replace _meta.name " " "")}}{{/append}}"
+        data-promotion-name="{{#replace _meta.name " " ""}}{{/replace}}"
+        data-creative-name="NO_IMAGE"
+        data-location-id="banner5050"
+        data-creative-slot="0"
+		{{/and}}>
+		{{#if (eq chooseLayout 'Right (Image/Video Right, Text Left)')}}
+			<div class="mol-header-block-container col-sm-12 col-lg-8 header-block-position {{#or (and (eq leftTextPosition 50) (eq topTextPosition 50)) (and (not leftTextPosition) (not topTextPosition)) (and (eq leftTextPosition 50) (not topTextPosition)) (and (eq topTextPosition 50) (not leftTextPosition))}}header-full-bleed{{/or}} d-flex{{#if (eq countDownClockAndImage.0.headerBlockPosition 'bottom most')}} flex-column-reverse{{else}} flex-column{{/if}}">
+			{{#if  mediaAsset.0.mobileImage}}
+				{{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=mediaAsset.0.mobileImage.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{else}}
+			    {{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=mediaAsset.0.image.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{/if}}
+			{{#if countDownClockAndImage}}{{> sfcc-banner5050-countdown-clock}}{{/if}}
+			</div>
+			{{#if disclaimerText}}<p class="{{#if bylineTextColor}}u-disclaimer-text-color {{/if}}disclaimer-text {{bylineTextSize}}">{{disclaimerText}}</p>{{/if}}		
+			{{else}}
+		{{#each mediaAsset}}
+			{{#if disableLazyLoad}}
+				{{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536 }}
+			{{else}}
+				{{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536 }}	
+			{{/if}}
+		{{/each}}
+		{{/if}}
+		</div>
+		<div class="right-container col-sm-12 col-md-6 p-0 {{#or TextBackgroundColor gradientColor}}bg-color {{#if gradientColor}}u-background-gradient{{/if}}{{/or}}{{#and (eq chooseLayout 'Left (Image/Video Left, Text Right)') pageSectionLink}} cursor-pointer{{#if pageSectionLinkTarget}} openLinkInNewTab{{/if}}{{/and}}"
+		{{#and (eq chooseLayout 'Left (Image/Video Left, Text Right)') pageSectionLink}}
+		tabindex="0" role="link"
+		data-comp-url="{{{pageSectionLink}}}"
+    	data-event="internal_promotion"
+        data-promotion-id="{{#append "id-" (replace _meta.name " " "")}}{{/append}}"
+        data-promotion-name="{{#replace _meta.name " " ""}}{{/replace}}"
+        data-creative-name="NO_IMAGE"
+        data-location-id="banner5050"
+        data-creative-slot="0"
+		{{/and}}>
+		{{#if (eq chooseLayout 'Right (Image/Video Right, Text Left)')}}
+		{{#each mediaAsset}}
+			{{#if disableLazyLoad}}
+				{{> sfcc-media-asset parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+			{{else}}
+				{{> sfcc-media-asset-lazy-load parentid=(replace (last (split ../[@id] "/")) "-" "") promotionId=(append "id-" (replace ../_meta.name " " "")) promotionName=../headerBlock.textBlock.headlineText locationId="banner5050" mediaAssetData=this desktopImageNormal=960 desktopImageRetina=1120 tabletImageNormal=700 tabletImageRetina=1120 mobileImageNormal=768 mobileImageRetina=1536}}
+			{{/if}}
+	    {{/each}}
+		{{else}}
+			<div class="mol-header-block-container col-sm-12 col-lg-8 header-block-position {{#or (and (eq leftTextPosition 50) (eq topTextPosition 50)) (and (not leftTextPosition) (not topTextPosition)) (and (eq leftTextPosition 50) (not topTextPosition)) (and (eq topTextPosition 50) (not leftTextPosition))}}header-full-bleed{{/or}} d-flex{{#if (eq countDownClockAndImage.0.headerBlockPosition 'bottom most')}} flex-column-reverse{{else}} flex-column{{/if}}">
+			{{#if  mediaAsset.0.mobileImage}}
+				{{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=mediaAsset.0.mobileImage.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{else}}
+			    {{> sfcc-header-block parentid=(replace (last (split [@id] "/")) "-" "") promotionId=(append "id-" (replace _meta.name " " "")) locationId="banner5050" creativeName=mediaAsset.0.image.name mainLinkConfigured=mediaAsset.0.link headerBlockData=headerBlock}}
+			{{/if}}
+			{{#if countDownClockAndImage}}{{> sfcc-banner5050-countdown-clock}}{{/if}}
+			</div>
+			{{#if disclaimerText}}<p class="{{#if bylineTextColor}}u-disclaimer-text-color {{/if}}disclaimer-text {{bylineTextSize}}">{{disclaimerText}}</p>{{/if}}
+		{{/if}}
+		</div>
+	</div>
+</div>
