@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://unpkg.com/dc-accelerators-content-rendering-service/dist/contentTypes/at-badge-text.json",
+    "$id": "https://raw.githubusercontent.com/Divya-Jain-Taneja/amplience/master/ContentSchemas/schemas/at-badge-text-schema.json",
     "title": "Badge",
     "description": "Atomic badge text element",
     "allOf": [
